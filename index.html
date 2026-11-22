@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>ПРОТОКОЛ БЕЗДНЫ — 100 Этажей</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script src="https://sad.adsgram.ai/js/sad.min.js"></script>
   <style>
     * {
       box-sizing: border-box;
@@ -479,6 +480,32 @@
       margin-bottom: 8px;
     }
 
+    .btn-ad {
+      width: 100%;
+      padding: 11px;
+      border-radius: 10px;
+      border: 1px solid rgba(16, 185, 129, 0.6);
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.28), rgba(5, 150, 105, 0.22));
+      color: #6ee7b7;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      margin-bottom: 8px;
+    }
+
+    .btn-share {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(168, 85, 247, 0.55);
+      background: rgba(168, 85, 247, 0.16);
+      color: #e9d5ff;
+      font-size: 12.5px;
+      font-weight: 800;
+      cursor: pointer;
+      margin-bottom: 8px;
+    }
+
     .btn-ghost {
       width: 100%;
       padding: 10px;
@@ -489,6 +516,14 @@
       font-size: 12.5px;
       font-weight: 700;
       cursor: pointer;
+    }
+
+    .status-note {
+      font-size: 11.5px;
+      color: #9beeff;
+      text-align: center;
+      min-height: 16px;
+      margin-bottom: 8px;
     }
 
     .stat-row {
@@ -642,20 +677,24 @@
         <div class="gear-box" id="gear-box"></div>
         <div style="font-size:12px;color:#9fb0cc;">Расходники (нажми, чтобы использовать):</div>
         <div class="inv-list" id="inv-list"></div>
+        <button class="btn-share" onclick="shareGame()">👥 Поделиться результатом с другом</button>
         <button class="btn-ghost" onclick="closeModals()">Закрыть</button>
       </div>
     </div>
 
-    <!-- Оверлей 3: Энергия -->
+    <!-- Оверлей 3: Энергия (Stars + Adsgram + Рефералка) -->
     <div class="overlay hidden" id="modal-shop">
       <div class="sys-window">
         <div class="sys-tag">[ПОПОЛНЕНИЕ ЭНЕРГИИ]</div>
         <div class="sys-title">Мана Разлома</div>
         <p class="sys-text">
-          Каждый ход расходует 1⚡. Победа над боссом этажа восстанавливает +15⚡. Здесь в будущем подключается оплата через Telegram Stars.
+          Каждый ход расходует 1⚡. Победа над боссом восстанавливает +15⚡. Пополни запас через Telegram Stars или бесплатно за просмотр короткого ролика.
         </p>
-        <button class="btn-gold" onclick="buyEnergy(30)">⚡ +30 ходов · 50 Stars (Тест)</button>
-        <button class="btn-primary" onclick="buyEnergy(100)">⚡ +100 ходов · 120 Stars (Тест)</button>
+        <div class="status-note" id="shop-status"></div>
+        <button class="btn-gold" onclick="buyEnergy(30)">⚡ +30 ходов · 50 ⭐</button>
+        <button class="btn-primary" onclick="buyEnergy(100)">⚡ +100 ходов · 120 ⭐</button>
+        <button class="btn-ad" onclick="watchAdForEnergy()">🎬 +15 ходов · Бесплатно (Реклама)</button>
+        <button class="btn-share" onclick="shareGame()">👥 Пригласить друга (+15⚡ раз в 12ч)</button>
         <button class="btn-ghost" onclick="closeModals()">Назад в Разлом</button>
       </div>
     </div>
@@ -666,7 +705,9 @@
         <div class="sys-tag" style="color:#ff3b5c;">[КРИТИЧЕСКИЙ УРОН]</div>
         <div class="sys-title">Связь с телом потеряна</div>
         <p class="sys-text" id="dead-reason">Тьма Разлома поглотила тебя.</p>
-        <button class="btn-gold" onclick="revivePlayer()">⏪ Откатить смерть (25 Stars · Тест)</button>
+        <div class="status-note" id="dead-status"></div>
+        <button class="btn-gold" onclick="revivePlayer()">⏪ Откатить смерть · 25 ⭐</button>
+        <button class="btn-ad" onclick="watchAdForRevive()">🎬 Откатить смерть · Бесплатно (Реклама)</button>
         <button class="btn-ghost" onclick="restartGame()">🔄 Начать заново с 1-го этажа</button>
       </div>
     </div>
@@ -679,6 +720,7 @@
         <p class="sys-text">
           Ты прошёл все <b>100 этажей</b> и сокрушил Владыку Абсолютной Бездны! Врата закрываются, а твоё имя вписано в Систему навсегда.
         </p>
+        <button class="btn-share" onclick="shareGame()">🏆 Поделиться победой с друзьями</button>
         <button class="btn-gold" onclick="restartGame()">🔥 Начать Новую Игру</button>
       </div>
     </div>
@@ -686,6 +728,30 @@
   </div>
 
   <script>
+    // =========================================================================
+    // 0. НАСТРОЙКИ МОНЕТИЗАЦИИ И БОТА
+    // =========================================================================
+    var API_URL = 'https://abyss-backend-zckn.onrender.com';
+    var ADSGRAM_BLOCK_ID = '61369';
+    var BOT_SHARE_URL = 'https://t.me/protocol_bezdny_bot';
+    var SHARE_COOLDOWN_MS = 12 * 60 * 60 * 1000;
+
+    var paymentPending = false;
+    var adController = null;
+
+    function initAdsgram() {
+      try {
+        if (window.Adsgram && !adController) {
+          adController = window.Adsgram.init({ blockId: ADSGRAM_BLOCK_ID });
+        }
+      } catch (e) {}
+    }
+
+    function setModalStatus(id, text) {
+      var el = document.getElementById(id);
+      if (el) el.textContent = text || '';
+    }
+
     // =========================================================================
     // 1. ЗВУКОВОЙ СИНТЕЗАТОР (РАБОТАЕТ БЕЗ ВНЕШНИХ ФАЙЛОВ)
     // =========================================================================
@@ -955,6 +1021,7 @@
         turn: 1,
         inCombat: false,
         enemy: null,
+        lastShareTs: 0,
         weapon: { name: 'Ржавый кинжал (+2 Силы)', str: 2, int: 0 },
         armor: { name: 'Обычная куртка (+0 HP)', hp: 0, mp: 0 },
         inv: ['Зелье крови (+45% HP)', 'Осколок маны (+45% MP)']
@@ -967,6 +1034,7 @@
           lvl: P.lvl, hp: P.hp, maxHp: P.maxHp, mp: P.mp, maxMp: P.maxMp,
           xp: P.xp, nextXp: P.nextXp, str: P.str, agi: P.agi, int: P.int,
           pts: P.pts, energy: P.energy, floor: P.floor, turn: P.turn,
+          lastShareTs: P.lastShareTs || 0,
           weapon: P.weapon, armor: P.armor, inv: P.inv
         };
         localStorage.setItem(SAVE_KEY, JSON.stringify(copy));
@@ -1330,6 +1398,7 @@
       if (P.hp <= 0) {
         P.hp = 0;
         updateHUD();
+        setModalStatus('dead-status', '');
         document.getElementById('dead-reason').textContent = 'Тебя сразил ' + P.enemy.name + ' на этаже ' + P.floor + '.';
         document.getElementById('modal-dead').classList.remove('hidden');
         return;
@@ -1497,26 +1566,152 @@
     }
 
     function openShop() {
+      setModalStatus('shop-status', '');
       document.getElementById('modal-shop').classList.remove('hidden');
     }
 
+    // =========================================================================
+    // 4. РЕАЛЬНАЯ ОПЛАТА TELEGRAM STARS
+    // =========================================================================
+    function payWithStars(itemId, statusId, onSuccess) {
+      if (paymentPending) return;
+
+      var tg = window.Telegram && window.Telegram.WebApp;
+      if (!tg || !tg.openInvoice) {
+        setModalStatus(statusId, 'Оплата Stars работает только внутри Telegram.');
+        return;
+      }
+
+      paymentPending = true;
+      setModalStatus(statusId, 'Подключаемся к серверу оплаты...');
+
+      var userId = (tg.initDataUnsafe && tg.initDataUnsafe.user) ? tg.initDataUnsafe.user.id : 0;
+
+      fetch(API_URL + '/api/create-invoice', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ itemId: itemId, userId: userId })
+      })
+      .then(function(r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.json();
+      })
+      .then(function(data) {
+        if (!data.invoiceLink) throw new Error('Нет ссылки');
+        setModalStatus(statusId, 'Открываем окно оплаты Telegram...');
+
+        tg.openInvoice(data.invoiceLink, function(status) {
+          paymentPending = false;
+          if (status === 'paid') {
+            setModalStatus(statusId, '');
+            onSuccess();
+          } else if (status === 'cancelled') {
+            setModalStatus(statusId, 'Оплата отменена.');
+          } else {
+            setModalStatus(statusId, 'Оплата не прошла. Попробуй снова.');
+          }
+        });
+      })
+      .catch(function() {
+        paymentPending = false;
+        setModalStatus(statusId, 'Сервер просыпается или недоступен. Подожди 15 сек и нажми ещё раз.');
+      });
+    }
+
     function buyEnergy(amount) {
-      P.energy += amount;
-      beep(820, 0.16, 'triangle', 0.1);
-      addLog('[СИСТЕМА]: Получено ⚡ +' + amount + ' энергии!', 'system');
-      saveProgress();
-      closeModals();
-      updateHUD();
+      var itemId = amount >= 100 ? 'energy_100' : 'energy_30';
+      payWithStars(itemId, 'shop-status', function() {
+        P.energy += amount;
+        beep(820, 0.16, 'triangle', 0.1);
+        addLog('[ОПЛАТА STARS]: Получено ⚡ +' + amount + ' энергии!', 'loot');
+        saveProgress();
+        closeModals();
+        updateHUD();
+      });
     }
 
     function revivePlayer() {
-      P.hp = P.maxHp;
-      P.mp = P.maxMp;
-      closeModals();
-      beep(760, 0.2, 'sine', 0.1);
-      addLog('[ВТОРОЙ ШАНС]: Время отмотано назад! Здоровье и мана восстановлены.', 'system');
-      showCombatChoices();
-      updateHUD();
+      payWithStars('revive', 'dead-status', function() {
+        P.hp = P.maxHp;
+        P.mp = P.maxMp;
+        closeModals();
+        beep(760, 0.2, 'sine', 0.1);
+        addLog('[ВТОРОЙ ШАНС]: Время отмотано назад! Здоровье и мана восстановлены.', 'loot');
+        saveProgress();
+        showCombatChoices();
+        updateHUD();
+      });
+    }
+
+    // =========================================================================
+    // 5. РЕКЛАМА ЗА НАГРАДУ (ADSGRAM)
+    // =========================================================================
+    function showRewardedAd(statusId, onReward) {
+      initAdsgram();
+      if (!adController) {
+        setModalStatus(statusId, 'Рекламный блок пока недоступен. Попробуй позже.');
+        return;
+      }
+      setModalStatus(statusId, 'Загружаем видео...');
+      adController.show().then(function() {
+        setModalStatus(statusId, '');
+        onReward();
+      }).catch(function() {
+        setModalStatus(statusId, 'Просмотр прерван или сейчас нет доступных роликов.');
+      });
+    }
+
+    function watchAdForEnergy() {
+      showRewardedAd('shop-status', function() {
+        P.energy += 15;
+        beep(780, 0.16, 'triangle', 0.1);
+        addLog('[НАГРАДА ЗА ПРОСМОТР]: Получено ⚡ +15 энергии!', 'loot');
+        saveProgress();
+        closeModals();
+        updateHUD();
+      });
+    }
+
+    function watchAdForRevive() {
+      showRewardedAd('dead-status', function() {
+        P.hp = P.maxHp;
+        P.mp = P.maxMp;
+        closeModals();
+        beep(760, 0.2, 'sine', 0.1);
+        addLog('[ВТОРОЙ ШАНС]: Возрождение за просмотр рекламы! HP и MP полные.', 'loot');
+        saveProgress();
+        showCombatChoices();
+        updateHUD();
+      });
+    }
+
+    // =========================================================================
+    // 6. ПОДЕЛИТЬСЯ С ДРУГОМ (+15 ЭНЕРГИИ РАЗ В 12 ЧАСОВ)
+    // =========================================================================
+    function shareGame() {
+      var text = '⚔️ Я уже на ' + P.floor + ' этаже (Ранг ' + getRank(P.lvl) + ') в «Протоколе Бездны»! Сможешь дойти до 100 этажа?';
+      var shareLink = 'https://t.me/share/url?url=' + encodeURIComponent(BOT_SHARE_URL) + '&text=' + encodeURIComponent(text);
+
+      try {
+        if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openTelegramLink) {
+          window.Telegram.WebApp.openTelegramLink(shareLink);
+        } else {
+          window.open(shareLink, '_blank');
+        }
+      } catch (e) {}
+
+      var now = Date.now();
+      if (!P.lastShareTs || (now - P.lastShareTs) >= SHARE_COOLDOWN_MS) {
+        P.lastShareTs = now;
+        P.energy += 15;
+        beep(740, 0.15, 'triangle', 0.09);
+        addLog('[БОНУС ЗА ПРИГЛАШЕНИЕ]: Получено ⚡ +15 энергии! Следующий бонус через 12 часов.', 'loot');
+        saveProgress();
+        closeModals();
+        updateHUD();
+      } else {
+        setModalStatus('shop-status', 'Бонус за приглашение уже получен (доступен раз в 12 часов).');
+      }
     }
 
     function restartGame() {
@@ -1540,8 +1735,9 @@
       }
     })();
 
-    // Инициализация Telegram Mini App на полный экран
+    // Инициализация Telegram Mini App и Adsgram
     (function initTelegramApp() {
+      initAdsgram();
       try {
         if (window.Telegram && window.Telegram.WebApp) {
           var tg = window.Telegram.WebApp;
