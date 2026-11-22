@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ПРОТОКОЛ БЕЗДНЫ — 100 Этажей</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    html, body {
+      height: 100%;
+      background: #05070d;
+      color: #e6edf7;
+      overflow: hidden;
+    }
+
+    .app {
+      max-width: 520px;
+      height: 100vh;
+      height: 100dvh;
+      height: var(--tg-viewport-stable-height, 100dvh);
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      background: radial-gradient(circle at 50% 0%, #0f172e 0%, #070a14 55%, #04060c 100%);
+      border-left: 1px solid rgba(0, 229, 255, 0.14);
+      border-right: 1px solid rgba(0, 229, 255, 0.14);
+      position: relative;
+    }
+
+    /* HUD */
+    .hud {
+      padding: 10px 14px 9px;
+      background: rgba(8, 12, 24, 0.96);
+      border-bottom: 1px solid rgba(0, 229, 255, 0.25);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.65);
+      z-index: 5;
+    }
+
+    .hud-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .rank-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      color: #00e5ff;
+      background: rgba(0, 229, 255, 0.1);
+      border: 1px solid rgba(0, 229, 255, 0.45);
+      padding: 4px 8px;
+      border-radius: 6px;
+      text-transform: uppercase;
+    }
+
+    .hud-right {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .energy-pill {
+      font-size: 12px;
+      font-weight: 800;
+      color: #ffd166;
+      background: rgba(255, 209, 102, 0.12);
+      border: 1px solid rgba(255, 209, 102, 0.35);
+      padding: 4px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .icon-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 7px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.06);
+      color: #e6edf7;
+      font-size: 14px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .pts-dot {
+      position: absolute;
+      top: -3px;
+      right: -3px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #00e5ff;
+      box-shadow: 0 0 8px #00e5ff;
+      display: none;
+    }
+
+    .bars {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+    }
+
+    .bar-box { font-size: 10.5px; }
+
+    .bar-label {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 3px;
+      color: #9fb0cc;
+      font-weight: 700;
+    }
+
+    .bar-track {
+      height: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      transition: width 0.3s ease;
+    }
+
+    .hp-fill { background: linear-gradient(90deg, #ff3b5c, #ff6b81); }
+    .mp-fill { background: linear-gradient(90deg, #3b82f6, #00e5ff); }
+    .xp-fill { background: linear-gradient(90deg, #8b5cf6, #d946ef); }
+
+    /* Сцена с изображением врага */
+    .scene-card {
+      margin: 10px 14px 0;
+      height: 168px;
+      border-radius: 14px;
+      border: 1px solid rgba(0, 229, 255, 0.3);
+      background: linear-gradient(180deg, #0c142b 0%, #090c18 100%);
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 10px 12px;
+      transition: border-color 0.35s ease;
+    }
+
+    .scene-card.danger {
+      border-color: rgba(255, 59, 92, 0.65);
+    }
+
+    .scene-card.boss-mode {
+      border-color: rgba(255, 209, 102, 0.85);
+      box-shadow: 0 0 22px rgba(255, 59, 92, 0.25);
+    }
+
+    .scene-glow {
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(0, 229, 255, 0.22), transparent 70%);
+      pointer-events: none;
+      transition: background 0.4s ease;
+    }
+
+    .scene-top {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .loc-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: #ffffff;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.8);
+    }
+
+    .loc-sub {
+      font-size: 11px;
+      color: #8ea4c8;
+      margin-top: 2px;
+    }
+
+    .floor-pill {
+      font-size: 11px;
+      font-weight: 800;
+      color: #cbd5e1;
+      background: rgba(0, 0, 0, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      padding: 3px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    .monster-stage {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .monster-art {
+      width: 116px;
+      height: 116px;
+      animation: floatMonster 2.8s ease-in-out infinite;
+      filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.85));
+    }
+
+    .monster-art.hit {
+      animation: hitShake 0.3s ease;
+      filter: brightness(2.2) drop-shadow(0 0 18px #ff3b5c);
+    }
+
+    @keyframes floatMonster {
+      0%, 100% { transform: translateY(0px) scale(1); }
+      50% { transform: translateY(-6px) scale(1.03); }
+    }
+
+    @keyframes hitShake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-8px) rotate(-4deg); }
+      50% { transform: translateX(8px) rotate(4deg); }
+      75% { transform: translateX(-4px); }
+      100% { transform: translateX(0); }
+    }
+
+    .enemy-hud {
+      position: relative;
+      z-index: 3;
+      background: rgba(5, 8, 18, 0.82);
+      border: 1px solid rgba(255, 59, 92, 0.4);
+      border-radius: 8px;
+      padding: 6px 9px;
+      display: none;
+    }
+
+    .enemy-hud.active { display: block; }
+
+    .enemy-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11.5px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .enemy-name { color: #ff8598; }
+    .enemy-name.boss { color: #ffd166; }
+
+    .enemy-hp-track {
+      height: 6px;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .enemy-hp-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #ff2a55, #ff758f);
+      border-radius: 99px;
+      transition: width 0.25s ease;
+    }
+
+    /* Лента сюжета */
+    .log {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .msg {
+      padding: 10px 12px;
+      border-radius: 11px;
+      font-size: 13.5px;
+      line-height: 1.45;
+      animation: fadeUp 0.2s ease;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .msg-story {
+      background: rgba(16, 23, 42, 0.86);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #e2e8f0;
+    }
+
+    .msg-system {
+      background: rgba(0, 229, 255, 0.08);
+      border: 1px solid rgba(0, 229, 255, 0.4);
+      color: #9beeff;
+      font-size: 12.5px;
+      font-weight: 600;
+    }
+
+    .msg-loot {
+      background: rgba(255, 209, 102, 0.1);
+      border: 1px solid rgba(255, 209, 102, 0.45);
+      color: #ffe299;
+      font-size: 12.5px;
+      font-weight: 700;
+    }
+
+    .msg-player {
+      align-self: flex-end;
+      background: rgba(124, 58, 237, 0.24);
+      border: 1px solid rgba(167, 139, 250, 0.45);
+      color: #ede9fe;
+      max-width: 86%;
+      font-size: 13px;
+    }
+
+    .msg-danger {
+      background: rgba(255, 42, 85, 0.12);
+      border: 1px solid rgba(255, 42, 85, 0.45);
+      color: #ffb3c1;
+    }
+
+    /* Панель управления */
+    .controls {
+      padding: 9px 14px 13px;
+      background: rgba(7, 10, 20, 0.97);
+      border-top: 1px solid rgba(0, 229, 255, 0.2);
+    }
+
+    .choices {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+    .choice-btn {
+      width: 100%;
+      text-align: left;
+      padding: 9px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(0, 229, 255, 0.28);
+      background: rgba(17, 25, 48, 0.92);
+      color: #e6f4ff;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .choice-btn:active {
+      transform: scale(0.985);
+      background: rgba(0, 229, 255, 0.16);
+    }
+
+    .custom-row { display: flex; gap: 8px; }
+
+    .custom-input {
+      flex: 1;
+      background: #0d1324;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 10px;
+      padding: 9px 12px;
+      color: #ffffff;
+      font-size: 13px;
+      outline: none;
+    }
+
+    .custom-input:focus { border-color: #00e5ff; }
+
+    .send-btn {
+      padding: 0 14px;
+      border-radius: 10px;
+      border: none;
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      color: #03111f;
+      font-weight: 800;
+      font-size: 12.5px;
+      cursor: pointer;
+    }
+
+    /* Оверлеи */
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(4, 6, 14, 0.94);
+      z-index: 30;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 18px;
+    }
+
+    .hidden { display: none !important; }
+
+    .sys-window {
+      width: 100%;
+      max-width: 390px;
+      max-height: 90vh;
+      overflow-y: auto;
+      background: linear-gradient(180deg, #0d1630 0%, #070b18 100%);
+      border: 1.5px solid #00e5ff;
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: 0 0 35px rgba(0, 229, 255, 0.22);
+    }
+
+    .sys-tag {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      color: #00e5ff;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .sys-title {
+      font-size: 19px;
+      font-weight: 900;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    .sys-text {
+      font-size: 13px;
+      line-height: 1.48;
+      color: #b8c7e0;
+      margin-bottom: 14px;
+    }
+
+    .btn-primary {
+      width: 100%;
+      padding: 11px;
+      border-radius: 10px;
+      border: none;
+      background: linear-gradient(135deg, #00e5ff, #3b82f6);
+      color: #04101f;
+      font-size: 13.5px;
+      font-weight: 900;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-bottom: 8px;
+    }
+
+    .btn-gold {
+      width: 100%;
+      padding: 11px;
+      border-radius: 10px;
+      border: none;
+      background: linear-gradient(135deg, #ffd166, #f59e0b);
+      color: #241300;
+      font-size: 13px;
+      font-weight: 900;
+      cursor: pointer;
+      margin-bottom: 8px;
+    }
+
+    .btn-ghost {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: transparent;
+      color: #cbd5e1;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 13px;
+    }
+
+    .plus-btn {
+      padding: 3px 10px;
+      border-radius: 6px;
+      border: 1px solid #00e5ff;
+      background: rgba(0, 229, 255, 0.14);
+      color: #00e5ff;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .gear-box {
+      margin: 10px 0;
+      padding: 9px 10px;
+      background: rgba(255, 209, 102, 0.08);
+      border: 1px solid rgba(255, 209, 102, 0.3);
+      border-radius: 9px;
+      font-size: 12px;
+      color: #ffe299;
+      line-height: 1.5;
+    }
+
+    .inv-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 8px 0 14px;
+    }
+
+    .inv-item {
+      font-size: 11.5px;
+      padding: 5px 8px;
+      border-radius: 7px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: #e2e8f0;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+
+    <!-- HUD -->
+    <div class="hud">
+      <div class="hud-top">
+        <div class="rank-badge" id="ui-rank">РАНГ E · УР. 1</div>
+        <div class="hud-right">
+          <div class="energy-pill" onclick="openShop()">⚡ <span id="ui-energy">50</span></div>
+          <button class="icon-btn" onclick="openStats()" title="Статус">📊<span class="pts-dot" id="pts-dot"></span></button>
+          <button class="icon-btn" onclick="toggleMute()" id="mute-btn" title="Звук">🔊</button>
+        </div>
+      </div>
+      <div class="bars">
+        <div class="bar-box">
+          <div class="bar-label"><span>HP</span><span id="ui-hp">100/100</span></div>
+          <div class="bar-track"><div class="bar-fill hp-fill" id="bar-hp" style="width:100%"></div></div>
+        </div>
+        <div class="bar-box">
+          <div class="bar-label"><span>MP</span><span id="ui-mp">50/50</span></div>
+          <div class="bar-track"><div class="bar-fill mp-fill" id="bar-mp" style="width:100%"></div></div>
+        </div>
+        <div class="bar-box">
+          <div class="bar-label"><span>XP</span><span id="ui-xp">0/100</span></div>
+          <div class="bar-track"><div class="bar-fill xp-fill" id="bar-xp" style="width:0%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Боевая сцена с портретом врага -->
+    <div class="scene-card" id="scene-card">
+      <div class="scene-glow" id="scene-glow"></div>
+
+      <div class="scene-top">
+        <div>
+          <div class="loc-title" id="loc-title">Станция «Нулевая» · Врата E</div>
+          <div class="loc-sub" id="loc-sub">Подземелье Бездны</div>
+        </div>
+        <div class="floor-pill" id="floor-pill">Этаж 1 / 100</div>
+      </div>
+
+      <div class="monster-stage" id="monster-stage"></div>
+
+      <div class="enemy-hud" id="enemy-hud">
+        <div class="enemy-row">
+          <span class="enemy-name" id="enemy-name">Монстр</span>
+          <span id="enemy-hp-text" style="color:#fff;">50/50 HP</span>
+        </div>
+        <div class="enemy-hp-track">
+          <div class="enemy-hp-fill" id="enemy-hp-fill" style="width:100%"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Сюжетная лента -->
+    <div class="log" id="log"></div>
+
+    <!-- Панель действий -->
+    <div class="controls">
+      <div class="choices" id="choices"></div>
+      <div class="custom-row">
+        <input type="text" class="custom-input" id="custom-input" placeholder="Или напиши своё действие..." onkeydown="if(event.key==='Enter') submitCustom()">
+        <button class="send-btn" onclick="submitCustom()">ХОД</button>
+      </div>
+    </div>
+
+    <!-- Оверлей 1: Старт -->
+    <div class="overlay" id="modal-start">
+      <div class="sys-window">
+        <div class="sys-tag">[УВЕДОМЛЕНИЕ СИСТЕМЫ]</div>
+        <div class="sys-title">Протокол Бездны · 100 Этажей</div>
+        <p class="sys-text">
+          Перед тобой открылись Врата, уходящие на <b>100 этажей</b> вглубь Бездны. Внутри — 10 мрачных зон, десятки уникальных чудовищ, элитные стражи и 10 боссов.<br><br>
+          <b>Пройдёшь путь от Ранга E до Монарха Бездны?</b>
+        </p>
+        <button class="btn-primary hidden" id="btn-continue" onclick="continueGame()">▶ Продолжить (Этаж <span id="saved-floor-num">1</span>)</button>
+        <button class="btn-primary" onclick="startGame()">Принять статус Игрока (Новая игра)</button>
+      </div>
+    </div>
+
+    <!-- Оверлей 2: Статус и снаряжение -->
+    <div class="overlay hidden" id="modal-stats">
+      <div class="sys-window">
+        <div class="sys-tag">[ОКНО СТАТУСА]</div>
+        <div class="sys-title" id="st-header">Игрок · Ранг E</div>
+        <div style="font-size:12px;color:#00e5ff;margin-bottom:8px;">
+          Свободных очков характеристик: <b id="st-pts">0</b>
+        </div>
+        <div class="stat-row">
+          <span>⚔️ Сила (ближний урон)</span>
+          <span><b id="st-str">6</b> <button class="plus-btn" id="btn-str" onclick="addStat('str')">+</button></span>
+        </div>
+        <div class="stat-row">
+          <span>💨 Ловкость (крит и уклонение)</span>
+          <span><b id="st-agi">5</b> <button class="plus-btn" id="btn-agi" onclick="addStat('agi')">+</button></span>
+        </div>
+        <div class="stat-row">
+          <span>🔮 Интеллект (мана и магия)</span>
+          <span><b id="st-int">5</b> <button class="plus-btn" id="btn-int" onclick="addStat('int')">+</button></span>
+        </div>
+        <div class="gear-box" id="gear-box"></div>
+        <div style="font-size:12px;color:#9fb0cc;">Расходники (нажми, чтобы использовать):</div>
+        <div class="inv-list" id="inv-list"></div>
+        <button class="btn-ghost" onclick="closeModals()">Закрыть</button>
+      </div>
+    </div>
+
+    <!-- Оверлей 3: Энергия -->
+    <div class="overlay hidden" id="modal-shop">
+      <div class="sys-window">
+        <div class="sys-tag">[ПОПОЛНЕНИЕ ЭНЕРГИИ]</div>
+        <div class="sys-title">Мана Разлома</div>
+        <p class="sys-text">
+          Каждый ход расходует 1⚡. Победа над боссом этажа восстанавливает +15⚡. Здесь в будущем подключается оплата через Telegram Stars.
+        </p>
+        <button class="btn-gold" onclick="buyEnergy(30)">⚡ +30 ходов · 50 Stars (Тест)</button>
+        <button class="btn-primary" onclick="buyEnergy(100)">⚡ +100 ходов · 120 Stars (Тест)</button>
+        <button class="btn-ghost" onclick="closeModals()">Назад в Разлом</button>
+      </div>
+    </div>
+
+    <!-- Оверлей 4: Смерть -->
+    <div class="overlay hidden" id="modal-dead">
+      <div class="sys-window" style="border-color:#ff3b5c;">
+        <div class="sys-tag" style="color:#ff3b5c;">[КРИТИЧЕСКИЙ УРОН]</div>
+        <div class="sys-title">Связь с телом потеряна</div>
+        <p class="sys-text" id="dead-reason">Тьма Разлома поглотила тебя.</p>
+        <button class="btn-gold" onclick="revivePlayer()">⏪ Откатить смерть (25 Stars · Тест)</button>
+        <button class="btn-ghost" onclick="restartGame()">🔄 Начать заново с 1-го этажа</button>
+      </div>
+    </div>
+
+    <!-- Оверлей 5: Финал 100 этажа -->
+    <div class="overlay hidden" id="modal-win">
+      <div class="sys-window" style="border-color:#ffd166;">
+        <div class="sys-tag" style="color:#ffd166;">[ПРОТОКОЛ ЗАВЕРШЁН]</div>
+        <div class="sys-title">👑 Монарх Бездны</div>
+        <p class="sys-text">
+          Ты прошёл все <b>100 этажей</b> и сокрушил Владыку Абсолютной Бездны! Врата закрываются, а твоё имя вписано в Систему навсегда.
+        </p>
+        <button class="btn-gold" onclick="restartGame()">🔥 Начать Новую Игру</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // =========================================================================
+    // 1. ЗВУКОВОЙ СИНТЕЗАТОР (РАБОТАЕТ БЕЗ ВНЕШНИХ ФАЙЛОВ)
+    // =========================================================================
+    var audioCtx = null;
+    var muted = false;
+
+    function beep(freq, dur, type, vol) {
+      if (muted) return;
+      try {
+        var AC = window.AudioContext || window.webkitAudioContext;
+        if (!AC) return;
+        if (!audioCtx) audioCtx = new AC();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        var osc = audioCtx.createOscillator();
+        var gain = audioCtx.createGain();
+        osc.type = type || 'sine';
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(vol || 0.08, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + dur);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + dur);
+      } catch (e) {}
+    }
+
+    function toggleMute() {
+      muted = !muted;
+      document.getElementById('mute-btn').textContent = muted ? '🔇' : '🔊';
+    }
+
+    // =========================================================================
+    // 2. ГЕНЕРАТОР SVG-ПОРТРЕТОВ ДЛЯ КАЖДОГО МОНСТРА И БОССА
+    // =========================================================================
+    function getPortalSVG(aura) {
+      return (
+        '<svg class="monster-art" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">' +
+          '<ellipse cx="60" cy="60" rx="34" ry="48" fill="none" stroke="' + aura + '" stroke-width="2.5" stroke-dasharray="6 4" opacity="0.7"/>' +
+          '<ellipse cx="60" cy="60" rx="22" ry="36" fill="' + aura + '" opacity="0.16"/>' +
+          '<path d="M60 16 L66 48 L60 60 L54 48 Z" fill="' + aura + '" opacity="0.85"/>' +
+          '<path d="M60 104 L66 72 L60 60 L54 72 Z" fill="' + aura + '" opacity="0.5"/>' +
+          '<circle cx="60" cy="60" r="8" fill="#ffffff" opacity="0.9"/>' +
+        '</svg>'
+      );
+    }
+
+    function getEnemySVG(type, body, eye, accent) {
+      var s = '<svg class="monster-art" id="active-monster-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">';
+      s += '<circle cx="60" cy="62" r="44" fill="' + accent + '" opacity="0.14"/>';
+
+      if (type === 'hound') {
+        s += '<path d="M22 86 L34 40 L48 52 L60 36 L72 52 L86 40 L98 86 L78 98 L60 88 L42 98 Z" fill="' + body + '" stroke="' + accent + '" stroke-width="2"/>';
+        s += '<polygon points="36,42 30,20 48,38" fill="' + body + '" stroke="' + accent + '" stroke-width="1.8"/>';
+        s += '<polygon points="84,42 90,20 72,38" fill="' + body + '" stroke="' + accent + '" stroke-width="1.8"/>';
+        s += '<polygon points="42,60 54,65 44,68" fill="' + eye + '"/>';
+        s += '<polygon points="78,60 66,65 76,68" fill="' + eye + '"/>';
+        s += '<path d="M44 82 L50 76 L55 83 L60 76 L65 83 L70 76 L76 82" fill="none" stroke="#ffffff" stroke-width="2.2"/>';
+      } else if (type === 'stalker') {
+        s += '<path d="M36 96 C32 62 34 32 60 24 C86 32 88 62 84 96 L70 84 L60 94 L50 84 Z" fill="' + body + '" stroke="' + accent + '" stroke-width="2"/>';
+        s += '<ellipse cx="60" cy="48" rx="18" ry="20" fill="#dbe4f0" opacity="0.92"/>';
+        s += '<path d="M48 64 L52 74 L56 64 L60 74 L64 64 L68 74 L72 64" fill="none" stroke="#0b0f1c" stroke-width="2.2"/>';
+        s += '<circle cx="52" cy="47" r="4.5" fill="#090d16"/><circle cx="68" cy="47" r="4.5" fill="#090d16"/>';
+        s += '<circle cx="52" cy="47" r="2.2" fill="' + eye + '"/><circle cx="68" cy="47" r="2.2" fill="' + eye + '"/>';
+      } else if (type === 'golem') {
+        s += '<polygon points="32,28 60,16 88,28 96,74 82,102 38,102 24,74" fill="' + body + '" stroke="' + accent + '" stroke-width="2.5"/>';
+        s += '<path d="M36 42 L60 52 L84 42 M60 52 L60 96" stroke="' + accent + '" stroke-width="2" fill="none" opacity="0.7"/>';
+        s += '<rect x="40" y="44" width="14" height="6" rx="2" fill="' + eye + '"/>';
+        s += '<rect x="66" y="44" width="14" height="6" rx="2" fill="' + eye + '"/>';
+        s += '<polygon points="60,26 66,34 60,42 54,34" fill="' + eye + '"/>';
+      } else if (type === 'spider') {
+        s += '<path d="M40 58 L14 38 L8 62 M40 66 L12 68 L14 92 M80 58 L106 38 L112 62 M80 66 L108 68 L106 92" stroke="' + accent + '" stroke-width="3.2" fill="none" stroke-linecap="round"/>';
+        s += '<ellipse cx="60" cy="44" rx="24" ry="20" fill="' + body + '" stroke="' + accent + '" stroke-width="2"/>';
+        s += '<circle cx="60" cy="70" r="18" fill="' + body + '" stroke="' + accent + '" stroke-width="2"/>';
+        s += '<circle cx="51" cy="68" r="3.5" fill="' + eye + '"/><circle cx="69" cy="68" r="3.5" fill="' + eye + '"/>';
+        s += '<circle cx="57" cy="62" r="2.2" fill="' + eye + '"/><circle cx="63" cy="62" r="2.2" fill="' + eye + '"/>';
+        s += '<path d="M52 84 L55 96 L58 84 M62 84 L65 96 L68 84" fill="#ffffff"/>';
+      } else if (type === 'knight') {
+        s += '<path d="M60 10 C78 14 96 28 94 50 C82 32 70 28 60 28 Z" fill="' + eye + '" opacity="0.9"/>';
+        s += '<path d="M26 102 L34 66 L60 56 L86 66 L94 102 Z" fill="' + body + '" stroke="' + accent + '" stroke-width="2"/>';
+        s += '<path d="M42 26 L60 16 L78 26 L76 58 L60 70 L44 58 Z" fill="' + body + '" stroke="' + accent + '" stroke-width="2.2"/>';
+        s += '<path d="M46 44 L58 48 L48 51 Z" fill="' + eye + '"/>';
+        s += '<path d="M74 44 L62 48 L72 51 Z" fill="' + eye + '"/>';
+        s += '<line x1="60" y1="22" x2="60" y2="66" stroke="' + accent + '" stroke-width="2"/>';
+      } else if (type === 'lich') {
+        s += '<path d="M24 104 L38 30 L60 16 L82 30 L96 104 Z" fill="' + body + '" stroke="' + accent + '" stroke-width="2"/>';
+        s += '<polygon points="44,24 50,10 60,20 70,10 76,24" fill="' + accent + '"/>';
+        s += '<ellipse cx="60" cy="48" rx="15" ry="18" fill="#060810"/>';
+        s += '<circle cx="53" cy="46" r="3.5" fill="' + eye + '"/><circle cx="67" cy="46" r="3.5" fill="' + eye + '"/>';
+        s += '<circle cx="60" cy="82" r="10" fill="' + eye + '" opacity="0.85"/>';
+        s += '<circle cx="60" cy="82" r="15" fill="none" stroke="' + eye + '" stroke-width="1.5" stroke-dasharray="4 3"/>';
+      } else if (type === 'wraith') {
+        s += '<path d="M60 14 C86 18 92 52 88 86 L74 76 L60 98 L46 76 L32 86 C28 52 34 18 60 14 Z" fill="' + body + '" stroke="' + accent + '" stroke-width="2.2"/>';
+        s += '<path d="M46 42 Q60 34 74 42 Q60 66 46 42 Z" fill="#060a14"/>';
+        s += '<circle cx="54" cy="46" r="3" fill="' + eye + '"/><circle cx="66" cy="46" r="3" fill="' + eye + '"/>';
+        s += '<path d="M22 30 L34 46 M98 30 L86 46" stroke="' + eye + '" stroke-width="2.5"/>';
+      } else if (type === 'vampire') {
+        s += '<path d="M16 42 L44 58 L32 104 L88 104 L76 58 L104 42 L84 30 L60 44 L36 30 Z" fill="' + body + '" stroke="' + accent + '" stroke-width="2"/>';
+        s += '<ellipse cx="60" cy="46" rx="16" ry="20" fill="#e2d9e8"/>';
+        s += '<path d="M44 38 L60 22 L76 38 L60 32 Z" fill="#0b0712"/>';
+        s += '<polygon points="49,44 57,47 50,49" fill="' + eye + '"/>';
+        s += '<polygon points="71,44 63,47 70,49" fill="' + eye + '"/>';
+        s += '<path d="M53 56 L55 62 L57 56 M63 56 L65 62 L67 56" fill="#ffffff" stroke="' + eye + '" stroke-width="0.8"/>';
+      } else if (type === 'demon') {
+        s += '<path d="M38 36 C24 22 22 10 34 14 C36 22 44 26 48 30 Z" fill="' + accent + '"/>';
+        s += '<path d="M82 36 C96 22 98 10 86 14 C84 22 76 26 72 30 Z" fill="' + accent + '"/>';
+        s += '<path d="M32 42 L60 26 L88 42 L84 84 L60 98 L36 84 Z" fill="' + body + '" stroke="' + accent + '" stroke-width="2.2"/>';
+        s += '<polygon points="44,52 56,56 46,60" fill="' + eye + '"/>';
+        s += '<polygon points="76,52 64,56 74,60" fill="' + eye + '"/>';
+        s += '<path d="M44 76 Q60 86 76 76" stroke="#08060a" stroke-width="4" fill="none"/>';
+        s += '<polygon points="48,78 52,70 55,79" fill="#ffffff"/><polygon points="72,78 68,70 65,79" fill="#ffffff"/>';
+      } else if (type === 'dragon') {
+        s += '<path d="M10 46 L42 60 L20 82 Z M110 46 L78 60 L100 82 Z" fill="' + body + '" stroke="' + accent + '" stroke-width="2"/>';
+        s += '<path d="M40 28 L60 14 L80 28 L84 68 L60 96 L36 68 Z" fill="' + body + '" stroke="' + accent + '" stroke-width="2.4"/>';
+        s += '<polygon points="40,28 24,10 48,20" fill="' + accent + '"/>';
+        s += '<polygon points="80,28 96,10 72,20" fill="' + accent + '"/>';
+        s += '<polygon points="44,50 56,54 46,58" fill="' + eye + '"/>';
+        s += '<polygon points="76,50 64,54 74,58" fill="' + eye + '"/>';
+        s += '<path d="M46 76 L53 86 L60 76 L67 86 L74 76" fill="none" stroke="' + eye + '" stroke-width="2.5"/>';
+      } else if (type === 'eye') {
+        s += '<path d="M14 60 Q60 16 106 60 Q60 104 14 60 Z" fill="' + body + '" stroke="' + accent + '" stroke-width="2.6"/>';
+        s += '<circle cx="60" cy="60" r="22" fill="' + eye + '" opacity="0.9"/>';
+        s += '<ellipse cx="60" cy="60" rx="6" ry="18" fill="#05070d"/>';
+        s += '<circle cx="60" cy="60" r="34" fill="none" stroke="' + accent + '" stroke-width="1.5" stroke-dasharray="5 5"/>';
+      } else {
+        s += '<circle cx="60" cy="54" r="42" fill="none" stroke="' + eye + '" stroke-width="2" stroke-dasharray="8 4"/>';
+        s += '<polygon points="34,30 44,8 54,24 60,4 66,24 76,8 86,30" fill="' + eye + '"/>';
+        s += '<path d="M22 106 L36 34 L60 26 L84 34 L98 106 Z" fill="' + body + '" stroke="' + accent + '" stroke-width="2.5"/>';
+        s += '<path d="M44 46 L57 52 L46 56 Z" fill="' + eye + '"/>';
+        s += '<path d="M76 46 L63 52 L74 56 Z" fill="' + eye + '"/>';
+        s += '<polygon points="60,68 70,82 60,96 50,82" fill="' + eye + '"/>';
+      }
+
+      s += '</svg>';
+      return s;
+    }
+
+    // =========================================================================
+    // 3. 10 ЗОН x 10 ЭТАЖЕЙ = 100 ЭТАЖЕЙ И УНИКАЛЬНЫЕ ВРАГИ
+    // =========================================================================
+    var ZONES = [
+      {
+        name: 'Станция «Нулевая» · Врата E',
+        aura: '#00e5ff',
+        mobs: [
+          { name: 'Теневая Гончая', art: 'hound', body: '#1c243b', eye: '#00e5ff', accent: '#38bdf8' },
+          { name: 'Туннельный Упырь', art: 'stalker', body: '#1f2937', eye: '#34d399', accent: '#10b981' },
+          { name: 'Крысолак Разлома', art: 'hound', body: '#2c1e2e', eye: '#f43f5e', accent: '#fb7185' }
+        ],
+        elite: { name: 'Свирепый Вожак Гончих', art: 'hound', body: '#12182b', eye: '#ff2a55', accent: '#ff5c7c', drop: { slot: 'weapon', name: 'Клык Вожака (+4 Силы)', str: 4, int: 0 } },
+        boss: { name: 'Альфа-Гончая Бездны', art: 'hound', body: '#0d1024', eye: '#ffd166', accent: '#00e5ff', drop: { slot: 'weapon', name: 'Парные Клыки Альфы (+7 Силы)', str: 7, int: 2 } }
+      },
+      {
+        name: 'Затопленный Коллектор · Врата D',
+        aura: '#10b981',
+        mobs: [
+          { name: 'Костяной Сталкер', art: 'stalker', body: '#182b29', eye: '#34d399', accent: '#10b981' },
+          { name: 'Болотный Ползун', art: 'spider', body: '#14291d', eye: '#a3e635', accent: '#4ade80' },
+          { name: 'Утопший Стражник', art: 'knight', body: '#122630', eye: '#22d3ee', accent: '#06b6d4' }
+        ],
+        elite: { name: 'Костяной Мясник', art: 'stalker', body: '#162421', eye: '#facc15', accent: '#10b981', drop: { slot: 'armor', name: 'Панцирь Коллектора (+35 HP)', hp: 35, mp: 10 } },
+        boss: { name: 'Повелитель Трясины', art: 'golem', body: '#102920', eye: '#a3e635', accent: '#10b981', drop: { slot: 'weapon', name: 'Топор Глубин (+11 Силы)', str: 11, int: 3 } }
+      },
+      {
+        name: 'Зал Каменных Идолов · Врата C',
+        aura: '#a855f7',
+        mobs: [
+          { name: 'Каменный Страж', art: 'golem', body: '#272738', eye: '#c084fc', accent: '#a855f7' },
+          { name: 'Рунная Гаргулья', art: 'demon', body: '#2d233d', eye: '#e879f9', accent: '#c084fc' },
+          { name: 'Живая Статуя', art: 'knight', body: '#312e47', eye: '#38bdf8', accent: '#818cf8' }
+        ],
+        elite: { name: 'Хранитель Рун', art: 'eye', body: '#1e1633', eye: '#d946ef', accent: '#a855f7', drop: { slot: 'weapon', name: 'Рунный Клинок (+14 Силы, +6 Инт)', str: 14, int: 6 } },
+        boss: { name: 'Древний Колосс Алтаря', art: 'golem', body: '#1f1636', eye: '#ffd166', accent: '#c084fc', drop: { slot: 'armor', name: 'Доспех Идола (+70 HP, +20 MP)', hp: 70, mp: 20 } }
+      },
+      {
+        name: 'Паучье Логово Тьмы · Врата C+',
+        aura: '#84cc16',
+        mobs: [
+          { name: 'Ядовитый Ткач', art: 'spider', body: '#1c2414', eye: '#bef264', accent: '#84cc16' },
+          { name: 'Коконный Охотник', art: 'spider', body: '#261729', eye: '#f43f5e', accent: '#a855f7' },
+          { name: 'Теневая Вдова', art: 'wraith', body: '#181826', eye: '#a3e635', accent: '#65a30d' }
+        ],
+        elite: { name: 'Ядовитый Матриарх', art: 'spider', body: '#1e2912', eye: '#fde047', accent: '#84cc16', drop: { slot: 'weapon', name: 'Жало Касаки (+19 Силы, +8 Инт)', str: 19, int: 8 } },
+        boss: { name: 'Арахна, Королева Яда', art: 'spider', body: '#190f24', eye: '#bef264', accent: '#ec4899', drop: { slot: 'armor', name: 'Шёлковый Плащ Бездны (+110 HP)', hp: 110, mp: 35 } }
+      },
+      {
+        name: 'Цитадель Пепла · Врата B',
+        aura: '#f97316',
+        mobs: [
+          { name: 'Пепельный Мечник', art: 'knight', body: '#2e1616', eye: '#fb923c', accent: '#f97316' },
+          { name: 'Культист Пламени', art: 'lich', body: '#331410', eye: '#facc15', accent: '#ef4444' },
+          { name: 'Палач Цитадели', art: 'demon', body: '#2b1215', eye: '#ff3b5c', accent: '#f97316' }
+        ],
+        elite: { name: 'Капитан Пепельной Гвардии', art: 'knight', body: '#3b1117', eye: '#ffd166', accent: '#ff4d4d', drop: { slot: 'weapon', name: 'Меч Гвардейца (+25 Силы, +10 Инт)', str: 25, int: 10 } },
+        boss: { name: 'Рыцарь Бездны Игрис', art: 'knight', body: '#1c0b14', eye: '#ff2a55', accent: '#ef4444', drop: { slot: 'weapon', name: 'Алый Клинок Игриса (+34 Силы, +14 Инт)', str: 34, int: 14 } }
+      },
+      {
+        name: 'Склеп Некроманта · Врата B+',
+        aura: '#6366f1',
+        mobs: [
+          { name: 'Чумной Лич', art: 'lich', body: '#171936', eye: '#818cf8', accent: '#6366f1' },
+          { name: 'Жнец Душ', art: 'wraith', body: '#11152b', eye: '#38bdf8', accent: '#818cf8' },
+          { name: 'Проклятый Паладин', art: 'knight', body: '#1a1630', eye: '#c084fc', accent: '#6366f1' }
+        ],
+        elite: { name: 'Хранитель Катакомб', art: 'lich', body: '#13112b', eye: '#00e5ff', accent: '#8b5cf6', drop: { slot: 'armor', name: 'Мантия Некроманта (+160 HP, +65 MP)', hp: 160, mp: 65 } },
+        boss: { name: 'Архилич Малгор', art: 'lich', body: '#0d0c24', eye: '#00f5d4', accent: '#818cf8', drop: { slot: 'weapon', name: 'Посох Повелителя Теней (+40 Силы, +28 Инт)', str: 40, int: 28 } }
+      },
+      {
+        name: 'Ледяной Разлом · Врата A',
+        aura: '#38bdf8',
+        mobs: [
+          { name: 'Морозный Фантом', art: 'wraith', body: '#10253b', eye: '#7dd3fc', accent: '#38bdf8' },
+          { name: 'Ледяной Колосс', art: 'golem', body: '#122c42', eye: '#e0f2fe', accent: '#0ea5e9' },
+          { name: 'Зимний Ассасин', art: 'stalker', body: '#0f2036', eye: '#00e5ff', accent: '#38bdf8' }
+        ],
+        elite: { name: 'Берсерк Вечной Стужи', art: 'demon', body: '#0e243d', eye: '#ffffff', accent: '#38bdf8', drop: { slot: 'weapon', name: 'Ледяной Клык Баруки (+52 Силы, +25 Инт)', str: 52, int: 25 } },
+        boss: { name: 'Ледяной Монарх Фрост', art: 'wraith', body: '#0a1d36', eye: '#ffffff', accent: '#00e5ff', drop: { slot: 'armor', name: 'Броня Вечного Льда (+240 HP, +90 MP)', hp: 240, mp: 90 } }
+      },
+      {
+        name: 'Алый Дворец Крови · Врата A+',
+        aura: '#ff2a55',
+        mobs: [
+          { name: 'Кровавый Барон', art: 'vampire', body: '#2b0b16', eye: '#ff2a55', accent: '#fb7185' },
+          { name: 'Охотник Ночи', art: 'vampire', body: '#240a18', eye: '#f43f5e', accent: '#e11d48' },
+          { name: 'Багровый Демон', art: 'demon', body: '#360c14', eye: '#ffd166', accent: '#ff2a55' }
+        ],
+        elite: { name: 'Леди Алой Луны', art: 'vampire', body: '#300918', eye: '#ff4d6d', accent: '#fda4af', drop: { slot: 'weapon', name: 'Кинжал Демона-Короля (+66 Силы, +34 Инт)', str: 66, int: 34 } },
+        boss: { name: 'Граф Алой Луны', art: 'vampire', body: '#240510', eye: '#ffd166', accent: '#ff2a55', drop: { slot: 'armor', name: 'Плащ Кровавого Графа (+340 HP, +120 MP)', hp: 340, mp: 120 } }
+      },
+      {
+        name: 'Драконий Хребет · Врата S',
+        aura: '#f59e0b',
+        mobs: [
+          { name: 'Страж-Виверна', art: 'dragon', body: '#2b1b0e', eye: '#fbbf24', accent: '#f59e0b' },
+          { name: 'Адский Они', art: 'demon', body: '#30140d', eye: '#f97316', accent: '#ef4444' },
+          { name: 'Обсидиановый Дрейк', art: 'dragon', body: '#1a1524', eye: '#ff3b5c', accent: '#f59e0b' }
+        ],
+        elite: { name: 'Древний Змей Пламени', art: 'dragon', body: '#2e160a', eye: '#fef08a', accent: '#f97316', drop: { slot: 'weapon', name: 'Гнев Камиша (+85 Силы, +48 Инт)', str: 85, int: 48 } },
+        boss: { name: 'Костяной Дракон Камиш', art: 'dragon', body: '#1f100a', eye: '#ff2a55', accent: '#fbbf24', drop: { slot: 'armor', name: 'Чешуя Дракона S-ранга (+480 HP, +160 MP)', hp: 480, mp: 160 } }
+      },
+      {
+        name: 'Тронный Зал Бездны · Ранг SS',
+        aura: '#e879f9',
+        mobs: [
+          { name: 'Наблюдатель Пустоты', art: 'eye', body: '#160b29', eye: '#e879f9', accent: '#c084fc' },
+          { name: 'Падший Серафим', art: 'knight', body: '#1c102e', eye: '#ffd166', accent: '#e879f9' },
+          { name: 'Тень Монарха', art: 'monarch', body: '#0d071c', eye: '#00e5ff', accent: '#a855f7' }
+        ],
+        elite: { name: 'Верховный Архитектор', art: 'eye', body: '#140826', eye: '#00e5ff', accent: '#ffd166', drop: { slot: 'weapon', name: 'Клинок Архитектора (+115 Силы, +70 Инт)', str: 115, int: 70 } },
+        boss: { name: 'Владыка Абсолютной Бездны', art: 'monarch', body: '#090414', eye: '#ffd166', accent: '#e879f9', drop: { slot: 'weapon', name: 'Корона Монарха (+150 Силы, +100 Инт)', str: 150, int: 100 } }
+      }
+    ];
+
+    var MAX_FLOORS = 100;
+    var SAVE_KEY = 'abyss_protocol_100_v1';
+    var P = {};
+
+    function initPlayer() {
+      P = {
+        lvl: 1,
+        hp: 100, maxHp: 100,
+        mp: 50, maxMp: 50,
+        xp: 0, nextXp: 100,
+        str: 6, agi: 5, int: 5,
+        pts: 0,
+        energy: 50,
+        floor: 1,
+        turn: 1,
+        inCombat: false,
+        enemy: null,
+        weapon: { name: 'Ржавый кинжал (+2 Силы)', str: 2, int: 0 },
+        armor: { name: 'Обычная куртка (+0 HP)', hp: 0, mp: 0 },
+        inv: ['Зелье крови (+45% HP)', 'Осколок маны (+45% MP)']
+      };
+    }
+
+    function saveProgress() {
+      try {
+        var copy = {
+          lvl: P.lvl, hp: P.hp, maxHp: P.maxHp, mp: P.mp, maxMp: P.maxMp,
+          xp: P.xp, nextXp: P.nextXp, str: P.str, agi: P.agi, int: P.int,
+          pts: P.pts, energy: P.energy, floor: P.floor, turn: P.turn,
+          weapon: P.weapon, armor: P.armor, inv: P.inv
+        };
+        localStorage.setItem(SAVE_KEY, JSON.stringify(copy));
+      } catch (e) {}
+    }
+
+    function loadProgress() {
+      try {
+        var raw = localStorage.getItem(SAVE_KEY);
+        if (!raw) return null;
+        return JSON.parse(raw);
+      } catch (e) { return null; }
+    }
+
+    function getRank(lvl) {
+      if (lvl >= 40) return 'Монарх';
+      if (lvl >= 30) return 'SS';
+      if (lvl >= 22) return 'S';
+      if (lvl >= 16) return 'A';
+      if (lvl >= 11) return 'B';
+      if (lvl >= 7) return 'C';
+      if (lvl >= 4) return 'D';
+      return 'E';
+    }
+
+    function getZone(floor) {
+      var idx = Math.min(ZONES.length - 1, Math.floor((floor - 1) / 10));
+      return ZONES[idx];
+    }
+
+    function getTotalStr() { return P.str + (P.weapon ? P.weapon.str : 0); }
+    function getTotalInt() { return P.int + (P.weapon ? P.weapon.int : 0); }
+
+    function updateHUD() {
+      document.getElementById('ui-rank').textContent = 'РАНГ ' + getRank(P.lvl) + ' · УР. ' + P.lvl;
+      document.getElementById('ui-energy').textContent = P.energy;
+      document.getElementById('ui-hp').textContent = P.hp + '/' + P.maxHp;
+      document.getElementById('ui-mp').textContent = P.mp + '/' + P.maxMp;
+      document.getElementById('ui-xp').textContent = P.xp + '/' + P.nextXp;
+
+      document.getElementById('bar-hp').style.width = Math.max(0, Math.min(100, Math.round(P.hp / P.maxHp * 100))) + '%';
+      document.getElementById('bar-mp').style.width = Math.max(0, Math.min(100, Math.round(P.mp / P.maxMp * 100))) + '%';
+      document.getElementById('bar-xp').style.width = Math.max(0, Math.min(100, Math.round(P.xp / P.nextXp * 100))) + '%';
+      document.getElementById('pts-dot').style.display = P.pts > 0 ? 'block' : 'none';
+
+      var zone = getZone(P.floor);
+      document.getElementById('loc-title').textContent = zone.name;
+      document.getElementById('floor-pill').textContent = 'Этаж ' + P.floor + ' / ' + MAX_FLOORS;
+
+      var card = document.getElementById('scene-card');
+      var glow = document.getElementById('scene-glow');
+      var eHud = document.getElementById('enemy-hud');
+      var stage = document.getElementById('monster-stage');
+
+      card.classList.remove('danger', 'boss-mode');
+
+      if (P.inCombat && P.enemy) {
+        card.classList.add('danger');
+        if (P.enemy.isBoss) card.classList.add('boss-mode');
+        glow.style.background = 'radial-gradient(circle, ' + P.enemy.accent + '44, transparent 70%)';
+        document.getElementById('loc-sub').textContent = P.enemy.isBoss ? '⚠️ БОСС ЭТАЖА' : (P.enemy.isElite ? '⚡ Элитный противник' : 'Бой в Разломе');
+
+        eHud.classList.add('active');
+        var eName = document.getElementById('enemy-name');
+        eName.textContent = (P.enemy.isBoss ? '👑 ' : (P.enemy.isElite ? '⚡ ' : '☠ ')) + P.enemy.name;
+        eName.className = 'enemy-name' + (P.enemy.isBoss ? ' boss' : '');
+        document.getElementById('enemy-hp-text').textContent = Math.max(0, P.enemy.hp) + '/' + P.enemy.maxHp + ' HP';
+        document.getElementById('enemy-hp-fill').style.width = Math.max(0, Math.round(P.enemy.hp / P.enemy.maxHp * 100)) + '%';
+
+        if (stage.getAttribute('data-drawn') !== P.enemy.uid) {
+          stage.innerHTML = getEnemySVG(P.enemy.art, P.enemy.body, P.enemy.eye, P.enemy.accent);
+          stage.setAttribute('data-drawn', P.enemy.uid);
+        }
+      } else {
+        glow.style.background = 'radial-gradient(circle, ' + zone.aura + '33, transparent 70%)';
+        document.getElementById('loc-sub').textContent = 'Ход ' + P.turn + ' · Свободная зона';
+        eHud.classList.remove('active');
+        if (stage.getAttribute('data-drawn') !== 'portal-' + zone.aura) {
+          stage.innerHTML = getPortalSVG(zone.aura);
+          stage.setAttribute('data-drawn', 'portal-' + zone.aura);
+        }
+      }
+    }
+
+    function flashMonsterHit() {
+      var svg = document.getElementById('active-monster-svg');
+      if (!svg) return;
+      svg.classList.remove('hit');
+      void svg.offsetWidth;
+      svg.classList.add('hit');
+      setTimeout(function() {
+        var el = document.getElementById('active-monster-svg');
+        if (el) el.classList.remove('hit');
+      }, 320);
+    }
+
+    function addLog(text, type) {
+      var log = document.getElementById('log');
+      var div = document.createElement('div');
+      div.className = 'msg msg-' + (type || 'story');
+      div.innerHTML = text;
+      log.appendChild(div);
+      log.scrollTop = log.scrollHeight;
+    }
+
+    function setChoices(arr) {
+      var box = document.getElementById('choices');
+      box.innerHTML = '';
+      for (var i = 0; i < arr.length; i++) {
+        (function(item) {
+          var b = document.createElement('button');
+          b.className = 'choice-btn';
+          b.textContent = item.label;
+          b.onclick = function() {
+            if (item.action === 'open_stats') { openStats(); return; }
+            handleAction(item.action, item.label);
+          };
+          box.appendChild(b);
+        })(arr[i]);
+      }
+    }
+
+    function startGame() {
+      beep(520, 0.14, 'triangle', 0.1);
+      setTimeout(function() { beep(780, 0.22, 'sine', 0.1); }, 110);
+      initPlayer();
+      saveProgress();
+      document.getElementById('modal-start').classList.add('hidden');
+      document.getElementById('modal-win').classList.add('hidden');
+      document.getElementById('log').innerHTML = '';
+      addLog('[СИСТЕМА]: Добро пожаловать, Игрок. Перед тобой 100 этажей Бездны. Уничтожай врагов, собирай артефакты и подними свой ранг.', 'system');
+      enterFloor();
+    }
+
+    function continueGame() {
+      var saved = loadProgress();
+      if (!saved) { startGame(); return; }
+      initPlayer();
+      for (var k in saved) {
+        if (saved.hasOwnProperty(k)) P[k] = saved[k];
+      }
+      P.inCombat = false;
+      P.enemy = null;
+      beep(620, 0.15, 'triangle', 0.1);
+      document.getElementById('modal-start').classList.add('hidden');
+      document.getElementById('log').innerHTML = '';
+      addLog('[СИСТЕМА]: Прогресс загружен. Возвращение на <b>Этаж ' + P.floor + '</b>.', 'system');
+      enterFloor();
+    }
+
+    function enterFloor() {
+      var zone = getZone(P.floor);
+      P.inCombat = false;
+      P.enemy = null;
+      var isBossFloor = (P.floor % 10 === 0);
+      var isEliteFloor = (!isBossFloor && P.floor % 5 === 0);
+
+      var desc = 'Ты ступаешь на <b>Этаж ' + P.floor + '</b> (' + zone.name + '). ';
+      if (isBossFloor) {
+        desc += 'Воздух дрожит от чудовищного давления маны — за вратами ждёт <b>Босс зоны</b>!';
+      } else if (isEliteFloor) {
+        desc += 'Впереди чувствуется сильная аура — этот этаж охраняет <b>элитный монстр</b> с редким трофеем.';
+      } else {
+        desc += 'В глубине коридора мелькают тени и слышен рык.';
+      }
+
+      addLog(desc, isBossFloor ? 'danger' : 'story');
+      setChoices([
+        { label: isBossFloor ? '👑 Войти в зал Босса' : '⚔️ Пойти вперёд в бой', action: 'explore' },
+        { label: '👁️ Осмотреть окружение (шанс добычи)', action: 'search' },
+        { label: '🧘 Перевести дух (+20% HP и +30% MP)', action: 'rest' }
+      ]);
+      saveProgress();
+      updateHUD();
+    }
+
+    function spawnEnemy() {
+      var zone = getZone(P.floor);
+      var isBoss = (P.floor % 10 === 0);
+      var isElite = (!isBoss && P.floor % 5 === 0);
+
+      var tpl;
+      if (isBoss) tpl = zone.boss;
+      else if (isElite) tpl = zone.elite;
+      else tpl = zone.mobs[(P.floor + Math.floor(Math.random() * zone.mobs.length)) % zone.mobs.length];
+
+      var f = P.floor;
+      var baseHp = Math.round(38 + f * 15 + f * f * 0.24);
+      var baseAtk = Math.round(8 + f * 2.25 + f * f * 0.018);
+      var baseXp = Math.round(45 + f * 14);
+
+      if (isBoss) {
+        baseHp = Math.round(baseHp * 1.75);
+        baseAtk = Math.round(baseAtk * 1.3);
+        baseXp = Math.round(baseXp * 2.4);
+      } else if (isElite) {
+        baseHp = Math.round(baseHp * 1.35);
+        baseAtk = Math.round(baseAtk * 1.15);
+        baseXp = Math.round(baseXp * 1.6);
+      }
+
+      P.inCombat = true;
+      P.enemy = {
+        uid: 'e-' + P.floor + '-' + P.turn + '-' + Math.random(),
+        name: tpl.name,
+        art: tpl.art,
+        body: tpl.body,
+        eye: tpl.eye,
+        accent: tpl.accent,
+        hp: baseHp,
+        maxHp: baseHp,
+        atk: baseAtk,
+        xp: baseXp,
+        isBoss: isBoss,
+        isElite: isElite,
+        drop: tpl.drop || null
+      };
+
+      beep(isBoss ? 140 : 195, 0.24, 'sawtooth', 0.09);
+      addLog(
+        (isBoss ? '👑 <b>БОСС ЗОНЫ!</b> ' : (isElite ? '⚡ <b>ЭЛИТА!</b> ' : '')) +
+        'Перед тобой появляется <b>' + P.enemy.name + '</b> (' + P.enemy.hp + ' HP)!',
+        'danger'
+      );
+      showCombatChoices();
+      updateHUD();
+    }
+
+    function showCombatChoices() {
+      var skillCost = Math.max(15, Math.round(P.maxMp * 0.22));
+      setChoices([
+        { label: '🗡️ Удар оружием (Сила: ' + getTotalStr() + ')', action: 'attack' },
+        { label: '⚡ Теневой разряд (' + skillCost + ' MP · Инт: ' + getTotalInt() + ')', action: 'skill' },
+        { label: '💨 Уклонение и контратака (Ловкость: ' + P.agi + ')', action: 'dodge' }
+      ]);
+    }
+
+    function submitCustom() {
+      var inp = document.getElementById('custom-input');
+      var txt = inp.value.trim();
+      if (!txt) return;
+      inp.value = '';
+      var low = txt.toLowerCase();
+      var act = 'custom';
+      if (low.indexOf('удар') !== -1 || low.indexOf('атак') !== -1 || low.indexOf('бью') !== -1 || low.indexOf('меч') !== -1 || low.indexOf('кинжал') !== -1) act = 'attack';
+      else if (low.indexOf('маг') !== -1 || low.indexOf('огон') !== -1 || low.indexOf('молни') !== -1 || low.indexOf('навык') !== -1 || low.indexOf('разряд') !== -1) act = 'skill';
+      else if (low.indexOf('бег') !== -1 || low.indexOf('уклон') !== -1 || low.indexOf('пряч') !== -1) act = 'dodge';
+      else if (low.indexOf('осмотр') !== -1 || low.indexOf('ищ') !== -1 || low.indexOf('обыск') !== -1) act = 'search';
+      else if (low.indexOf('зел') !== -1 || low.indexOf('леч') !== -1 || low.indexOf('хил') !== -1) act = 'heal';
+      handleAction(act, txt);
+    }
+
+    function handleAction(action, labelText) {
+      if (P.hp <= 0) return;
+      if (P.energy <= 0) {
+        openShop();
+        return;
+      }
+
+      P.energy--;
+      P.turn++;
+      beep(420, 0.05, 'sine', 0.05);
+      addLog(labelText, 'player');
+
+      if (action === 'heal') {
+        usePotionQuick();
+        updateHUD();
+        return;
+      }
+
+      if (!P.inCombat) {
+        if (action === 'explore') {
+          spawnEnemy();
+        } else if (action === 'search') {
+          if (Math.random() < 0.65) {
+            var loot = Math.random() < 0.62 ? 'Зелье крови (+45% HP)' : 'Осколок маны (+45% MP)';
+            P.inv.push(loot);
+            beep(660, 0.13, 'triangle', 0.08);
+            addLog('[НАХОДКА]: В руинах найдено <b>' + loot + '</b>! Но шорох выдал тебя.', 'loot');
+            spawnEnemy();
+          } else {
+            addLog('В тенях пусто — но ты успел заметить врага первым.', 'story');
+            spawnEnemy();
+          }
+        } else if (action === 'rest') {
+          var hpAdd = Math.round(P.maxHp * 0.22);
+          var mpAdd = Math.round(P.maxMp * 0.32);
+          P.hp = Math.min(P.maxHp, P.hp + hpAdd);
+          P.mp = Math.min(P.maxMp, P.mp + mpAdd);
+          addLog('Ты восстанавливаешь дыхание (+' + hpAdd + ' HP, +' + mpAdd + ' MP). Впереди слышен скрежет.', 'story');
+          setChoices([
+            { label: '⚔️ Выйти в бой', action: 'explore' },
+            { label: '📊 Открыть статус и инвентарь', action: 'open_stats' }
+          ]);
+        } else {
+          addLog('Твоё действие эхом разносится по Разлому — и навстречу выходит противник.', 'story');
+          spawnEnemy();
+        }
+        saveProgress();
+        updateHUD();
+        return;
+      }
+
+      // Боевой расчёт
+      var dmg = 0;
+      var dodged = false;
+      var tStr = getTotalStr();
+      var tInt = getTotalInt();
+      var skillCost = Math.max(15, Math.round(P.maxMp * 0.22));
+
+      if (action === 'attack') {
+        var crit = Math.random() < Math.min(0.65, 0.12 + P.agi * 0.015);
+        dmg = Math.round((10 + tStr * 2.7 + Math.random() * (6 + P.floor * 0.5)) * (crit ? 1.75 : 1));
+        P.enemy.hp -= dmg;
+        flashMonsterHit();
+        beep(crit ? 760 : 280, 0.1, 'sawtooth', 0.08);
+        addLog((crit ? '🔥 <b>КРИТ!</b> ' : '') + 'Ты наносишь <b>' + dmg + '</b> урона врагу ' + P.enemy.name + '.', 'story');
+      } else if (action === 'skill') {
+        if (P.mp < skillCost) {
+          addLog('[СИСТЕМА]: Недостаточно маны (' + skillCost + ' MP)! Нанесён обычный удар.', 'system');
+          dmg = Math.round(8 + tStr * 1.9);
+        } else {
+          P.mp -= skillCost;
+          dmg = Math.round(22 + tInt * 3.9 + tStr * 0.7 + Math.random() * (8 + P.floor * 0.6));
+          beep(880, 0.16, 'triangle', 0.09);
+          addLog('⚡ Из твоей ладони бьёт разряд маны! <b>' + P.enemy.name + '</b> получает <b>' + dmg + '</b> урона.', 'story');
+        }
+        P.enemy.hp -= dmg;
+        flashMonsterHit();
+      } else if (action === 'dodge') {
+        if (Math.random() < Math.min(0.82, 0.36 + P.agi * 0.025)) {
+          dodged = true;
+          dmg = Math.round(9 + P.agi * 2.2 + tStr * 0.8);
+          P.enemy.hp -= dmg;
+          flashMonsterHit();
+          beep(600, 0.1, 'sine', 0.08);
+          addLog('💨 Идеальное уклонение! Контратака наносит <b>' + dmg + '</b> урона!', 'story');
+        } else {
+          addLog('Уйти с линии удара не удалось — враг достал тебя!', 'danger');
+        }
+      } else {
+        dmg = Math.round(14 + (tStr + tInt) * 1.45);
+        P.enemy.hp -= dmg;
+        flashMonsterHit();
+        addLog('Нестандартный приём сбивает врага с толку! Ты снимаешь <b>' + dmg + '</b> HP.', 'story');
+      }
+
+      if (P.enemy.hp <= 0) {
+        winCombat();
+        return;
+      }
+
+      if (!dodged) {
+        var spread = Math.max(3, Math.round(P.enemy.atk * 0.18));
+        var eDmg = Math.max(3, Math.round(P.enemy.atk + (Math.random() * spread * 2 - spread)));
+        P.hp -= eDmg;
+        beep(130, 0.18, 'sawtooth', 0.1);
+        addLog(P.enemy.name + ' атакует в ответ: <b>-' + eDmg + ' HP</b>!', 'danger');
+      }
+
+      if (P.hp <= 0) {
+        P.hp = 0;
+        updateHUD();
+        document.getElementById('dead-reason').textContent = 'Тебя сразил ' + P.enemy.name + ' на этаже ' + P.floor + '.';
+        document.getElementById('modal-dead').classList.remove('hidden');
+        return;
+      }
+
+      showCombatChoices();
+      updateHUD();
+    }
+
+    function winCombat() {
+      var xpGain = P.enemy.xp;
+      var defeated = P.enemy.name;
+      var wasBoss = P.enemy.isBoss;
+      var dropGear = P.enemy.drop;
+
+      P.inCombat = false;
+      P.enemy = null;
+      P.xp += xpGain;
+
+      beep(587, 0.12, 'triangle', 0.1);
+      setTimeout(function() { beep(880, 0.22, 'triangle', 0.1); }, 110);
+
+      addLog('[ПОБЕДА]: <b>' + defeated + '</b> повержен! Получено <b>+' + xpGain + ' XP</b>.', 'system');
+
+      if (wasBoss) {
+        P.energy += 15;
+        addLog('[БОНУС БОССА]: Восстановлено ⚡ <b>+15 энергии</b>!', 'loot');
+      }
+
+      if (dropGear) {
+        if (dropGear.slot === 'weapon') {
+          P.weapon = { name: dropGear.name, str: dropGear.str || 0, int: dropGear.int || 0 };
+          addLog('⚔️ [РЕДКОЕ ОРУЖИЕ]: Экипировано — <b>' + dropGear.name + '</b>!', 'loot');
+        } else if (dropGear.slot === 'armor') {
+          var oldHp = P.armor ? (P.armor.hp || 0) : 0;
+          var oldMp = P.armor ? (P.armor.mp || 0) : 0;
+          P.armor = { name: dropGear.name, hp: dropGear.hp || 0, mp: dropGear.mp || 0 };
+          P.maxHp += (P.armor.hp - oldHp);
+          P.maxMp += (P.armor.mp - oldMp);
+          P.hp = P.maxHp;
+          P.mp = P.maxMp;
+          addLog('🛡️ [РЕДКАЯ БРОНЯ]: Экипировано — <b>' + dropGear.name + '</b>!', 'loot');
+        }
+      } else if (Math.random() < 0.65) {
+        var drop = Math.random() < 0.65 ? 'Зелье крови (+45% HP)' : 'Осколок маны (+45% MP)';
+        P.inv.push(drop);
+        addLog('[ДОБЫЧА]: Получено — <b>' + drop + '</b>.', 'loot');
+      }
+
+      while (P.xp >= P.nextXp) {
+        P.xp -= P.nextXp;
+        P.lvl++;
+        P.nextXp = Math.round(P.nextXp * 1.26);
+        P.maxHp += 26;
+        P.maxMp += 12;
+        P.hp = P.maxHp;
+        P.mp = P.maxMp;
+        P.pts += 3;
+        addLog('[LEVEL UP!]: <b>Уровень ' + P.lvl + ' (Ранг ' + getRank(P.lvl) + ')</b>! Здоровье и мана полные, начислено <b>+3 очка характеристик</b> (кнопка 📊).', 'system');
+      }
+
+      if (P.floor >= MAX_FLOORS) {
+        saveProgress();
+        updateHUD();
+        document.getElementById('modal-win').classList.remove('hidden');
+        return;
+      }
+
+      P.floor++;
+      saveProgress();
+
+      setChoices([
+        { label: '🚪 Спуститься на Этаж ' + P.floor + ' / ' + MAX_FLOORS, action: 'next_floor' },
+        { label: '📊 Прокачать характеристики / Инвентарь', action: 'open_stats' }
+      ]);
+
+      var firstBtn = document.querySelector('.choice-btn');
+      if (firstBtn) {
+        firstBtn.onclick = function() {
+          beep(460, 0.08, 'sine', 0.06);
+          enterFloor();
+        };
+      }
+
+      updateHUD();
+    }
+
+    function usePotionQuick() {
+      for (var i = 0; i < P.inv.length; i++) {
+        if (P.inv[i].indexOf('Зелье') !== -1) {
+          P.inv.splice(i, 1);
+          var heal = Math.round(P.maxHp * 0.45);
+          P.hp = Math.min(P.maxHp, P.hp + heal);
+          beep(700, 0.14, 'sine', 0.08);
+          addLog('🧪 Выпито зелье крови (+' + heal + ' HP).', 'system');
+          return;
+        }
+      }
+      addLog('[СИСТЕМА]: В инвентаре нет зелий здоровья.', 'system');
+    }
+
+    function openStats() {
+      document.getElementById('st-header').textContent = 'Игрок · Ранг ' + getRank(P.lvl) + ' (Ур. ' + P.lvl + ')';
+      document.getElementById('st-pts').textContent = P.pts;
+      document.getElementById('st-str').textContent = P.str + ' (+' + (P.weapon ? P.weapon.str : 0) + ')';
+      document.getElementById('st-agi').textContent = P.agi;
+      document.getElementById('st-int').textContent = P.int + ' (+' + (P.weapon ? P.weapon.int : 0) + ')';
+
+      var dis = P.pts <= 0;
+      document.getElementById('btn-str').style.opacity = dis ? '0.3' : '1';
+      document.getElementById('btn-agi').style.opacity = dis ? '0.3' : '1';
+      document.getElementById('btn-int').style.opacity = dis ? '0.3' : '1';
+
+      document.getElementById('gear-box').innerHTML =
+        '⚔️ <b>Оружие:</b> ' + (P.weapon ? P.weapon.name : 'Нет') + '<br>' +
+        '🛡️ <b>Броня:</b> ' + (P.armor ? P.armor.name : 'Нет');
+
+      var invBox = document.getElementById('inv-list');
+      invBox.innerHTML = '';
+      if (P.inv.length === 0) {
+        invBox.innerHTML = '<span style="font-size:12px;color:#64748b;">Пусто</span>';
+      } else {
+        for (var i = 0; i < P.inv.length; i++) {
+          (function(idx, name) {
+            var el = document.createElement('div');
+            el.className = 'inv-item';
+            el.textContent = name;
+            el.onclick = function() { useItem(idx); };
+            invBox.appendChild(el);
+          })(i, P.inv[i]);
+        }
+      }
+      document.getElementById('modal-stats').classList.remove('hidden');
+    }
+
+    function addStat(key) {
+      if (P.pts <= 0) return;
+      P[key]++;
+      P.pts--;
+      if (key === 'int') { P.maxMp += 6; P.mp += 6; }
+      if (key === 'str') { P.maxHp += 5; P.hp += 5; }
+      beep(680, 0.08, 'triangle', 0.07);
+      saveProgress();
+      openStats();
+      updateHUD();
+    }
+
+    function useItem(idx) {
+      var name = P.inv[idx];
+      if (name.indexOf('Зелье') !== -1) {
+        P.inv.splice(idx, 1);
+        var heal = Math.round(P.maxHp * 0.45);
+        P.hp = Math.min(P.maxHp, P.hp + heal);
+        addLog('🧪 Использовано: ' + name + ' (+' + heal + ' HP)', 'system');
+      } else if (name.indexOf('Осколок') !== -1) {
+        P.inv.splice(idx, 1);
+        var mana = Math.round(P.maxMp * 0.45);
+        P.mp = Math.min(P.maxMp, P.mp + mana);
+        addLog('🔮 Использовано: ' + name + ' (+' + mana + ' MP)', 'system');
+      }
+      beep(720, 0.12, 'sine', 0.08);
+      saveProgress();
+      openStats();
+      updateHUD();
+    }
+
+    function openShop() {
+      document.getElementById('modal-shop').classList.remove('hidden');
+    }
+
+    function buyEnergy(amount) {
+      P.energy += amount;
+      beep(820, 0.16, 'triangle', 0.1);
+      addLog('[СИСТЕМА]: Получено ⚡ +' + amount + ' энергии!', 'system');
+      saveProgress();
+      closeModals();
+      updateHUD();
+    }
+
+    function revivePlayer() {
+      P.hp = P.maxHp;
+      P.mp = P.maxMp;
+      closeModals();
+      beep(760, 0.2, 'sine', 0.1);
+      addLog('[ВТОРОЙ ШАНС]: Время отмотано назад! Здоровье и мана восстановлены.', 'system');
+      showCombatChoices();
+      updateHUD();
+    }
+
+    function restartGame() {
+      closeModals();
+      startGame();
+    }
+
+    function closeModals() {
+      document.getElementById('modal-stats').classList.add('hidden');
+      document.getElementById('modal-shop').classList.add('hidden');
+      document.getElementById('modal-dead').classList.add('hidden');
+      document.getElementById('modal-win').classList.add('hidden');
+    }
+
+    // Проверка сохранённого прогресса при старте
+    (function checkSaveOnLoad() {
+      var saved = loadProgress();
+      if (saved && saved.floor && saved.floor > 1) {
+        document.getElementById('saved-floor-num').textContent = saved.floor;
+        document.getElementById('btn-continue').classList.remove('hidden');
+      }
+    })();
+
+    // Инициализация Telegram Mini App на полный экран
+    (function initTelegramApp() {
+      try {
+        if (window.Telegram && window.Telegram.WebApp) {
+          var tg = window.Telegram.WebApp;
+          tg.ready();
+          tg.expand();
+          if (tg.setHeaderColor) tg.setHeaderColor('#080c18');
+          if (tg.setBackgroundColor) tg.setBackgroundColor('#05070d');
+          if (tg.disableVerticalSwipes) tg.disableVerticalSwipes();
+        }
+      } catch (e) {}
+    })();
+  </script>
+</body>
+</html>
