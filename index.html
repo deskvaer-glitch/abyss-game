@@ -22,7 +22,6 @@
       overflow: hidden;
     }
 
-    /* 10 тем интерфейса под каждый десяток этажей */
     .app {
       --ui-accent: #00e5ff;
       --ui-accent-2: #3b82f6;
@@ -39,145 +38,16 @@
       --ui-pattern: radial-gradient(circle at 50% -10%, rgba(0, 229, 255, 0.16) 0%, transparent 48%);
     }
 
-    /* 1–10: Сталь и Циан Разлома */
-    .app.theme-tier-1 {
-      --ui-accent: #00e5ff;
-      --ui-accent-2: #38bdf8;
-      --ui-border: rgba(0, 229, 255, 0.35);
-      --ui-border-strong: rgba(0, 229, 255, 0.68);
-      --ui-glow: rgba(0, 229, 255, 0.25);
-      --ui-bg-top: #0e192e;
-      --ui-bg-mid: #070d1a;
-      --ui-btn-top: #13223d;
-      --ui-btn-bot: #0b1426;
-      --ui-pattern: radial-gradient(circle at 50% -10%, rgba(0, 229, 255, 0.18) 0%, transparent 50%);
-    }
-
-    /* 11–20: Изумрудные Глубины */
-    .app.theme-tier-2 {
-      --ui-accent: #10b981;
-      --ui-accent-2: #2dd4bf;
-      --ui-border: rgba(16, 185, 129, 0.38);
-      --ui-border-strong: rgba(52, 211, 153, 0.72);
-      --ui-glow: rgba(16, 185, 129, 0.25);
-      --ui-bg-top: #0c211f;
-      --ui-bg-mid: #061112;
-      --ui-btn-top: #112e2b;
-      --ui-btn-bot: #091b1a;
-      --ui-pattern: radial-gradient(circle at 50% -10%, rgba(16, 185, 129, 0.18) 0%, transparent 50%);
-    }
-
-    /* 21–30: Аметистовые Руны */
-    .app.theme-tier-3 {
-      --ui-accent: #c084fc;
-      --ui-accent-2: #a855f7;
-      --ui-border: rgba(192, 132, 252, 0.38);
-      --ui-border-strong: rgba(192, 132, 252, 0.72);
-      --ui-glow: rgba(168, 85, 247, 0.26);
-      --ui-bg-top: #1a1230;
-      --ui-bg-mid: #0b0818;
-      --ui-btn-top: #261a44;
-      --ui-btn-bot: #150e29;
-      --ui-pattern: radial-gradient(circle at 50% -10%, rgba(168, 85, 247, 0.2) 0%, transparent 50%);
-    }
-
-    /* 31–40: Ядовитое Логово */
-    .app.theme-tier-4 {
-      --ui-accent: #a3e635;
-      --ui-accent-2: #84cc16;
-      --ui-border: rgba(163, 230, 53, 0.36);
-      --ui-border-strong: rgba(163, 230, 53, 0.7);
-      --ui-glow: rgba(132, 204, 22, 0.24);
-      --ui-bg-top: #172110;
-      --ui-bg-mid: #090e07;
-      --ui-btn-top: #223117;
-      --ui-btn-bot: #121c0c;
-      --ui-pattern: radial-gradient(circle at 50% -10%, rgba(163, 230, 53, 0.16) 0%, transparent 50%);
-    }
-
-    /* 41–50: Цитадель Пепла */
-    .app.theme-tier-5 {
-      --ui-accent: #fb923c;
-      --ui-accent-2: #f97316;
-      --ui-border: rgba(251, 146, 60, 0.4);
-      --ui-border-strong: rgba(251, 146, 60, 0.75);
-      --ui-glow: rgba(249, 115, 22, 0.28);
-      --ui-bg-top: #26140d;
-      --ui-bg-mid: #110906;
-      --ui-btn-top: #381d13;
-      --ui-btn-bot: #1e0f0a;
-      --ui-pattern: radial-gradient(circle at 50% -10%, rgba(249, 115, 22, 0.2) 0%, transparent 50%);
-    }
-
-    /* 51–60: Склеп Теней */
-    .app.theme-tier-6 {
-      --ui-accent: #818cf8;
-      --ui-accent-2: #6366f1;
-      --ui-border: rgba(129, 140, 248, 0.38);
-      --ui-border-strong: rgba(129, 140, 248, 0.72);
-      --ui-glow: rgba(99, 102, 241, 0.26);
-      --ui-bg-top: #121633;
-      --ui-bg-mid: #080a19;
-      --ui-btn-top: #1b214b;
-      --ui-btn-bot: #0e122b;
-      --ui-pattern: radial-gradient(circle at 50% -10%, rgba(99, 102, 241, 0.2) 0%, transparent 50%);
-    }
-
-    /* 61–70: Ледяной Разлом */
-    .app.theme-tier-7 {
-      --ui-accent: #7dd3fc;
-      --ui-accent-2: #38bdf8;
-      --ui-border: rgba(125, 211, 252, 0.4);
-      --ui-border-strong: rgba(186, 230, 253, 0.75);
-      --ui-glow: rgba(56, 189, 248, 0.26);
-      --ui-bg-top: #0d2136;
-      --ui-bg-mid: #06101c;
-      --ui-btn-top: #13304d;
-      --ui-btn-bot: #0a1b2e;
-      --ui-pattern: radial-gradient(circle at 50% -10%, rgba(125, 211, 252, 0.18) 0%, transparent 50%);
-    }
-
-    /* 71–80: Алый Дворец Крови */
-    .app.theme-tier-8 {
-      --ui-accent: #fb7185;
-      --ui-accent-2: #ff2a55;
-      --ui-border: rgba(251, 113, 133, 0.4);
-      --ui-border-strong: rgba(255, 42, 85, 0.75);
-      --ui-glow: rgba(255, 42, 85, 0.26);
-      --ui-bg-top: #260d18;
-      --ui-bg-mid: #12060c;
-      --ui-btn-top: #381223;
-      --ui-btn-bot: #1e0913;
-      --ui-pattern: radial-gradient(circle at 50% -10%, rgba(255, 42, 85, 0.18) 0%, transparent 50%);
-    }
-
-    /* 81–90: Драконий Хребет / Звёздный Разлом */
-    .app.theme-tier-9 {
-      --ui-accent: #fbbf24;
-      --ui-accent-2: #60a5fa;
-      --ui-border: rgba(251, 191, 36, 0.42);
-      --ui-border-strong: rgba(251, 191, 36, 0.78);
-      --ui-glow: rgba(251, 191, 36, 0.25);
-      --ui-bg-top: #151c38;
-      --ui-bg-mid: #080c1c;
-      --ui-btn-top: #1f2952;
-      --ui-btn-bot: #101630;
-      --ui-pattern: radial-gradient(circle at 50% -10%, rgba(251, 191, 36, 0.16) 0%, transparent 50%);
-    }
-
-    /* 91–100: Трон Монарха Бездны */
-    .app.theme-tier-10 {
-      --ui-accent: #ffd166;
-      --ui-accent-2: #c084fc;
-      --ui-border: rgba(255, 209, 102, 0.5);
-      --ui-border-strong: rgba(255, 209, 102, 0.88);
-      --ui-glow: rgba(192, 132, 252, 0.3);
-      --ui-bg-top: #1f1033;
-      --ui-bg-mid: #0b0614;
-      --ui-btn-top: #2e174b;
-      --ui-btn-bot: #180c29;
-      --ui-pattern: radial-gradient(circle at 50% -10%, rgba(255, 209, 102, 0.22) 0%, transparent 52%);
-    }
+    .app.theme-tier-1 { --ui-accent: #00e5ff; --ui-accent-2: #38bdf8; --ui-border: rgba(0, 229, 255, 0.35); --ui-border-strong: rgba(0, 229, 255, 0.68); --ui-glow: rgba(0, 229, 255, 0.25); --ui-bg-top: #0e192e; --ui-bg-mid: #070d1a; --ui-btn-top: #13223d; --ui-btn-bot: #0b1426; --ui-pattern: radial-gradient(circle at 50% -10%, rgba(0, 229, 255, 0.18) 0%, transparent 50%); }
+    .app.theme-tier-2 { --ui-accent: #10b981; --ui-accent-2: #2dd4bf; --ui-border: rgba(16, 185, 129, 0.38); --ui-border-strong: rgba(52, 211, 153, 0.72); --ui-glow: rgba(16, 185, 129, 0.25); --ui-bg-top: #0c211f; --ui-bg-mid: #061112; --ui-btn-top: #112e2b; --ui-btn-bot: #091b1a; --ui-pattern: radial-gradient(circle at 50% -10%, rgba(16, 185, 129, 0.18) 0%, transparent 50%); }
+    .app.theme-tier-3 { --ui-accent: #c084fc; --ui-accent-2: #a855f7; --ui-border: rgba(192, 132, 252, 0.38); --ui-border-strong: rgba(192, 132, 252, 0.72); --ui-glow: rgba(168, 85, 247, 0.26); --ui-bg-top: #1a1230; --ui-bg-mid: #0b0818; --ui-btn-top: #261a44; --ui-btn-bot: #150e29; --ui-pattern: radial-gradient(circle at 50% -10%, rgba(168, 85, 247, 0.2) 0%, transparent 50%); }
+    .app.theme-tier-4 { --ui-accent: #a3e635; --ui-accent-2: #84cc16; --ui-border: rgba(163, 230, 53, 0.36); --ui-border-strong: rgba(163, 230, 53, 0.7); --ui-glow: rgba(132, 204, 22, 0.24); --ui-bg-top: #172110; --ui-bg-mid: #090e07; --ui-btn-top: #223117; --ui-btn-bot: #121c0c; --ui-pattern: radial-gradient(circle at 50% -10%, rgba(163, 230, 53, 0.16) 0%, transparent 50%); }
+    .app.theme-tier-5 { --ui-accent: #fb923c; --ui-accent-2: #f97316; --ui-border: rgba(251, 146, 60, 0.4); --ui-border-strong: rgba(251, 146, 60, 0.75); --ui-glow: rgba(249, 115, 22, 0.28); --ui-bg-top: #26140d; --ui-bg-mid: #110906; --ui-btn-top: #381d13; --ui-btn-bot: #1e0f0a; --ui-pattern: radial-gradient(circle at 50% -10%, rgba(249, 115, 22, 0.2) 0%, transparent 50%); }
+    .app.theme-tier-6 { --ui-accent: #818cf8; --ui-accent-2: #6366f1; --ui-border: rgba(129, 140, 248, 0.38); --ui-border-strong: rgba(129, 140, 248, 0.72); --ui-glow: rgba(99, 102, 241, 0.26); --ui-bg-top: #121633; --ui-bg-mid: #080a19; --ui-btn-top: #1b214b; --ui-btn-bot: #0e122b; --ui-pattern: radial-gradient(circle at 50% -10%, rgba(99, 102, 241, 0.2) 0%, transparent 50%); }
+    .app.theme-tier-7 { --ui-accent: #7dd3fc; --ui-accent-2: #38bdf8; --ui-border: rgba(125, 211, 252, 0.4); --ui-border-strong: rgba(186, 230, 253, 0.75); --ui-glow: rgba(56, 189, 248, 0.26); --ui-bg-top: #0d2136; --ui-bg-mid: #06101c; --ui-btn-top: #13304d; --ui-btn-bot: #0a1b2e; --ui-pattern: radial-gradient(circle at 50% -10%, rgba(125, 211, 252, 0.18) 0%, transparent 50%); }
+    .app.theme-tier-8 { --ui-accent: #fb7185; --ui-accent-2: #ff2a55; --ui-border: rgba(251, 113, 133, 0.4); --ui-border-strong: rgba(255, 42, 85, 0.75); --ui-glow: rgba(255, 42, 85, 0.26); --ui-bg-top: #260d18; --ui-bg-mid: #12060c; --ui-btn-top: #381223; --ui-btn-bot: #1e0913; --ui-pattern: radial-gradient(circle at 50% -10%, rgba(255, 42, 85, 0.18) 0%, transparent 50%); }
+    .app.theme-tier-9 { --ui-accent: #fbbf24; --ui-accent-2: #60a5fa; --ui-border: rgba(251, 191, 36, 0.42); --ui-border-strong: rgba(251, 191, 36, 0.78); --ui-glow: rgba(251, 191, 36, 0.25); --ui-bg-top: #151c38; --ui-bg-mid: #080c1c; --ui-btn-top: #1f2952; --ui-btn-bot: #101630; --ui-pattern: radial-gradient(circle at 50% -10%, rgba(251, 191, 36, 0.16) 0%, transparent 50%); }
+    .app.theme-tier-10 { --ui-accent: #ffd166; --ui-accent-2: #c084fc; --ui-border: rgba(255, 209, 102, 0.5); --ui-border-strong: rgba(255, 209, 102, 0.88); --ui-glow: rgba(192, 132, 252, 0.3); --ui-bg-top: #1f1033; --ui-bg-mid: #0b0614; --ui-btn-top: #2e174b; --ui-btn-bot: #180c29; --ui-pattern: radial-gradient(circle at 50% -10%, rgba(255, 209, 102, 0.22) 0%, transparent 52%); }
 
     .app {
       max-width: 520px;
@@ -187,9 +57,7 @@
       margin: 0 auto;
       display: flex;
       flex-direction: column;
-      background:
-        var(--ui-pattern),
-        linear-gradient(180deg, var(--ui-bg-top) 0%, var(--ui-bg-mid) 58%, var(--ui-bg-bot) 100%);
+      background: var(--ui-pattern), linear-gradient(180deg, var(--ui-bg-top) 0%, var(--ui-bg-mid) 58%, var(--ui-bg-bot) 100%);
       border-left: 1px solid var(--ui-border);
       border-right: 1px solid var(--ui-border);
       position: relative;
@@ -207,30 +75,15 @@
       80% { transform: translate(3px, -1px); }
     }
 
-    .hit-vignette {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      z-index: 25;
-      box-shadow: inset 0 0 60px rgba(255, 30, 70, 0);
-      transition: box-shadow 0.18s ease;
-    }
+    .hit-vignette { position: absolute; inset: 0; pointer-events: none; z-index: 25; box-shadow: inset 0 0 60px rgba(255, 30, 70, 0); transition: box-shadow 0.18s ease; }
     .hit-vignette.active { box-shadow: inset 0 0 85px rgba(255, 30, 70, 0.82); }
 
-    .ult-flash {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      z-index: 26;
-      background: radial-gradient(circle, rgba(0, 245, 212, 0.48), rgba(139, 92, 246, 0.35), transparent 75%);
-      opacity: 0;
-      transition: opacity 0.25s ease;
-    }
+    .ult-flash { position: absolute; inset: 0; pointer-events: none; z-index: 26; background: radial-gradient(circle, rgba(0, 245, 212, 0.48), rgba(139, 92, 246, 0.35), transparent 75%); opacity: 0; transition: opacity 0.25s ease; }
     .ult-flash.active { opacity: 1; }
 
     /* HUD */
     .hud {
-      padding: 9px 12px 8px;
+      padding: 8px 11px 7px;
       background: linear-gradient(180deg, var(--ui-btn-top) 0%, var(--ui-bg-mid) 100%);
       border-bottom: 1px solid var(--ui-border-strong);
       box-shadow: 0 6px 22px rgba(0, 0, 0, 0.72);
@@ -240,24 +93,49 @@
 
     .hud-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; gap: 5px; }
 
-    .rank-badge {
+    .player-chip {
       display: inline-flex;
       align-items: center;
-      gap: 4px;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 0.05em;
-      color: var(--ui-accent);
+      gap: 6px;
       background: rgba(255, 255, 255, 0.06);
       border: 1px solid var(--ui-border-strong);
-      padding: 3px 7px;
-      border-radius: 7px;
-      text-transform: uppercase;
+      padding: 2px 8px 2px 3px;
+      border-radius: 9px;
+      cursor: pointer;
+      max-width: 48%;
+      box-shadow: inset 0 0 10px var(--ui-glow);
+    }
+
+    .hud-avatar {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      object-fit: cover;
+      border: 1px solid var(--ui-accent);
+      background: #090e1c;
+      flex-shrink: 0;
+    }
+
+    .hud-avatar-ph {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      background: rgba(0, 229, 255, 0.14);
+      border: 1px solid var(--ui-accent);
+      flex-shrink: 0;
+    }
+
+    .player-chip-text {
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--ui-accent);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      max-width: 44%;
-      box-shadow: inset 0 0 10px var(--ui-glow);
     }
 
     .res-group { display: flex; align-items: center; gap: 4px; }
@@ -291,9 +169,8 @@
     .nav-btn {
       height: 27px; border-radius: 7px; border: 1px solid var(--ui-border);
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
-      color: #e2e8f0; font-size: 10px; font-weight: 700; cursor: pointer; position: relative;
+      color: #e2e8f0; font-size: 9.8px; font-weight: 700; cursor: pointer; position: relative;
       display: inline-flex; align-items: center; justify-content: center; gap: 2px; padding: 0 2px;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
     }
 
     .nav-btn:active { background: rgba(255, 255, 255, 0.14); border-color: var(--ui-accent); }
@@ -310,7 +187,7 @@
     .mp-fill { background: linear-gradient(90deg, #2563eb, #00e5ff); box-shadow: 0 0 8px rgba(0, 229, 255, 0.45); }
     .xp-fill { background: linear-gradient(90deg, #7c3aed, #e879f9); box-shadow: 0 0 8px rgba(192, 132, 252, 0.45); }
 
-    /* Сцена боя */
+    /* Сцена боя и погодные/стихийные эффекты 1 этажа из 10 */
     .scene-card {
       margin: 8px 12px 0; height: 194px; border-radius: var(--ui-radius);
       border: 1px solid var(--ui-border-strong);
@@ -329,6 +206,64 @@
     }
     .scene-card.danger { border-color: rgba(255, 59, 92, 0.72); }
     .scene-card.boss-mode { border-color: rgba(255, 209, 102, 0.95); box-shadow: inset 0 0 20px rgba(255, 209, 102, 0.16), 0 0 28px rgba(255, 59, 92, 0.36); }
+
+    /* Оверлеи особых эффектов (1 этаж из 10) */
+    .special-fx-layer { position: absolute; inset: 0; pointer-events: none; z-index: 3; overflow: hidden; opacity: 0; transition: opacity 0.4s ease; }
+    .special-fx-layer.active { opacity: 1; }
+
+    .fx-fog {
+      background:
+        radial-gradient(circle at 25% 75%, rgba(203, 213, 225, 0.34), transparent 55%),
+        radial-gradient(circle at 75% 35%, rgba(148, 163, 184, 0.28), transparent 60%);
+      animation: fogDrift 5s ease-in-out infinite alternate;
+    }
+
+    @keyframes fogDrift {
+      0% { transform: translateX(-14px); }
+      100% { transform: translateX(14px); }
+    }
+
+    .fx-fire {
+      background: linear-gradient(0deg, rgba(249, 115, 22, 0.35) 0%, rgba(239, 68, 68, 0.14) 45%, transparent 80%);
+      animation: firePulse 1.4s ease-in-out infinite alternate;
+    }
+
+    @keyframes firePulse {
+      0% { opacity: 0.72; }
+      100% { opacity: 1; }
+    }
+
+    .fx-water {
+      background: linear-gradient(180deg, rgba(14, 165, 233, 0.12) 0%, rgba(2, 132, 199, 0.34) 100%);
+      animation: waterWave 2.6s ease-in-out infinite;
+    }
+
+    @keyframes waterWave {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .fx-storm {
+      background: radial-gradient(circle at 50% 10%, rgba(250, 204, 21, 0.25), rgba(56, 189, 248, 0.12) 55%, transparent 80%);
+      animation: stormFlash 3.2s infinite;
+    }
+
+    @keyframes stormFlash {
+      0%, 92%, 100% { opacity: 0.45; }
+      94%, 97% { opacity: 1; }
+    }
+
+    .fx-tag {
+      display: inline-block;
+      margin-top: 2px;
+      font-size: 9.5px;
+      font-weight: 800;
+      padding: 1px 6px;
+      border-radius: 5px;
+      background: rgba(255, 209, 102, 0.16);
+      border: 1px solid rgba(255, 209, 102, 0.55);
+      color: #ffd166;
+    }
 
     .scene-glow { position: absolute; width: 245px; height: 245px; border-radius: 50%; top: 52%; left: 50%; transform: translate(-50%, -50%); background: radial-gradient(circle, var(--ui-glow), transparent 70%); pointer-events: none; transition: background 0.4s ease; }
 
@@ -377,7 +312,7 @@
     .floor-pill { font-size: 10px; font-weight: 800; color: #e2e8f0; background: rgba(4, 7, 15, 0.72); border: 1px solid var(--ui-border); padding: 3px 8px; border-radius: 7px; white-space: nowrap; }
     .floor-pill.hc { color: #ff8598; border-color: rgba(255, 42, 85, 0.75); background: rgba(90, 8, 24, 0.84); }
 
-    .intent-pill { position: absolute; top: 38px; right: 10px; z-index: 5; font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 7px; background: rgba(9, 13, 26, 0.92); border: 1px solid rgba(255, 255, 255, 0.22); color: #cbd5e1; display: none; box-shadow: 0 3px 10px rgba(0,0,0,0.65); }
+    .intent-pill { position: absolute; top: 44px; right: 10px; z-index: 5; font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 7px; background: rgba(9, 13, 26, 0.92); border: 1px solid rgba(255, 255, 255, 0.22); color: #cbd5e1; display: none; box-shadow: 0 3px 10px rgba(0,0,0,0.65); }
     .intent-pill.active { display: inline-flex; align-items: center; gap: 4px; }
     .intent-pill.heavy { color: #ffd166; border-color: #ff3b5c; background: rgba(120, 12, 32, 0.92); animation: pulseIntent 0.9s infinite; }
     .intent-pill.shield { color: #7dd3fc; border-color: #00e5ff; background: rgba(8, 47, 73, 0.92); }
@@ -388,7 +323,7 @@
       50% { transform: scale(1.06); }
     }
 
-    .buff-pills { position: absolute; top: 38px; left: 10px; z-index: 5; display: flex; flex-direction: column; gap: 3px; }
+    .buff-pills { position: absolute; top: 44px; left: 10px; z-index: 5; display: flex; flex-direction: column; gap: 3px; }
     .buff-tag { font-size: 9.5px; font-weight: 800; padding: 2px 6px; border-radius: 5px; background: rgba(255, 255, 255, 0.08); border: 1px solid var(--ui-border-strong); color: var(--ui-accent); }
     .buff-tag.shadow-tag { background: rgba(139, 92, 246, 0.26); border-color: rgba(192, 132, 252, 0.65); color: #e9d5ff; cursor: pointer; }
 
@@ -522,6 +457,53 @@
     .sys-title { font-size: 17px; font-weight: 900; color: #ffffff; margin-bottom: 7px; }
     .sys-text { font-size: 12px; line-height: 1.45; color: #b8c7e0; margin-bottom: 11px; }
 
+    /* Личное окно игрока */
+    .profile-form-box {
+      background: rgba(10, 16, 32, 0.85);
+      border: 1px solid var(--ui-border);
+      border-radius: 12px;
+      padding: 11px;
+      margin-bottom: 11px;
+    }
+
+    .avatar-picker-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .avatar-preview-box {
+      width: 66px;
+      height: 66px;
+      border-radius: 14px;
+      border: 2px solid var(--ui-accent);
+      background: rgba(15, 23, 42, 0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+      font-size: 28px;
+    }
+
+    .avatar-preview-box img { width: 100%; height: 100%; object-fit: cover; }
+
+    .field-label { display: block; font-size: 10.5px; font-weight: 700; color: #9fb0cc; margin-bottom: 4px; }
+    .field-input, .field-select {
+      width: 100%;
+      background: #070c18;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 8px;
+      padding: 7px 10px;
+      color: #ffffff;
+      font-size: 12px;
+      margin-bottom: 8px;
+      outline: none;
+    }
+    .field-input:focus, .field-select:focus { border-color: var(--ui-accent); }
+    .field-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
     .class-grid { display: flex; flex-direction: column; gap: 6px; margin-bottom: 11px; }
     .class-card { padding: 8px 10px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.14); background: rgba(15, 23, 42, 0.85); cursor: pointer; }
     .class-card.selected { border-color: var(--ui-accent); background: rgba(255, 255, 255, 0.08); box-shadow: 0 0 12px var(--ui-glow); }
@@ -571,11 +553,7 @@
     .crate-aura { position: absolute; width: 110px; height: 110px; border-radius: 50%; background: radial-gradient(circle, rgba(255, 209, 102, 0.55), transparent 70%); opacity: 0; transform: scale(0.35); transition: all 0.5s ease; }
     .crate-aura.burst { opacity: 1; transform: scale(1.65); }
 
-    .crate-box {
-      position: relative; z-index: 2; font-size: 64px;
-      opacity: 0; transform: translateY(-28px) scale(0.75);
-      transition: opacity 0.35s ease, transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
-    }
+    .crate-box { position: relative; z-index: 2; font-size: 64px; opacity: 0; transform: translateY(-28px) scale(0.75); transition: opacity 0.35s ease, transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1); }
     .crate-box.enter { opacity: 1; transform: translateY(0px) scale(1); }
     .crate-box.shaking { opacity: 1; animation: crateShake 0.22s infinite; }
     .crate-box.opened { opacity: 1; transform: translateY(-4px) scale(1.24); filter: drop-shadow(0 0 26px #ffd166); }
@@ -642,11 +620,14 @@
     <!-- HUD -->
     <div class="hud">
       <div class="hud-top">
-        <div class="rank-badge" id="ui-rank">🗡️ РАНГ E · УР. 1</div>
+        <div class="player-chip" onclick="openProfileModal(false)" title="Личный профиль игрока">
+          <div id="hud-avatar-slot"><div class="hud-avatar-ph">👤</div></div>
+          <div class="player-chip-text" id="ui-rank">ИГРОК · УР.1</div>
+        </div>
         <div class="res-group">
           <div class="voice-pill" id="voice-pill" onclick="toggleVoice()" title="Озвучка 18+">🎙️ 18+</div>
           <div class="shard-pill" onclick="openMerchant(true)" title="Осколки Бездны">💎 <span id="ui-shards">0</span></div>
-          <div class="energy-pill" id="energy-pill" onclick="openShop()">⚡ <span id="ui-energy">18</span></div>
+          <div class="energy-pill" id="energy-pill" onclick="openShop()">⚡ <span id="ui-energy">20</span></div>
         </div>
       </div>
 
@@ -656,7 +637,7 @@
         <button class="nav-btn" onclick="openQuests()">📜 Квесты<span class="pts-dot gold" id="quest-dot"></span></button>
         <button class="nav-btn" onclick="openBestiary()">📖 Звери</button>
         <button class="nav-btn" onclick="openLeaderboard()">🏆 Топ-20</button>
-        <button class="nav-btn" onclick="toggleMute()" id="mute-btn">🔊 Звук</button>
+        <button class="nav-btn" onclick="openProfileModal(false)">👤 Профиль</button>
       </div>
 
       <div class="bars">
@@ -675,15 +656,17 @@
       </div>
     </div>
 
-    <!-- Боевая сцена -->
+    <!-- Боевая сцена + особый эффект на 1 этаж из 10 -->
     <div class="scene-card" id="scene-card">
       <div class="scene-glow" id="scene-glow"></div>
       <div class="biome-particles" id="biome-particles"></div>
+      <div class="special-fx-layer" id="special-fx-layer"></div>
 
       <div class="scene-top">
         <div>
           <div class="loc-title" id="loc-title">Станция «Нулевая» · Врата E</div>
           <div class="loc-sub" id="loc-sub">Подземелье Бездны</div>
+          <div id="special-fx-badge"></div>
         </div>
         <div class="floor-pill" id="floor-pill">Этаж 1 / 100</div>
       </div>
@@ -724,13 +707,56 @@
       </div>
     </div>
 
-    <!-- Оверлей 1: Старт -->
-    <div class="overlay" id="modal-start">
+    <!-- Личное окно игрока (при первом входе и по кнопке Профиль) -->
+    <div class="overlay hidden" id="modal-profile">
+      <div class="sys-window" style="border-color:var(--ui-accent);">
+        <div class="sys-tag">[ЛИЧНОЕ ОКНО ИГРОКА]</div>
+        <div class="sys-title" id="prof-title">Досье Охотника</div>
+        <p class="sys-text" style="margin-bottom:8px;">
+          Данные сохраняются между ходами. Пол можно не указывать, а аватарку — выбрать из галереи.
+        </p>
+
+        <div class="profile-form-box">
+          <div class="avatar-picker-row">
+            <div class="avatar-preview-box" id="prof-avatar-preview">👤</div>
+            <div style="flex:1;">
+              <button class="btn-share" style="margin-bottom:4px;padding:7px 9px;" onclick="document.getElementById('avatar-file-input').click()">🖼️ Выбрать из галереи</button>
+              <button class="btn-ghost" style="padding:5px 8px;font-size:10.5px;" onclick="clearProfileAvatar()">Убрать фото</button>
+              <input type="file" id="avatar-file-input" accept="image/*" class="hidden" onchange="handleAvatarSelected(event)">
+            </div>
+          </div>
+
+          <label class="field-label" for="prof-nick">Никнейм</label>
+          <input type="text" class="field-input" id="prof-nick" maxlength="18" placeholder="Например, ShadowSlayer">
+
+          <div class="field-row-2">
+            <div>
+              <label class="field-label" for="prof-age">Возраст</label>
+              <input type="number" class="field-input" id="prof-age" min="6" max="99" placeholder="Например, 18">
+            </div>
+            <div>
+              <label class="field-label" for="prof-gender">Пол (по желанию)</label>
+              <select class="field-select" id="prof-gender">
+                <option value="">Не указан</option>
+                <option value="Мужской">Мужской</option>
+                <option value="Женский">Женский</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn-primary" id="prof-save-btn" onclick="saveProfileAndProceed()">Сохранить и продолжить</button>
+        <button class="btn-ghost hidden" id="prof-close-btn" onclick="closeModals()">Закрыть</button>
+      </div>
+    </div>
+
+    <!-- Оверлей старта и выбора класса -->
+    <div class="overlay hidden" id="modal-start">
       <div class="sys-window">
         <div class="sys-tag">[УВЕДОМЛЕНИЕ СИСТЕМЫ]</div>
         <div class="sys-title">Протокол Бездны · 100 Этажей</div>
         <p class="sys-text">
-          Стиль интерфейса меняется каждые 10 этажей (1–10 … 91–100). Короткие фразы без обрывов, <b>50 уникальных жетонов</b> в альбоме и трофейные коробки боссов!
+          Выбери класс и начни путь с <b>1-го уровня и 1-го этажа</b>. Альбом жетонов и личный профиль сохраняются!
         </p>
 
         <button class="btn-primary hidden" id="btn-continue" onclick="continueGame()">▶ Продолжить (Этаж <span id="saved-floor-num">1</span> · Ур. <span id="saved-lvl-num">1</span>)</button>
@@ -754,7 +780,7 @@
       </div>
     </div>
 
-    <!-- Оверлей 2: Альбом 50 уникальных жетонов -->
+    <!-- Альбом 50 уникальных жетонов -->
     <div class="overlay hidden" id="modal-album">
       <div class="sys-window" style="border-color:#ffd166;">
         <div class="sys-tag" style="color:#ffd166;">[КОЛЛЕКЦИЯ УНИКАЛЬНЫХ ЖЕТОНОВ]</div>
@@ -774,7 +800,7 @@
       </div>
     </div>
 
-    <!-- Оверлей 3: Затемнение + анимация появления и раскрытия Коробки Босса -->
+    <!-- Коробка босса -->
     <div class="overlay dark-dim hidden" id="modal-crate">
       <div class="sys-window" id="crate-win" style="border-color:#ffd166;text-align:center;">
         <div class="sys-tag" style="color:#ffd166;">[ТРОФЕЙНАЯ КОРОБКА БОССА]</div>
@@ -789,7 +815,7 @@
       </div>
     </div>
 
-    <!-- Оверлей 4: Статус и дизайны экипировки/артефактов -->
+    <!-- Статус -->
     <div class="overlay hidden" id="modal-stats">
       <div class="sys-window">
         <div class="sys-tag">[ОКНО СТАТУСА]</div>
@@ -819,7 +845,7 @@
       </div>
     </div>
 
-    <!-- Оверлей 5: Извлечение Тени Босса -->
+    <!-- Извлечение Тени -->
     <div class="overlay hidden" id="modal-shadow">
       <div class="sys-window" style="border-color:#a855f7;box-shadow:0 0 38px rgba(168,85,247,0.38);text-align:center;">
         <div class="sys-tag" style="color:#c084fc;">[ИЗВЛЕЧЕНИЕ ТЕНИ]</div>
@@ -832,7 +858,7 @@
       </div>
     </div>
 
-    <!-- Оверлей 6: Лавка Тайного Торговца -->
+    <!-- Лавка Торговца -->
     <div class="overlay hidden" id="modal-merchant">
       <div class="sys-window" style="border-color:#c084fc;">
         <div class="sys-tag" style="color:#c084fc;">[ТАЙНЫЙ ТОРГОВЕЦ БЕЗДНЫ]</div>
@@ -844,7 +870,7 @@
       </div>
     </div>
 
-    <!-- Оверлей 7: Сундук -->
+    <!-- Сундук -->
     <div class="overlay hidden" id="modal-chest">
       <div class="sys-window" id="chest-win" style="text-align:center;">
         <div class="sys-tag" id="chest-tag">[СУНДУК БЕЗДНЫ]</div>
@@ -856,7 +882,7 @@
       </div>
     </div>
 
-    <!-- Оверлей 8: Пробуждение класса -->
+    <!-- Пробуждение класса -->
     <div class="overlay hidden" id="modal-awake">
       <div class="sys-window" style="border-color:#ffd166;text-align:center;">
         <div class="sys-tag" style="color:#ffd166;">[ПРОБУЖДЕНИЕ КЛАССА]</div>
@@ -867,7 +893,7 @@
       </div>
     </div>
 
-    <!-- Оверлей 9: Бестиарий -->
+    <!-- Бестиарий -->
     <div class="overlay hidden" id="modal-bestiary">
       <div class="sys-window">
         <div class="sys-tag">[КОЛЛЕКЦИЯ МОНСТРОВ]</div>
@@ -878,7 +904,7 @@
       </div>
     </div>
 
-    <!-- Оверлей 10: Глобальная таблица лидеров -->
+    <!-- Топ-20 -->
     <div class="overlay hidden" id="modal-lb">
       <div class="sys-window" style="border-color:#ffd166;">
         <div class="sys-tag" style="color:#ffd166;">[ЗАЛ СЛАВЫ БЕЗДНЫ]</div>
@@ -889,7 +915,7 @@
       </div>
     </div>
 
-    <!-- Оверлей 11: Квесты -->
+    <!-- Квесты -->
     <div class="overlay hidden" id="modal-quests">
       <div class="sys-window">
         <div class="sys-tag">[СИСТЕМА КВЕСТОВ]</div>
@@ -899,22 +925,22 @@
       </div>
     </div>
 
-    <!-- Оверлей 12: Магазин Энергии -->
+    <!-- Магазин Энергии (сниженные цены Stars + увеличенные бесплатные награды) -->
     <div class="overlay hidden" id="modal-shop">
       <div class="sys-window">
         <div class="sys-tag">[ПОПОЛНЕНИЕ ЭНЕРГИИ]</div>
         <div class="sys-title">Мана Разлома</div>
-        <div class="regen-box" id="regen-timer-box">⏳ Автовосстановление: +1⚡ каждые 10 мин (до 18⚡)</div>
+        <div class="regen-box" id="regen-timer-box">⏳ Автовосстановление: +1⚡ каждые 8 мин (до 20⚡)</div>
         <div class="status-note" id="shop-status"></div>
-        <button class="btn-ad" onclick="watchAdForEnergy()">🎬 +10 ходов · Бесплатно (Реклама)</button>
-        <button class="btn-gold" onclick="buyEnergy(30)">⚡ +30 ходов · 50 ⭐</button>
-        <button class="btn-primary" onclick="buyEnergy(100)">⚡ +100 ходов · 120 ⭐</button>
-        <button class="btn-share" onclick="shareGame()">👥 Пригласить друга (+5⚡ раз в 12ч)</button>
+        <button class="btn-ad" onclick="watchAdForEnergy()">🎬 +12 ходов · Бесплатно (Реклама)</button>
+        <button class="btn-gold" onclick="buyEnergy(30)">⚡ +30 ходов · 20 ⭐</button>
+        <button class="btn-primary" onclick="buyEnergy(100)">⚡ +100 ходов · 45 ⭐</button>
+        <button class="btn-share" onclick="shareGame()">👥 Пригласить друга (+8⚡ раз в 12ч)</button>
         <button class="btn-ghost" onclick="closeModals()">Назад в Разлом</button>
       </div>
     </div>
 
-    <!-- Оверлей 13: Смерть (откат 20 ⭐ или полный рестарт на 1-й уровень) -->
+    <!-- Смерть -->
     <div class="overlay hidden" id="modal-dead">
       <div class="sys-window" style="border-color:#ff3b5c;">
         <div class="sys-tag" style="color:#ff3b5c;">[КРИТИЧЕСКИЙ УРОН]</div>
@@ -927,7 +953,7 @@
       </div>
     </div>
 
-    <!-- Оверлей 14: Финал 100 этажа -->
+    <!-- Финал 100 этажа -->
     <div class="overlay hidden" id="modal-win">
       <div class="sys-window" style="border-color:#ffd166;">
         <div class="sys-tag" style="color:#ffd166;">[ПРОТОКОЛ ЗАВЕРШЁН]</div>
@@ -951,8 +977,8 @@
     var BOT_SHARE_URL = 'https://t.me/protocol_bezdny_bot';
     var SHARE_COOLDOWN_MS = 12 * 60 * 60 * 1000;
     var DAILY_COOLDOWN_MS = 24 * 60 * 60 * 1000;
-    var REGEN_INTERVAL_MS = 10 * 60 * 1000;
-    var MAX_PASSIVE_ENERGY = 18;
+    var REGEN_INTERVAL_MS = 8 * 60 * 1000;
+    var MAX_PASSIVE_ENERGY = 20;
     var PHRASE_REPEAT_COOLDOWN_FLOORS = 35;
 
     var PARTNER_TASKS = [];
@@ -970,6 +996,149 @@
     var currentThemeTier = -1;
     var combatBusy = false;
     var albumFilter = 'all';
+    var profileFirstTime = false;
+    var draftAvatarDataUrl = '';
+
+    var PROFILE_KEY = 'abyss_player_profile_v1';
+    var UserProfile = { nick: '', age: '', gender: '', avatar: '' };
+
+    function loadUserProfile() {
+      try {
+        var raw = localStorage.getItem(PROFILE_KEY);
+        if (raw) {
+          var parsed = JSON.parse(raw);
+          UserProfile.nick = parsed.nick || '';
+          UserProfile.age = parsed.age || '';
+          UserProfile.gender = parsed.gender || '';
+          UserProfile.avatar = parsed.avatar || '';
+          return true;
+        }
+      } catch (e) {}
+      return false;
+    }
+
+    function saveUserProfile() {
+      try { localStorage.setItem(PROFILE_KEY, JSON.stringify(UserProfile)); } catch (e) {}
+    }
+
+    function renderAvatarPreviewBox(boxEl, dataUrl) {
+      if (!boxEl) return;
+      if (dataUrl) {
+        boxEl.innerHTML = '<img src="' + dataUrl + '" alt="Аватар">';
+      } else {
+        boxEl.innerHTML = '👤';
+      }
+    }
+
+    function renderHudAvatar() {
+      var slot = document.getElementById('hud-avatar-slot');
+      if (!slot) return;
+      if (UserProfile.avatar) {
+        slot.innerHTML = '<img class="hud-avatar" src="' + UserProfile.avatar + '" alt="Avatar">';
+      } else {
+        slot.innerHTML = '<div class="hud-avatar-ph">👤</div>';
+      }
+    }
+
+    function openProfileModal(firstTime) {
+      profileFirstTime = !!firstTime;
+      draftAvatarDataUrl = UserProfile.avatar || '';
+      document.getElementById('prof-title').textContent = firstTime ? 'Добро пожаловать в Бездну!' : 'Личный профиль игрока';
+      document.getElementById('prof-nick').value = UserProfile.nick || '';
+      document.getElementById('prof-age').value = UserProfile.age || '';
+      document.getElementById('prof-gender').value = UserProfile.gender || '';
+      renderAvatarPreviewBox(document.getElementById('prof-avatar-preview'), draftAvatarDataUrl);
+
+      document.getElementById('prof-save-btn').textContent = firstTime ? 'Сохранить и выбрать класс' : 'Сохранить изменения';
+      var closeBtn = document.getElementById('prof-close-btn');
+      if (firstTime) closeBtn.classList.add('hidden');
+      else closeBtn.classList.remove('hidden');
+
+      document.getElementById('modal-profile').classList.remove('hidden');
+    }
+
+    function clearProfileAvatar() {
+      draftAvatarDataUrl = '';
+      renderAvatarPreviewBox(document.getElementById('prof-avatar-preview'), '');
+    }
+
+    function handleAvatarSelected(evt) {
+      var file = evt && evt.target && evt.target.files && evt.target.files[0];
+      if (!file) return;
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        var img = new Image();
+        img.onload = function() {
+          // Сжимаем аватарку до 160x160, чтобы легко помещалась в localStorage
+          var canvas = document.createElement('canvas');
+          var sz = 160;
+          canvas.width = sz;
+          canvas.height = sz;
+          var ctx = canvas.getContext('2d');
+          var minSide = Math.min(img.width, img.height);
+          var sx = (img.width - minSide) / 2;
+          var sy = (img.height - minSide) / 2;
+          ctx.drawImage(img, sx, sy, minSide, minSide, 0, 0, sz, sz);
+          draftAvatarDataUrl = canvas.toDataURL('image/jpeg', 0.82);
+          renderAvatarPreviewBox(document.getElementById('prof-avatar-preview'), draftAvatarDataUrl);
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function saveProfileAndProceed() {
+      var nickVal = (document.getElementById('prof-nick').value || '').trim();
+      var ageVal = (document.getElementById('prof-age').value || '').trim();
+      var genderVal = document.getElementById('prof-gender').value || '';
+
+      UserProfile.nick = nickVal || 'Охотник';
+      UserProfile.age = ageVal;
+      UserProfile.gender = genderVal;
+      UserProfile.avatar = draftAvatarDataUrl || '';
+      saveUserProfile();
+      renderHudAvatar();
+      if (P && P.lvl) updateHUD();
+
+      document.getElementById('modal-profile').classList.add('hidden');
+      if (profileFirstTime) {
+        profileFirstTime = false;
+        document.getElementById('modal-start').classList.remove('hidden');
+      }
+    }
+
+    // =========================================================================
+    // 1. ОСОБЫЙ ЭФФЕКТ НА 1 ЭТАЖ ИЗ КАЖДЫХ 10 (ТУМАН, ОГОНЬ, ВОДА, МОЛНИЯ, ТЬМА)
+    // =========================================================================
+    var SPECIAL_FLOOR_FX = [
+      { key: 'fog',   label: '🌫️ Густой Туман',    desc: 'Туман скрывает удары: +18% крит, но -10% уклон.' },
+      { key: 'fire',  label: '🔥 Жар Бездны',      desc: 'Раскалённый воздух усиливает атаки (+15% урон), но обжигает.' },
+      { key: 'water', label: '🌊 Затопленный Уровень', desc: 'Вода гасит жару: +15% защита и +6 MP за ход.' },
+      { key: 'storm', label: '⚡ Грозовой Разряд', desc: 'Молнии бьют по арене: +20% крит у обеих сторон.' }
+    ];
+
+    function getFloorSpecialFx(floor) {
+      // В каждом десятке этажей ровно 1 особый этаж (например, 7-й, 17-й, 27-й...)
+      var posInTen = ((floor - 1) % 10) + 1;
+      if (posInTen !== 7) return null;
+      var idx = Math.floor((floor - 1) / 10) % SPECIAL_FLOOR_FX.length;
+      return SPECIAL_FLOOR_FX[idx];
+    }
+
+    function applySpecialFloorFx(floor) {
+      var fxLayer = document.getElementById('special-fx-layer');
+      var badge = document.getElementById('special-fx-badge');
+      var fx = getFloorSpecialFx(floor);
+
+      if (!fxLayer || !badge) return;
+      fxLayer.className = 'special-fx-layer';
+      badge.innerHTML = '';
+
+      if (fx) {
+        fxLayer.classList.add('active', 'fx-' + fx.key);
+        badge.innerHTML = '<span class="fx-tag">' + fx.label + '</span>';
+      }
+    }
 
     function applyFloorTheme(floor) {
       var tier = Math.min(10, Math.max(1, Math.floor((floor - 1) / 10) + 1));
@@ -1007,7 +1176,7 @@
     }
 
     // =========================================================================
-    // 1. УНИКАЛЬНЫЕ SVG-ДИЗАЙНЫ ДЛЯ АРТЕФАКТОВ, ОРУЖИЯ И БРОНИ
+    // 2. УНИКАЛЬНЫЕ SVG-ДИЗАЙНЫ ДЛЯ АРТЕФАКТОВ, ОРУЖИЯ И БРОНИ
     // =========================================================================
     function getGearDesignSVG(kind, rarityKey) {
       var rar = RARITIES[rarityKey || 'common'] || RARITIES.common;
@@ -1039,7 +1208,7 @@
     }
 
     // =========================================================================
-    // 2. КОРОТКИЕ ОЗВУЧЕННЫЕ ФРАЗЫ (ПОВТОР РАЗ В 30–40 ЭТАЖЕЙ + БЕЗ ОБРЫВОВ)
+    // 3. КОРОТКИЕ ОЗВУЧЕННЫЕ ФРАЗЫ (ПОВТОР РАЗ В 30–40 ЭТАЖЕЙ + БЕЗ ОБРЫВОВ)
     // =========================================================================
     var voiceEnabled = true;
     var currentVoiceAudio = null;
@@ -1324,7 +1493,7 @@
     }
 
     // =========================================================================
-    // 3. ЗВУК, VFX-ЭФФЕКТЫ И ЧАСТИЦЫ БИОМОВ
+    // 4. ЗВУК, VFX-ЭФФЕКТЫ И ЧАСТИЦЫ БИОМОВ
     // =========================================================================
     var audioCtx = null;
     var muted = false;
@@ -1347,11 +1516,6 @@
         osc.start();
         osc.stop(audioCtx.currentTime + dur);
       } catch (e) {}
-    }
-
-    function toggleMute() {
-      muted = !muted;
-      document.getElementById('mute-btn').textContent = muted ? '🔇 Тихо' : '🔊 Звук';
     }
 
     function renderBiomeParticles(zoneIdx) {
@@ -1464,7 +1628,7 @@
     }
 
     // =========================================================================
-    // 4. 50 ЖЕТОНОВ С УНИКАЛЬНЫМ ДИЗАЙНОМ У КАЖДОГО (4 РЕДКОСТИ + 3D)
+    // 5. 50 ЖЕТОНОВ С УНИКАЛЬНЫМ ДИЗАЙНОМ У КАЖДОГО (4 РЕДКОСТИ + 3D)
     // =========================================================================
     var POOP_RARITY_META = {
       rare:      { name: 'Редкий',      cls: 'poop-rare',      txtCls: 'r-rare',      chance: 0.45, total: 30 },
@@ -1498,18 +1662,10 @@
       ];
 
       var idx = 1;
-      for (var i = 0; i < rareNames.length; i++) {
-        list.push({ id: 'p_' + idx, num: idx++, name: rareNames[i], rarity: 'rare', designId: i });
-      }
-      for (var j = 0; j < epicNames.length; j++) {
-        list.push({ id: 'p_' + idx, num: idx++, name: epicNames[j], rarity: 'epic', designId: 30 + j });
-      }
-      for (var m = 0; m < mythicNames.length; m++) {
-        list.push({ id: 'p_' + idx, num: idx++, name: mythicNames[m], rarity: 'mythic', designId: 40 + m });
-      }
-      for (var l = 0; l < leg3DNames.length; l++) {
-        list.push({ id: 'p_' + idx, num: idx++, name: leg3DNames[l], rarity: 'legendary', designId: 47 + l });
-      }
+      for (var i = 0; i < rareNames.length; i++) list.push({ id: 'p_' + idx, num: idx++, name: rareNames[i], rarity: 'rare', designId: i });
+      for (var j = 0; j < epicNames.length; j++) list.push({ id: 'p_' + idx, num: idx++, name: epicNames[j], rarity: 'epic', designId: 30 + j });
+      for (var m = 0; m < mythicNames.length; m++) list.push({ id: 'p_' + idx, num: idx++, name: mythicNames[m], rarity: 'mythic', designId: 40 + m });
+      for (var l = 0; l < leg3DNames.length; l++) list.push({ id: 'p_' + idx, num: idx++, name: leg3DNames[l], rarity: 'legendary', designId: 47 + l });
       return list;
     })();
 
@@ -1643,7 +1799,7 @@
     }
 
     // =========================================================================
-    // 5. ПАУЗА + ТЁМНЫЙ ЭКРАН + ВЫХОД И РАСКРЫТИЕ КОРОБКИ ПОСЛЕ БОССА
+    // 6. ПАУЗА + ТЁМНЫЙ ЭКРАН + ВЫХОД И РАСКРЫТИЕ КОРОБКИ ПОСЛЕ БОССА
     // =========================================================================
     function openBossRewardCrate(bossEnemy, onDone) {
       pendingCrateCallback = onDone || null;
@@ -1685,9 +1841,9 @@
       }, 1700);
 
       setTimeout(function() {
-        var extraShards = Math.round(25 + P.floor * 4);
+        var extraShards = Math.round(30 + P.floor * 4);
         P.shards += extraShards;
-        var extraEnergy = 2;
+        var extraEnergy = 4;
         P.energy += extraEnergy;
 
         var token = rollPoopTokenDrop() || POOP_TOKENS[Math.floor(Math.random() * 30)];
@@ -1729,7 +1885,7 @@
     }
 
     // =========================================================================
-    // 6. РЕНДЕР ВРАГОВ (АРТЫ БОССОВ + SVG)
+    // 7. РЕНДЕР ВРАГОВ (АРТЫ БОССОВ + SVG)
     // =========================================================================
     function getPortalSVG(aura) {
       return (
@@ -1849,7 +2005,7 @@
     }
 
     // =========================================================================
-    // 7. КЛАССЫ, МИКРО-ЛОР, 10 ЗОН И 10 БОССОВ
+    // 8. КЛАССЫ, МИКРО-ЛОР, 10 ЗОН И 10 БОССОВ
     // =========================================================================
     var HERO_CLASSES = {
       assassin: {
@@ -2036,16 +2192,16 @@
     ];
 
     var STORY_QUESTS = [
-      { id: 'q_kills3',  title: 'Первая кровь', desc: 'Убей 3 монстров в Разломе', stat: 'kills', goal: 3, rewardEnergy: 4, rewardShards: 25 },
-      { id: 'q_combo2',  title: 'Мастер комбо', desc: 'Выполни 2 боевые комбинации', stat: 'combos', goal: 2, rewardEnergy: 5, rewardItem: '💣 Бомба Бездны (-30% HP врага)' },
-      { id: 'q_boss1',   title: 'Первая Тень', desc: 'Победи Босса на 10-м этаже', stat: 'bosses', goal: 1, rewardEnergy: 6, rewardShards: 80 },
-      { id: 'q_awake1',  title: 'Пробуждение', desc: 'Доберись до 20-го этажа', stat: 'maxFloor', goal: 20, rewardEnergy: 8, rewardPts: 3 },
-      { id: 'q_igris',   title: 'Покоритель Игриса', desc: 'Доберись до 51-го этажа', stat: 'maxFloor', goal: 51, rewardEnergy: 10, rewardShards: 250 }
+      { id: 'q_kills3',  title: 'Первая кровь', desc: 'Убей 3 монстров в Разломе', stat: 'kills', goal: 3, rewardEnergy: 6, rewardShards: 30 },
+      { id: 'q_combo2',  title: 'Мастер комбо', desc: 'Выполни 2 боевые комбинации', stat: 'combos', goal: 2, rewardEnergy: 7, rewardItem: '💣 Бомба Бездны (-30% HP врага)' },
+      { id: 'q_boss1',   title: 'Первая Тень', desc: 'Победи Босса на 10-м этаже', stat: 'bosses', goal: 1, rewardEnergy: 9, rewardShards: 90 },
+      { id: 'q_awake1',  title: 'Пробуждение', desc: 'Доберись до 20-го этажа', stat: 'maxFloor', goal: 20, rewardEnergy: 11, rewardPts: 3 },
+      { id: 'q_igris',   title: 'Покоритель Игриса', desc: 'Доберись до 51-го этажа', stat: 'maxFloor', goal: 51, rewardEnergy: 14, rewardShards: 260 }
     ];
 
     var MAX_FLOORS = 100;
-    var SAVE_KEY = 'abyss_protocol_100_v6';
-    var ALL_SAVE_KEYS = ['abyss_protocol_100_v6', 'abyss_protocol_100_v5', 'abyss_protocol_100_v4', 'abyss_protocol_100_v3', 'abyss_protocol_100_v2', 'abyss_protocol_100_v1'];
+    var SAVE_KEY = 'abyss_protocol_100_v7';
+    var ALL_SAVE_KEYS = ['abyss_protocol_100_v7', 'abyss_protocol_100_v6', 'abyss_protocol_100_v5', 'abyss_protocol_100_v4', 'abyss_protocol_100_v3', 'abyss_protocol_100_v2', 'abyss_protocol_100_v1'];
     var P = {};
 
     function selectHeroClass(cls) {
@@ -2074,9 +2230,9 @@
         xp: 0, nextXp: 100,
         str: c.str, agi: c.agi, int: c.int,
         pts: 0,
-        energy: 18,
+        energy: 20,
         lastEnergyTs: Date.now(),
-        shards: 25,
+        shards: 30,
         ult: 0,
         combatTurn: 0,
         floor: 1,
@@ -2139,9 +2295,7 @@
         }
       }
       try {
-        for (var i = 0; i < ALL_SAVE_KEYS.length; i++) {
-          localStorage.removeItem(ALL_SAVE_KEYS[i]);
-        }
+        for (var i = 0; i < ALL_SAVE_KEYS.length; i++) localStorage.removeItem(ALL_SAVE_KEYS[i]);
       } catch (e) {}
       document.getElementById('btn-continue').classList.add('hidden');
       return albumCopy;
@@ -2160,7 +2314,8 @@
       document.getElementById('modal-win').classList.add('hidden');
       document.getElementById('log').innerHTML = '';
       var ci = getClassInfo();
-      addLog('[СИСТЕМА]: Новый забег с <b>1-го уровня и 1-го этажа</b>! Класс: <b>' + ci.tier.icon + ' ' + ci.tier.name + '</b>. Альбом жетонов сохранён.', 'system');
+      var who = UserProfile.nick || 'Игрок';
+      addLog('[СИСТЕМА]: <b>' + who + '</b> начинает с <b>1-го уровня и 1-го этажа</b> (' + ci.tier.icon + ' ' + ci.tier.name + ').', 'system');
       enterFloor();
     }
 
@@ -2183,7 +2338,7 @@
       if (!P.poopAlbum) P.poopAlbum = {};
       if (!P.seenEnemies) P.seenEnemies = {};
       if (!P.loreRead) P.loreRead = {};
-      if (typeof P.shards !== 'number') P.shards = 25;
+      if (typeof P.shards !== 'number') P.shards = 30;
       processEnergyRegen();
       beep(620, 0.15, 'triangle', 0.1);
       document.getElementById('modal-start').classList.add('hidden');
@@ -2270,8 +2425,11 @@
     function updateHUD() {
       processEnergyRegen();
       applyFloorTheme(P.floor || 1);
+      applySpecialFloorFx(P.floor || 1);
+      renderHudAvatar();
       var ci = getClassInfo();
-      document.getElementById('ui-rank').textContent = ci.tier.icon + ' ' + getRank(P.lvl) + ' · УР.' + P.lvl;
+      var nickLabel = UserProfile.nick ? (UserProfile.nick + ' · ') : '';
+      document.getElementById('ui-rank').textContent = nickLabel + ci.tier.icon + ' УР.' + P.lvl;
       document.getElementById('ui-energy').textContent = P.energy;
       document.getElementById('ui-shards').textContent = P.shards || 0;
       document.getElementById('energy-pill').classList.toggle('low', P.energy <= 4);
@@ -2384,7 +2542,7 @@
     }
 
     // =========================================================================
-    // 8. ПРОБУЖДЕНИЕ, ЭТАЖИ, БОЙ И ПОБЕДА
+    // 9. ПРОБУЖДЕНИЕ, ЭТАЖИ, БОЙ И ПОБЕДА
     // =========================================================================
     function checkClassAwakening() {
       var targetTier = P.floor >= 50 ? 2 : (P.floor >= 20 ? 1 : 0);
@@ -2415,6 +2573,7 @@
     function enterFloor() {
       combatBusy = false;
       var zone = getZone(P.floor);
+      var fx = getFloorSpecialFx(P.floor);
       P.inCombat = false;
       P.enemy = null;
       P.lastAction = null;
@@ -2424,6 +2583,10 @@
       checkClassAwakening();
       submitScoreToServer();
       speakVoice('floor');
+
+      if (fx) {
+        addLog('✨ [ОСОБЫЙ ЭФФЕКТ ЭТАЖА — ' + fx.label + ']: ' + fx.desc, 'system');
+      }
 
       if (LORE_NOTES[P.floor] && !P.loreRead[P.floor]) {
         P.loreRead[P.floor] = true;
@@ -2737,9 +2900,9 @@
         spawnEnemy(); saveProgress(); updateHUD(); return;
       }
       if (action === 'evt_altar_energy') {
-        P.energy += 3;
+        P.energy += 5;
         beep(780, 0.14, 'sine', 0.09);
-        addLog('⚡ Алтарь рассыпался искрами маны: <b>+3 энергии</b>! На шум выбежал страж.', 'loot');
+        addLog('⚡ Алтарь рассыпался искрами маны: <b>+5 энергии</b>! На шум выбежал страж.', 'loot');
         spawnEnemy(); saveProgress(); updateHUD(); return;
       }
 
@@ -2776,7 +2939,10 @@
       }
 
       P.combatTurn++;
-      var passiveMp = (P.heroClass === 'necro' ? (5 + (P.awakeTier || 0) * 3) : 0) + (P.artifact && P.artifact.stat === 'mpRegen' ? P.artifact.val : 0);
+      var fx = getFloorSpecialFx(P.floor);
+      var passiveMp = (P.heroClass === 'necro' ? (5 + (P.awakeTier || 0) * 3) : 0) +
+        (P.artifact && P.artifact.stat === 'mpRegen' ? P.artifact.val : 0) +
+        (fx && fx.key === 'water' ? 6 : 0);
       if (passiveMp > 0) P.mp = Math.min(P.maxMp, P.mp + passiveMp);
 
       var dmg = 0, dodged = false, isCrit = false, comboTriggered = false;
@@ -2785,21 +2951,23 @@
       var skillCost = Math.max(14, Math.round(P.maxMp * 0.2));
       var artCrit = (P.artifact && P.artifact.stat === 'crit') ? P.artifact.val : 0;
       var clsCrit = P.heroClass === 'assassin' ? (0.15 + (P.awakeTier || 0) * 0.07) : 0;
+      var fxCrit = (fx && fx.key === 'fog') ? 0.18 : ((fx && fx.key === 'storm') ? 0.20 : 0);
+      var fxDmgMul = (fx && fx.key === 'fire') ? 1.15 : 1;
       var physBoost = (P.heroClass === 'berserk' && P.awakeTier > 0) ? (1 + P.awakeTier * 0.12) : 1;
       var rageMul = P.rageBuff ? 2.2 : 1;
 
       if (action === 'attack') {
         if (P.lastAction === 'dodge') {
           comboTriggered = true; isCrit = true; P.combos++; addUlt(30); voiceCat = 'crit';
-          dmg = Math.round((14 + tStr * 3.1 + P.agi * 1.2) * 1.65 * physBoost * rageMul);
+          dmg = Math.round((14 + tStr * 3.1 + P.agi * 1.2) * 1.65 * physBoost * rageMul * fxDmgMul);
           playVFX('crit'); playVFX('combo');
           spawnFloatText('ТЕНЕВОЙ ВЫПАД -' + dmg, 'combo');
           addLog('⚡ <b>КОМБО [ТЕНЕВОЙ ВЫПАД]!</b> Критический удар наносит <b>' + dmg + ' HP</b>!', 'combo');
         } else {
           addUlt(15);
-          isCrit = Math.random() < Math.min(0.8, 0.12 + P.agi * 0.015 + artCrit + clsCrit);
+          isCrit = Math.random() < Math.min(0.85, 0.12 + P.agi * 0.015 + artCrit + clsCrit + fxCrit);
           voiceCat = isCrit ? 'crit' : 'hit';
-          dmg = Math.round((10 + tStr * 2.7 + Math.random() * (6 + P.floor * 0.5)) * (isCrit ? 1.75 : 1) * physBoost * rageMul);
+          dmg = Math.round((10 + tStr * 2.7 + Math.random() * (6 + P.floor * 0.5)) * (isCrit ? 1.75 : 1) * physBoost * rageMul * fxDmgMul);
           if (P.enemy.intent === 'shield') {
             dmg = Math.max(4, Math.round(dmg * 0.42));
             addLog('🛡️ Барьер поглотил часть удара! Нанесено <b>' + dmg + '</b> (пробей магией!).', 'danger');
@@ -2823,7 +2991,7 @@
           voiceCat = 'hit';
         } else {
           P.mp -= skillCost;
-          var skillBonus = 1 + (P.heroClass === 'necro' ? (0.2 + (P.awakeTier || 0) * 0.12) : 0) + (P.artifact && P.artifact.stat === 'skillMul' ? P.artifact.val : 0);
+          var skillBonus = (1 + (P.heroClass === 'necro' ? (0.2 + (P.awakeTier || 0) * 0.12) : 0) + (P.artifact && P.artifact.stat === 'skillMul' ? P.artifact.val : 0)) * fxDmgMul;
           if (P.lastAction === 'attack') {
             comboTriggered = true; P.combos++; addUlt(30); voiceCat = 'crit';
             dmg = Math.round((26 + tInt * 4.2 + tStr * 1.1) * 1.45 * skillBonus * rageMul);
@@ -2866,7 +3034,8 @@
           P.lastAction = null;
         } else {
           addUlt(15);
-          var dodgeChance = Math.min(0.88, (P.enemy.intent === 'heavy' ? 0.64 : 0.42) + P.agi * 0.025 + (P.heroClass === 'assassin' ? 0.1 : 0));
+          var fxDodgePen = (fx && fx.key === 'fog') ? -0.10 : 0;
+          var dodgeChance = Math.max(0.15, Math.min(0.88, (P.enemy.intent === 'heavy' ? 0.64 : 0.42) + P.agi * 0.025 + (P.heroClass === 'assassin' ? 0.1 : 0) + fxDodgePen));
           if (Math.random() < dodgeChance) {
             dodged = true; voiceCat = 'dodge';
             var cMul = (P.enemy.intent === 'heavy' ? 1.55 : 1) * (P.heroClass === 'assassin' ? (1.2 + (P.awakeTier || 0) * 0.18) : 1);
@@ -2884,7 +3053,7 @@
         }
       } else {
         addUlt(12); voiceCat = 'hit';
-        dmg = Math.round((14 + (tStr + tInt) * 1.45) * rageMul);
+        dmg = Math.round((14 + (tStr + tInt) * 1.45) * rageMul * fxDmgMul);
         P.rageBuff = false; P.enemy.hp -= dmg;
         playVFX('slash'); flashMonsterHit(false); spawnFloatText('-' + dmg, '');
         addLog('Нестандартный приём сбивает врага с толку! Ты снимаешь <b>' + dmg + '</b> HP.', 'story');
@@ -2917,6 +3086,7 @@
     }
 
     function enemyCounterTurn(dodged) {
+      var fx = getFloorSpecialFx(P.floor);
       if (P.enemy.intent === 'fury') {
         var eHeal = Math.round(P.enemy.maxHp * 0.12);
         P.enemy.hp = Math.min(P.enemy.maxHp, P.enemy.hp + eHeal);
@@ -2931,7 +3101,8 @@
         } else {
           var spread = Math.max(3, Math.round(P.enemy.atk * 0.16));
           var mult = (P.enemy.intent === 'heavy') ? 1.85 : 1;
-          var defMul = 1 - (P.artifact && P.artifact.stat === 'def' ? P.artifact.val : 0);
+          var fxDef = (fx && fx.key === 'water') ? 0.15 : 0;
+          var defMul = Math.max(0.3, 1 - (P.artifact && P.artifact.stat === 'def' ? P.artifact.val : 0) - fxDef);
           var eDmg = Math.max(4, Math.round((P.enemy.atk + (Math.random() * spread * 2 - spread)) * mult * defMul));
           P.hp -= eDmg;
           addUlt(10);
@@ -3117,7 +3288,7 @@
       }
 
       if (wasBoss && defeatedEnemy.deathQuote) addLog('👑 <b>' + defeatedEnemy.name + ':</b> ' + defeatedEnemy.deathQuote, 'lore');
-      if (wasBoss) { P.energy += 4; addLog('[БОНУС БОССА]: Восстановлено ⚡ <b>+4 энергии</b>!', 'loot'); }
+      if (wasBoss) { P.energy += 6; addLog('[БОНУС БОССА]: Восстановлено ⚡ <b>+6 энергии</b>!', 'loot'); }
 
       if (dropGear) {
         if (dropGear.slot === 'weapon') {
@@ -3189,7 +3360,7 @@
         addLog('🩸 Перед тобой древний <b>Алтарь Крови</b>. Он шепчет: «Отдай кровь — получи силу».', 'system');
         setChoices([
           { label: '🩸 Пожертвовать 20% HP → +2 очка характеристик', action: 'evt_altar_blood' },
-          { label: '✨ Осквернить алтарь → +3⚡ энергии (пробудит врага)', action: 'evt_altar_energy' },
+          { label: '✨ Осквернить алтарь → +5⚡ энергии (пробудит врага)', action: 'evt_altar_energy' },
           { label: '⚔️ Пройти мимо в бой', action: 'explore' }
         ]);
       } else {
@@ -3246,8 +3417,8 @@
             setModalStatus('merch-status', '✅ Набор добавлен в инвентарь!');
           }
         },
-        { kind: 'artifact', rar: 'rare', title: '⚡ Флакон Маны Разлома (+4 энергии)', desc: 'Быстрое пополнение ходов за Осколки', cost: 55, fn: function() {
-            P.energy += 4; setModalStatus('merch-status', '✅ Получено +4⚡ энергии!');
+        { kind: 'artifact', rar: 'rare', title: '⚡ Флакон Маны Разлома (+6 энергии)', desc: 'Быстрое пополнение ходов за Осколки', cost: 45, fn: function() {
+            P.energy += 6; setModalStatus('merch-status', '✅ Получено +6⚡ энергии!');
           }
         }
       ];
@@ -3333,6 +3504,9 @@
     }
 
     function getTelegramUser() {
+      if (UserProfile.nick) {
+        return { id: 'prof_' + UserProfile.nick, name: UserProfile.nick };
+      }
       try {
         var tg = window.Telegram && window.Telegram.WebApp;
         if (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) {
@@ -3392,7 +3566,12 @@
 
     function openStats() {
       var ci = getClassInfo();
-      document.getElementById('st-header').textContent = 'Игрок · Ранг ' + getRank(P.lvl) + ' (Ур. ' + P.lvl + ')';
+      var extraProf = [];
+      if (UserProfile.nick) extraProf.push(UserProfile.nick);
+      if (UserProfile.age) extraProf.push(UserProfile.age + ' лет');
+      if (UserProfile.gender) extraProf.push(UserProfile.gender);
+
+      document.getElementById('st-header').textContent = (extraProf.length ? (extraProf.join(' · ') + ' · ') : '') + 'Ранг ' + getRank(P.lvl) + ' (Ур. ' + P.lvl + ')';
       document.getElementById('st-class-info').textContent = ci.tier.icon + ' ' + ci.tier.name + ' — ' + ci.tier.passive;
       document.getElementById('st-pts').textContent = P.pts;
       document.getElementById('st-str').textContent = P.str + ' (+' + getWeaponBonusStr() + ')';
@@ -3510,7 +3689,7 @@
       dCard.className = 'quest-card' + (dailyReady ? ' ready' : '');
       dCard.innerHTML =
         '<div class="quest-top"><span>🎁 Ежедневный вход</span><span>' + (dailyReady ? 'Готово' : 'Получено') + '</span></div>' +
-        '<div class="quest-reward">Награда: ⚡ +4 энергии + 💎 20 Осколков</div>' +
+        '<div class="quest-reward">Награда: ⚡ +7 энергии + 💎 25 Осколков</div>' +
         '<button class="quest-btn" ' + (dailyReady ? '' : 'disabled') + ' onclick="claimDaily()">' + (dailyReady ? 'Забрать награду' : 'Доступно завтра') + '</button>';
       box.appendChild(dCard);
 
@@ -3519,7 +3698,7 @@
       bCard.className = 'quest-card' + (bReady ? ' ready' : '');
       bCard.innerHTML =
         '<div class="quest-top"><span>⚔️ Контракт: Убить 5 врагов</span><span>' + Math.min(5, P.bountyKills) + '/5</span></div>' +
-        '<div class="quest-reward">Награда: ⚡ +3 энергии + предмет (повторяемый)</div>' +
+        '<div class="quest-reward">Награда: ⚡ +6 энергии + предмет (повторяемый)</div>' +
         '<button class="quest-btn" ' + (bReady ? '' : 'disabled') + ' onclick="claimBounty()">' + (bReady ? 'Забрать награду' : 'В процессе') + '</button>';
       box.appendChild(bCard);
 
@@ -3571,18 +3750,18 @@
     }
 
     function claimDaily() {
-      P.lastDailyTs = Date.now(); P.energy += 4; P.shards += 20;
+      P.lastDailyTs = Date.now(); P.energy += 7; P.shards += 25;
       beep(800, 0.16, 'triangle', 0.1); haptic('success');
-      addLog('🎁 [ЕЖЕДНЕВНЫЙ БОНУС]: ⚡ +4 энергии и 💎 +20 Осколков!', 'loot');
+      addLog('🎁 [ЕЖЕДНЕВНЫЙ БОНУС]: ⚡ +7 энергии и 💎 +25 Осколков!', 'loot');
       saveProgress(); openQuests(); updateHUD();
     }
 
     function claimBounty() {
       if (P.bountyKills < 5) return;
-      P.bountyKills -= 5; P.energy += 3;
+      P.bountyKills -= 5; P.energy += 6;
       var item = getRandomConsumable(); P.inv.push(item);
       beep(820, 0.16, 'triangle', 0.1); haptic('success');
-      addLog('⚔️ [КОНТРАКТ]: ⚡ +3 энергии и <b>' + item + '</b>!', 'loot');
+      addLog('⚔️ [КОНТРАКТ]: ⚡ +6 энергии и <b>' + item + '</b>!', 'loot');
       saveProgress(); openQuests(); updateHUD();
     }
 
@@ -3679,8 +3858,8 @@
 
     function watchAdForEnergy() {
       showRewardedAd('shop-status', function() {
-        P.energy += 10; beep(780, 0.16, 'triangle', 0.1);
-        addLog('[НАГРАДА ЗА ПРОСМОТР]: Получено ⚡ +10 энергии!', 'loot');
+        P.energy += 12; beep(780, 0.16, 'triangle', 0.1);
+        addLog('[НАГРАДА ЗА ПРОСМОТР]: Получено ⚡ +12 энергии!', 'loot');
         saveProgress(); closeModals(); updateHUD();
       });
     }
@@ -3710,9 +3889,9 @@
 
       var now = Date.now();
       if (!P.lastShareTs || (now - P.lastShareTs) >= SHARE_COOLDOWN_MS) {
-        P.lastShareTs = now; P.energy += 5;
+        P.lastShareTs = now; P.energy += 8;
         beep(740, 0.15, 'triangle', 0.09);
-        addLog('[БОНУС ЗА ПРИГЛАШЕНИЕ]: ⚡ +5 энергии! Следующий через 12ч.', 'loot');
+        addLog('[БОНУС ЗА ПРИГЛАШЕНИЕ]: ⚡ +8 энергии! Следующий через 12ч.', 'loot');
         saveProgress(); closeModals(); updateHUD();
       } else {
         setModalStatus('shop-status', 'Бонус за приглашение доступен раз в 12 часов.');
@@ -3720,7 +3899,7 @@
     }
 
     function closeModals() {
-      var ids = ['modal-stats', 'modal-quests', 'modal-shop', 'modal-dead', 'modal-win', 'modal-bestiary', 'modal-lb', 'modal-awake', 'modal-merchant', 'modal-album'];
+      var ids = ['modal-stats', 'modal-quests', 'modal-shop', 'modal-dead', 'modal-win', 'modal-bestiary', 'modal-lb', 'modal-awake', 'modal-merchant', 'modal-album', 'modal-profile'];
       for (var i = 0; i < ids.length; i++) document.getElementById(ids[i]).classList.add('hidden');
     }
 
@@ -3732,17 +3911,7 @@
       }
     }, 1000);
 
-    (function checkSaveOnLoad() {
-      var saved = loadProgress();
-      if (saved && saved.floor && saved.floor > 1) {
-        applyFloorTheme(saved.floor);
-        document.getElementById('saved-floor-num').textContent = saved.floor;
-        document.getElementById('saved-lvl-num').textContent = saved.lvl || 1;
-        document.getElementById('btn-continue').classList.remove('hidden');
-      }
-    })();
-
-    (function initTelegramApp() {
+    (function bootstrapApp() {
       initAdsgram();
       try {
         if (window.Telegram && window.Telegram.WebApp) {
@@ -3753,6 +3922,25 @@
           if (tg.disableVerticalSwipes) tg.disableVerticalSwipes();
         }
       } catch (e) {}
+
+      var hasProfile = loadUserProfile();
+      renderHudAvatar();
+
+      var saved = loadProgress();
+      initPlayer('assassin', saved && saved.poopAlbum ? saved.poopAlbum : {});
+      if (saved && saved.floor && saved.floor > 1) {
+        applyFloorTheme(saved.floor);
+        document.getElementById('saved-floor-num').textContent = saved.floor;
+        document.getElementById('saved-lvl-num').textContent = saved.lvl || 1;
+        document.getElementById('btn-continue').classList.remove('hidden');
+      }
+      updateHUD();
+
+      if (!hasProfile) {
+        openProfileModal(true);
+      } else {
+        document.getElementById('modal-start').classList.remove('hidden');
+      }
     })();
   </script>
 </body>
