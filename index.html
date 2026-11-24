@@ -71,7 +71,7 @@
     }
     .ult-flash.active { opacity: 1; }
 
-    /* Детализированный HUD */
+    /* HUD */
     .hud {
       padding: 9px 12px 8px;
       background: linear-gradient(180deg, rgba(13, 20, 40, 0.96) 0%, rgba(7, 11, 22, 0.98) 100%);
@@ -122,95 +122,37 @@
 
     .energy-pill:active, .shard-pill:active, .voice-pill:active { transform: scale(0.95); }
 
-    .voice-pill {
-      color: #6ee7b7;
-      background: rgba(16, 185, 129, 0.15);
-      border: 1px solid rgba(16, 185, 129, 0.48);
-    }
+    .voice-pill { color: #6ee7b7; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.48); }
+    .voice-pill.off { color: #94a3b8; background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.16); }
 
-    .voice-pill.off {
-      color: #94a3b8;
-      background: rgba(255, 255, 255, 0.06);
-      border-color: rgba(255, 255, 255, 0.16);
-    }
-
-    .energy-pill {
-      color: #ffd166;
-      background: rgba(255, 209, 102, 0.13);
-      border: 1px solid rgba(255, 209, 102, 0.42);
-    }
-
-    .energy-pill.low {
-      color: #ff6b81;
-      border-color: rgba(255, 59, 92, 0.78);
-      background: rgba(255, 59, 92, 0.2);
-      animation: pulseLow 1.3s infinite;
-    }
-
-    .shard-pill {
-      color: #d8b4fe;
-      background: rgba(168, 85, 247, 0.16);
-      border: 1px solid rgba(192, 132, 252, 0.45);
-    }
+    .energy-pill { color: #ffd166; background: rgba(255, 209, 102, 0.13); border: 1px solid rgba(255, 209, 102, 0.42); }
+    .energy-pill.low { color: #ff6b81; border-color: rgba(255, 59, 92, 0.78); background: rgba(255, 59, 92, 0.2); animation: pulseLow 1.3s infinite; }
+    .shard-pill { color: #d8b4fe; background: rgba(168, 85, 247, 0.16); border: 1px solid rgba(192, 132, 252, 0.45); }
 
     @keyframes pulseLow {
       0%, 100% { box-shadow: 0 0 0 rgba(255, 59, 92, 0); }
       50% { box-shadow: 0 0 10px rgba(255, 59, 92, 0.65); }
     }
 
-    .nav-bar {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 4px;
-      margin-bottom: 6px;
-    }
+    .nav-bar { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; margin-bottom: 6px; }
 
     .nav-btn {
-      height: 27px;
-      border-radius: 7px;
-      border: 1px solid rgba(148, 163, 184, 0.22);
+      height: 27px; border-radius: 7px; border: 1px solid rgba(148, 163, 184, 0.22);
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
-      color: #e2e8f0;
-      font-size: 10px;
-      font-weight: 700;
-      cursor: pointer;
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 2px;
-      padding: 0 2px;
+      color: #e2e8f0; font-size: 10px; font-weight: 700; cursor: pointer; position: relative;
+      display: inline-flex; align-items: center; justify-content: center; gap: 2px; padding: 0 2px;
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
     }
 
     .nav-btn:active { background: rgba(0, 229, 255, 0.2); border-color: #00e5ff; }
 
-    .pts-dot {
-      position: absolute;
-      top: -3px;
-      right: -2px;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #00e5ff;
-      box-shadow: 0 0 8px #00e5ff;
-      display: none;
-    }
-
+    .pts-dot { position: absolute; top: -3px; right: -2px; width: 8px; height: 8px; border-radius: 50%; background: #00e5ff; box-shadow: 0 0 8px #00e5ff; display: none; }
     .pts-dot.gold { background: #ffd166; box-shadow: 0 0 8px #ffd166; }
 
     .bars { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 7px; }
     .bar-box { font-size: 9.5px; }
     .bar-label { display: flex; justify-content: space-between; margin-bottom: 2px; color: #a5b7d4; font-weight: 700; }
-
-    .bar-track {
-      height: 6px;
-      background: rgba(255, 255, 255, 0.07);
-      border-radius: 99px;
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
+    .bar-track { height: 6px; background: rgba(255, 255, 255, 0.07); border-radius: 99px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.06); }
     .bar-fill { height: 100%; border-radius: 99px; transition: width 0.28s ease; }
     .hp-fill { background: linear-gradient(90deg, #e11d48, #ff6b81); box-shadow: 0 0 8px rgba(255, 59, 92, 0.45); }
     .mp-fill { background: linear-gradient(90deg, #2563eb, #00e5ff); box-shadow: 0 0 8px rgba(0, 229, 255, 0.45); }
@@ -218,56 +160,25 @@
 
     /* Сцена боя */
     .scene-card {
-      margin: 8px 12px 0;
-      height: 194px;
-      border-radius: 16px;
+      margin: 8px 12px 0; height: 194px; border-radius: 16px;
       border: 1px solid rgba(0, 229, 255, 0.34);
       background: linear-gradient(180deg, #0f1936 0%, #070b17 100%);
-      position: relative;
-      overflow: hidden;
-      flex-shrink: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 9px 11px;
+      position: relative; overflow: hidden; flex-shrink: 0;
+      display: flex; flex-direction: column; justify-content: space-between; padding: 9px 11px;
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 8px 24px rgba(0,0,0,0.65);
       transition: border-color 0.35s ease, box-shadow 0.35s ease;
     }
 
-    .scene-card.hardcore-zone {
-      border-color: rgba(255, 42, 85, 0.88);
-      box-shadow: inset 0 0 22px rgba(255, 42, 85, 0.22), 0 0 26px rgba(255, 42, 85, 0.32);
-    }
-
+    .scene-card.hardcore-zone { border-color: rgba(255, 42, 85, 0.88); box-shadow: inset 0 0 22px rgba(255, 42, 85, 0.22), 0 0 26px rgba(255, 42, 85, 0.32); }
     .scene-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(0, 229, 255, 0.045) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 229, 255, 0.045) 1px, transparent 1px);
-      background-size: 22px 22px;
-      pointer-events: none;
+      content: ""; position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(0, 229, 255, 0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 229, 255, 0.045) 1px, transparent 1px);
+      background-size: 22px 22px; pointer-events: none;
     }
-
     .scene-card.danger { border-color: rgba(255, 59, 92, 0.72); }
-    .scene-card.boss-mode {
-      border-color: rgba(255, 209, 102, 0.95);
-      box-shadow: inset 0 0 20px rgba(255, 209, 102, 0.16), 0 0 28px rgba(255, 59, 92, 0.36);
-    }
+    .scene-card.boss-mode { border-color: rgba(255, 209, 102, 0.95); box-shadow: inset 0 0 20px rgba(255, 209, 102, 0.16), 0 0 28px rgba(255, 59, 92, 0.36); }
 
-    .scene-glow {
-      position: absolute;
-      width: 245px;
-      height: 245px;
-      border-radius: 50%;
-      top: 52%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: radial-gradient(circle, rgba(0, 229, 255, 0.25), transparent 70%);
-      pointer-events: none;
-      transition: background 0.4s ease;
-    }
+    .scene-glow { position: absolute; width: 245px; height: 245px; border-radius: 50%; top: 52%; left: 50%; transform: translate(-50%, -50%); background: radial-gradient(circle, rgba(0, 229, 255, 0.25), transparent 70%); pointer-events: none; transition: background 0.4s ease; }
 
     .biome-particles { position: absolute; inset: 0; pointer-events: none; z-index: 1; overflow: hidden; }
     .particle { position: absolute; border-radius: 50%; opacity: 0; pointer-events: none; }
@@ -281,37 +192,24 @@
       85% { opacity: 0.6; }
       100% { transform: translateY(-20px) translateX(18px) scale(1.1); opacity: 0; }
     }
-
     @keyframes pFall {
       0% { transform: translateY(-18px) translateX(0); opacity: 0; }
       15% { opacity: 0.85; }
       85% { opacity: 0.7; }
       100% { transform: translateY(200px) translateX(-16px); opacity: 0; }
     }
-
     @keyframes pDrift {
       0%, 100% { transform: translate(0, 0) scale(0.7); opacity: 0.15; }
       50% { transform: translate(18px, -18px) scale(1.2); opacity: 0.8; }
     }
 
     .shout-bubble {
-      position: absolute;
-      left: 10px;
-      bottom: 46px;
-      max-width: 84%;
-      z-index: 8;
-      padding: 6px 11px;
-      border-radius: 12px 12px 12px 2px;
-      background: rgba(7, 11, 22, 0.96);
-      border: 1.5px solid #00e5ff;
-      color: #ffffff;
-      font-size: 11.5px;
-      font-weight: 800;
-      line-height: 1.3;
+      position: absolute; left: 10px; bottom: 46px; max-width: 84%; z-index: 8;
+      padding: 6px 11px; border-radius: 12px 12px 12px 2px;
+      background: rgba(7, 11, 22, 0.96); border: 1.5px solid #00e5ff; color: #ffffff;
+      font-size: 11.5px; font-weight: 800; line-height: 1.3;
       box-shadow: 0 6px 18px rgba(0, 0, 0, 0.9), 0 0 14px rgba(0, 229, 255, 0.35);
-      pointer-events: none;
-      opacity: 0;
-      transform: translateY(8px) scale(0.92);
+      pointer-events: none; opacity: 0; transform: translateY(8px) scale(0.92);
       transition: opacity 0.18s ease, transform 0.18s ease;
     }
 
@@ -324,39 +222,10 @@
     .loc-title { font-size: 12px; font-weight: 800; color: #ffffff; text-shadow: 0 2px 6px rgba(0,0,0,0.85); }
     .loc-sub { font-size: 10px; color: #93a9cc; margin-top: 1px; }
 
-    .floor-pill {
-      font-size: 10px;
-      font-weight: 800;
-      color: #e2e8f0;
-      background: rgba(4, 7, 15, 0.72);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      padding: 3px 8px;
-      border-radius: 7px;
-      white-space: nowrap;
-    }
+    .floor-pill { font-size: 10px; font-weight: 800; color: #e2e8f0; background: rgba(4, 7, 15, 0.72); border: 1px solid rgba(255, 255, 255, 0.2); padding: 3px 8px; border-radius: 7px; white-space: nowrap; }
+    .floor-pill.hc { color: #ff8598; border-color: rgba(255, 42, 85, 0.75); background: rgba(90, 8, 24, 0.84); }
 
-    .floor-pill.hc {
-      color: #ff8598;
-      border-color: rgba(255, 42, 85, 0.75);
-      background: rgba(90, 8, 24, 0.84);
-    }
-
-    .intent-pill {
-      position: absolute;
-      top: 38px;
-      right: 10px;
-      z-index: 5;
-      font-size: 10px;
-      font-weight: 800;
-      padding: 3px 8px;
-      border-radius: 7px;
-      background: rgba(9, 13, 26, 0.92);
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      color: #cbd5e1;
-      display: none;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.65);
-    }
-
+    .intent-pill { position: absolute; top: 38px; right: 10px; z-index: 5; font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 7px; background: rgba(9, 13, 26, 0.92); border: 1px solid rgba(255, 255, 255, 0.22); color: #cbd5e1; display: none; box-shadow: 0 3px 10px rgba(0,0,0,0.65); }
     .intent-pill.active { display: inline-flex; align-items: center; gap: 4px; }
     .intent-pill.heavy { color: #ffd166; border-color: #ff3b5c; background: rgba(120, 12, 32, 0.92); animation: pulseIntent 0.9s infinite; }
     .intent-pill.shield { color: #7dd3fc; border-color: #00e5ff; background: rgba(8, 47, 73, 0.92); }
@@ -373,12 +242,7 @@
 
     .monster-stage { position: absolute; inset: 0; display: flex; justify-content: center; align-items: center; z-index: 2; pointer-events: none; }
     .monster-art { width: 130px; height: 130px; animation: floatMonster 2.7s ease-in-out infinite; filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.9)); transition: filter 0.15s ease; }
-
-    .boss-portrait-img {
-      width: 120px; height: 120px; object-fit: cover; border-radius: 14px;
-      border: 2px solid #ffd166; box-shadow: 0 0 24px rgba(255, 209, 102, 0.45), 0 8px 18px rgba(0, 0, 0, 0.95);
-      animation: floatMonster 2.7s ease-in-out infinite; margin-bottom: 10px;
-    }
+    .boss-portrait-img { width: 120px; height: 120px; object-fit: cover; border-radius: 14px; border: 2px solid #ffd166; box-shadow: 0 0 24px rgba(255, 209, 102, 0.45), 0 8px 18px rgba(0, 0, 0, 0.95); animation: floatMonster 2.7s ease-in-out infinite; margin-bottom: 10px; }
 
     .monster-art.hit, .boss-portrait-img.hit { animation: hitShake 0.32s ease; filter: brightness(2.2) drop-shadow(0 0 22px #ff3b5c); }
     .monster-art.crit-hit, .boss-portrait-img.crit-hit { animation: hitShake 0.38s ease; filter: brightness(2.6) drop-shadow(0 0 28px #ffd166); }
@@ -388,7 +252,6 @@
       0%, 100% { transform: translateY(0px) scale(1); }
       50% { transform: translateY(-5px) scale(1.03); }
     }
-
     @keyframes hitShake {
       0% { transform: translateX(0) scale(1); }
       20% { transform: translateX(-11px) rotate(-5deg) scale(0.95); }
@@ -396,7 +259,6 @@
       75% { transform: translateX(-5px) rotate(-2deg); }
       100% { transform: translateX(0) scale(1); }
     }
-
     @keyframes enemyLunge {
       0% { transform: scale(1); }
       40% { transform: scale(1.2) translateY(7px); }
@@ -412,19 +274,12 @@
       25% { opacity: 1; transform: translate(-50%, -50%) scale(1.08) rotate(0deg); }
       100% { opacity: 0; transform: translate(-50%, -50%) scale(1.25) rotate(6deg); }
     }
-
     @keyframes ringExpand {
       0% { width: 24px; height: 24px; opacity: 1; border-width: 4px; }
       100% { width: 195px; height: 195px; opacity: 0; border-width: 1px; }
     }
 
-    .float-num {
-      position: absolute; left: 50%; top: 46%; transform: translate(-50%, -50%);
-      font-size: 19px; font-weight: 900; color: #ffffff;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95), 0 0 12px rgba(0, 229, 255, 0.7);
-      white-space: nowrap; animation: floatUpNum 0.92s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-    }
-
+    .float-num { position: absolute; left: 50%; top: 46%; transform: translate(-50%, -50%); font-size: 19px; font-weight: 900; color: #ffffff; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95), 0 0 12px rgba(0, 229, 255, 0.7); white-space: nowrap; animation: floatUpNum 0.92s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
     .float-num.crit { font-size: 22px; color: #ffd166; text-shadow: 0 2px 12px #000, 0 0 16px #ff9900; }
     .float-num.magic { color: #c084fc; text-shadow: 0 2px 12px #000, 0 0 16px #7c3aed; }
     .float-num.combo { font-size: 17px; color: #00f5d4; text-shadow: 0 2px 12px #000, 0 0 16px #00e5ff; }
@@ -476,22 +331,11 @@
     .combo-hint { font-size: 10.5px; font-weight: 800; color: #5eead4; background: rgba(0, 245, 212, 0.1); border: 1px solid rgba(0, 245, 212, 0.35); border-radius: 8px; padding: 4px 8px; margin-bottom: 5px; display: none; }
     .combo-hint.active { display: block; }
 
-    .ult-btn {
-      width: 100%; padding: 7px 10px; border-radius: 9px; border: 1px solid rgba(139, 92, 246, 0.35);
-      background: rgba(20, 18, 44, 0.9); color: #94a3b8; font-size: 11.5px; font-weight: 800;
-      margin-bottom: 6px; position: relative; overflow: hidden; cursor: default;
-      display: none; justify-content: space-between; align-items: center;
-    }
-
+    .ult-btn { width: 100%; padding: 7px 10px; border-radius: 9px; border: 1px solid rgba(139, 92, 246, 0.35); background: rgba(20, 18, 44, 0.9); color: #94a3b8; font-size: 11.5px; font-weight: 800; margin-bottom: 6px; position: relative; overflow: hidden; cursor: default; display: none; justify-content: space-between; align-items: center; }
     .ult-btn.visible { display: flex; }
     .ult-fill-bg { position: absolute; left: 0; top: 0; bottom: 0; background: linear-gradient(90deg, rgba(139, 92, 246, 0.42), rgba(0, 229, 255, 0.42)); transition: width 0.3s ease; z-index: 0; }
     .ult-btn > span { position: relative; z-index: 1; }
-
-    .ult-btn.ready {
-      cursor: pointer; color: #ffffff; border-color: #ffd166;
-      background: linear-gradient(90deg, #7c3aed, #00c6ff, #f59e0b);
-      box-shadow: 0 0 18px rgba(0, 229, 255, 0.45); animation: pulseUlt 1.1s infinite;
-    }
+    .ult-btn.ready { cursor: pointer; color: #ffffff; border-color: #ffd166; background: linear-gradient(90deg, #7c3aed, #00c6ff, #f59e0b); box-shadow: 0 0 18px rgba(0, 229, 255, 0.45); animation: pulseUlt 1.1s infinite; }
 
     @keyframes pulseUlt {
       0%, 100% { transform: scale(1); }
@@ -499,21 +343,11 @@
     }
 
     .choices { display: flex; flex-direction: column; gap: 5px; margin-bottom: 6px; }
-
-    .choice-btn {
-      width: 100%; text-align: left; padding: 8px 11px; border-radius: 10px;
-      border: 1px solid rgba(0, 229, 255, 0.3);
-      background: linear-gradient(180deg, rgba(21, 31, 58, 0.95) 0%, rgba(14, 21, 40, 0.95) 100%);
-      color: #e6f4ff; font-size: 12px; font-weight: 600; cursor: pointer;
-      display: flex; justify-content: space-between; align-items: center; gap: 6px;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
-    }
-
+    .choice-btn { width: 100%; text-align: left; padding: 8px 11px; border-radius: 10px; border: 1px solid rgba(0, 229, 255, 0.3); background: linear-gradient(180deg, rgba(21, 31, 58, 0.95) 0%, rgba(14, 21, 40, 0.95) 100%); color: #e6f4ff; font-size: 12px; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 6px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.06); }
     .choice-btn.combo-ready { border-color: #00f5d4; background: linear-gradient(90deg, rgba(14, 34, 60, 0.96), rgba(0, 229, 255, 0.2)); }
     .choice-btn.recommend { border-color: #ffd166; background: linear-gradient(90deg, rgba(34, 24, 16, 0.95), rgba(255, 209, 102, 0.16)); }
     .choice-btn.red-door { border-color: rgba(255, 59, 92, 0.72); background: linear-gradient(90deg, rgba(48, 12, 24, 0.94), rgba(255, 42, 85, 0.2)); }
     .choice-btn.blue-door { border-color: rgba(56, 189, 248, 0.72); background: linear-gradient(90deg, rgba(12, 28, 52, 0.94), rgba(0, 229, 255, 0.18)); }
-
     .choice-badge { font-size: 9.5px; font-weight: 900; padding: 2px 6px; border-radius: 5px; background: rgba(0, 245, 212, 0.22); color: #5eead4; white-space: nowrap; }
     .choice-badge.warn { background: rgba(255, 209, 102, 0.24); color: #ffd166; }
     .choice-btn:active { transform: scale(0.985); }
@@ -523,38 +357,15 @@
     .custom-input:focus { border-color: #00e5ff; }
     .send-btn { padding: 0 13px; border-radius: 9px; border: none; background: linear-gradient(135deg, #00e5ff, #3b82f6); color: #03111f; font-weight: 800; font-size: 11.5px; cursor: pointer; }
 
-    .boss-intro {
-      position: absolute; inset: 0; z-index: 45; background: rgba(5, 3, 10, 0.93);
-      display: flex; flex-direction: column; justify-content: center; align-items: center;
-      padding: 20px; text-align: center; animation: fadeUp 0.25s ease;
-    }
+    .boss-intro { position: absolute; inset: 0; z-index: 45; background: rgba(5, 3, 10, 0.93); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; text-align: center; animation: fadeUp 0.25s ease; }
+    .boss-stripe { width: 100%; padding: 16px 12px; border-top: 2px solid #ff2a55; border-bottom: 2px solid #ffd166; background: linear-gradient(90deg, rgba(120, 8, 28, 0.35), rgba(18, 12, 34, 0.95), rgba(120, 8, 28, 0.35)); box-shadow: 0 0 40px rgba(255, 42, 85, 0.45); }
+    .boss-intro-img { width: 128px; height: 128px; object-fit: cover; border-radius: 16px; border: 2px solid #ffd166; box-shadow: 0 0 28px rgba(255, 42, 85, 0.65); margin: 10px auto; display: block; }
 
-    .boss-stripe {
-      width: 100%; padding: 16px 12px; border-top: 2px solid #ff2a55; border-bottom: 2px solid #ffd166;
-      background: linear-gradient(90deg, rgba(120, 8, 28, 0.35), rgba(18, 12, 34, 0.95), rgba(120, 8, 28, 0.35));
-      box-shadow: 0 0 40px rgba(255, 42, 85, 0.45);
-    }
-
-    .boss-intro-img {
-      width: 128px; height: 128px; object-fit: cover; border-radius: 16px;
-      border: 2px solid #ffd166; box-shadow: 0 0 28px rgba(255, 42, 85, 0.65); margin: 10px auto; display: block;
-    }
-
-    .overlay {
-      position: absolute; inset: 0; background: rgba(3, 5, 12, 0.94);
-      backdrop-filter: blur(4px);
-      z-index: 35; display: flex; justify-content: center; align-items: center; padding: 14px;
-    }
-
+    .overlay { position: absolute; inset: 0; background: rgba(2, 4, 10, 0.95); backdrop-filter: blur(5px); z-index: 35; display: flex; justify-content: center; align-items: center; padding: 14px; transition: background 0.35s ease; }
+    .overlay.dark-dim { background: rgba(0, 0, 0, 0.97); }
     .hidden { display: none !important; }
 
-    .sys-window {
-      width: 100%; max-width: 410px; max-height: 90vh; overflow-y: auto;
-      background: linear-gradient(180deg, #101b3a 0%, #070b18 100%);
-      border: 1.5px solid rgba(0, 229, 255, 0.65); border-radius: 16px; padding: 16px;
-      box-shadow: 0 0 38px rgba(0, 229, 255, 0.22), inset 0 1px 0 rgba(255,255,255,0.12);
-    }
-
+    .sys-window { width: 100%; max-width: 410px; max-height: 90vh; overflow-y: auto; background: linear-gradient(180deg, #101b3a 0%, #070b18 100%); border: 1.5px solid rgba(0, 229, 255, 0.65); border-radius: 16px; padding: 16px; box-shadow: 0 0 38px rgba(0, 229, 255, 0.22), inset 0 1px 0 rgba(255,255,255,0.12); }
     .sys-tag { font-size: 10px; font-weight: 800; letter-spacing: 0.12em; color: #00e5ff; text-transform: uppercase; margin-bottom: 4px; }
     .sys-title { font-size: 17px; font-weight: 900; color: #ffffff; margin-bottom: 7px; }
     .sys-text { font-size: 12px; line-height: 1.45; color: #b8c7e0; margin-bottom: 11px; }
@@ -565,10 +376,7 @@
     .class-name { font-size: 12.5px; font-weight: 800; color: #fff; margin-bottom: 2px; }
     .class-desc { font-size: 11px; color: #9fb0cc; line-height: 1.32; }
 
-    .btn-primary, .btn-gold, .btn-ad, .btn-share, .btn-violet, .btn-ghost {
-      width: 100%; padding: 10px; border-radius: 10px; font-size: 12.5px; font-weight: 900; cursor: pointer; margin-bottom: 7px; border: none;
-    }
-
+    .btn-primary, .btn-gold, .btn-ad, .btn-share, .btn-violet, .btn-ghost { width: 100%; padding: 10px; border-radius: 10px; font-size: 12.5px; font-weight: 900; cursor: pointer; margin-bottom: 7px; border: none; }
     .btn-primary { background: linear-gradient(135deg, #00e5ff, #3b82f6); color: #04101f; text-transform: uppercase; }
     .btn-gold { background: linear-gradient(135deg, #ffd166, #f59e0b); color: #241300; }
     .btn-violet { background: linear-gradient(135deg, #9333ea, #3b82f6); color: #ffffff; text-transform: uppercase; box-shadow: 0 0 18px rgba(147, 51, 234, 0.45); }
@@ -581,7 +389,18 @@
 
     .stat-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.08); font-size: 12px; }
     .plus-btn { padding: 3px 10px; border-radius: 6px; border: 1px solid #00e5ff; background: rgba(0, 229, 255, 0.14); color: #00e5ff; font-weight: 800; cursor: pointer; }
-    .gear-box { margin: 8px 0; padding: 8px 10px; background: rgba(255, 209, 102, 0.08); border: 1px solid rgba(255, 209, 102, 0.3); border-radius: 9px; font-size: 11.5px; color: #ffe299; line-height: 1.55; }
+
+    .gear-card-row {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 11.5px;
+    }
+    .gear-card-row:last-child { border-bottom: none; }
+
+    .gear-box { margin: 8px 0; padding: 8px 10px; background: rgba(255, 209, 102, 0.07); border: 1px solid rgba(255, 209, 102, 0.3); border-radius: 10px; color: #ffe299; }
     .shadow-army-box { margin: 8px 0; padding: 8px 10px; background: rgba(147, 51, 234, 0.14); border: 1px solid rgba(192, 132, 252, 0.42); border-radius: 9px; font-size: 11px; color: #e9d5ff; }
     .inv-list { display: flex; flex-wrap: wrap; gap: 5px; margin: 7px 0 11px; }
     .inv-item { font-size: 10.5px; padding: 5px 8px; border-radius: 7px; background: rgba(255, 255, 255, 0.07); border: 1px solid rgba(255, 255, 255, 0.16); color: #e2e8f0; cursor: pointer; }
@@ -603,13 +422,28 @@
     .best-thumb img { width: 100%; height: 100%; object-fit: cover; }
     .best-card.locked .best-thumb { filter: brightness(0); }
 
-    /* Анимация коробки босса */
-    .crate-stage { position: relative; height: 112px; display: flex; align-items: center; justify-content: center; margin: 8px 0 10px; }
-    .crate-aura { position: absolute; width: 105px; height: 105px; border-radius: 50%; background: radial-gradient(circle, rgba(255, 209, 102, 0.5), transparent 70%); opacity: 0; transform: scale(0.4); transition: all 0.45s ease; }
-    .crate-aura.burst { opacity: 1; transform: scale(1.5); }
-    .crate-box { position: relative; z-index: 2; font-size: 62px; transition: transform 0.3s ease; }
-    .crate-box.shaking { animation: crateShake 0.22s infinite; }
-    .crate-box.opened { transform: scale(1.22); filter: drop-shadow(0 0 24px #ffd166); }
+    /* Детализированная анимация коробки босса */
+    .crate-stage { position: relative; height: 124px; display: flex; align-items: center; justify-content: center; margin: 8px 0 10px; }
+    .crate-aura { position: absolute; width: 110px; height: 110px; border-radius: 50%; background: radial-gradient(circle, rgba(255, 209, 102, 0.55), transparent 70%); opacity: 0; transform: scale(0.35); transition: all 0.5s ease; }
+    .crate-aura.burst { opacity: 1; transform: scale(1.65); }
+
+    .crate-box {
+      position: relative; z-index: 2; font-size: 64px;
+      opacity: 0; transform: translateY(-28px) scale(0.75);
+      transition: opacity 0.35s ease, transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
+    }
+    .crate-box.enter { opacity: 1; transform: translateY(0px) scale(1); }
+    .crate-box.shaking { opacity: 1; animation: crateShake 0.22s infinite; }
+    .crate-box.opened { opacity: 1; transform: translateY(-4px) scale(1.24); filter: drop-shadow(0 0 26px #ffd166); }
+
+    .crate-loot-pop {
+      animation: lootPopUp 0.52s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+    }
+
+    @keyframes lootPopUp {
+      0% { opacity: 0; transform: translateY(18px) scale(0.78); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
 
     @keyframes crateShake {
       0% { transform: rotate(0deg) scale(1); }
@@ -623,39 +457,16 @@
     .poop-token { display: inline-flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 12px; position: relative; user-select: none; }
     .poop-svg-wrap { width: 54px; height: 54px; display: flex; align-items: center; justify-content: center; position: relative; }
 
-    .poop-rare {
-      background: linear-gradient(160deg, rgba(56, 189, 248, 0.14), rgba(15, 23, 42, 0.94));
-      border: 1.5px solid rgba(56, 189, 248, 0.65);
-      box-shadow: 0 0 10px rgba(56, 189, 248, 0.22);
-    }
-
-    .poop-epic {
-      background: linear-gradient(150deg, rgba(168, 85, 247, 0.24), rgba(15, 23, 42, 0.96));
-      border: 1.5px solid #c084fc;
-      box-shadow: 0 0 16px rgba(192, 132, 252, 0.45);
-    }
-
-    .poop-mythic {
-      background: linear-gradient(145deg, rgba(244, 63, 94, 0.26), rgba(76, 29, 149, 0.38));
-      border: 1.5px solid #fb7185;
-      box-shadow: 0 0 20px rgba(244, 63, 94, 0.55), inset 0 0 10px rgba(0, 229, 255, 0.25);
-    }
-
-    .poop-legendary {
-      background: radial-gradient(circle at 30% 25%, rgba(255, 230, 120, 0.42), rgba(180, 83, 9, 0.3), rgba(15, 23, 42, 0.96));
-      border: 2px solid #ffd166;
-      box-shadow: 0 0 28px rgba(255, 209, 102, 0.85), 0 6px 0 rgba(120, 53, 15, 0.92);
-      transform: perspective(260px) rotateX(10deg);
-      animation: leg3DPulse 2.2s ease-in-out infinite;
-    }
-
+    .poop-rare { background: linear-gradient(160deg, rgba(56, 189, 248, 0.14), rgba(15, 23, 42, 0.94)); border: 1.5px solid rgba(56, 189, 248, 0.65); box-shadow: 0 0 10px rgba(56, 189, 248, 0.22); }
+    .poop-epic { background: linear-gradient(150deg, rgba(168, 85, 247, 0.24), rgba(15, 23, 42, 0.96)); border: 1.5px solid #c084fc; box-shadow: 0 0 16px rgba(192, 132, 252, 0.45); }
+    .poop-mythic { background: linear-gradient(145deg, rgba(244, 63, 94, 0.26), rgba(76, 29, 149, 0.38)); border: 1.5px solid #fb7185; box-shadow: 0 0 20px rgba(244, 63, 94, 0.55), inset 0 0 10px rgba(0, 229, 255, 0.25); }
+    .poop-legendary { background: radial-gradient(circle at 30% 25%, rgba(255, 230, 120, 0.42), rgba(180, 83, 9, 0.3), rgba(15, 23, 42, 0.96)); border: 2px solid #ffd166; box-shadow: 0 0 28px rgba(255, 209, 102, 0.85), 0 6px 0 rgba(120, 53, 15, 0.92); transform: perspective(260px) rotateX(10deg); animation: leg3DPulse 2.2s ease-in-out infinite; }
     .poop-legendary .poop-svg-wrap { animation: leg3DSpin 3.4s ease-in-out infinite; }
 
     @keyframes leg3DPulse {
       0%, 100% { box-shadow: 0 0 22px rgba(255, 209, 102, 0.75), 0 6px 0 rgba(120, 53, 15, 0.9); }
       50% { box-shadow: 0 0 36px rgba(255, 240, 150, 0.98), 0 8px 0 rgba(146, 64, 14, 0.95); }
     }
-
     @keyframes leg3DSpin {
       0%, 100% { transform: perspective(220px) rotateY(-14deg) scale(1); }
       50% { transform: perspective(220px) rotateY(18deg) scale(1.1); }
@@ -773,16 +584,16 @@
       </div>
     </div>
 
-    <!-- Оверлей 1: Старт -->
+    <!-- Оверлей 1: Старт (только 1-й уровень при новом забеге) -->
     <div class="overlay" id="modal-start">
       <div class="sys-window">
         <div class="sys-tag">[УВЕДОМЛЕНИЕ СИСТЕМЫ]</div>
         <div class="sys-title">Протокол Бездны · 100 Этажей</div>
         <p class="sys-text">
-          Короткие угарные фразы с повтором раз в 30–40 этажей, <b>50 уникальных жетонов-какашек</b> в альбоме, коробки боссов, усиленные боссы (+25%) и адские этажи 91–100!
+          Начинай путь с <b>1-го уровня и 1-го этажа</b>. Альбом жетонов сохраняется при перезапуске. Собирай артефакты, тени боссов и дойди до 100-го этажа!
         </p>
 
-        <button class="btn-primary hidden" id="btn-continue" onclick="continueGame()">▶ Продолжить (Этаж <span id="saved-floor-num">1</span>)</button>
+        <button class="btn-primary hidden" id="btn-continue" onclick="continueGame()">▶ Продолжить (Этаж <span id="saved-floor-num">1</span> · Ур. <span id="saved-lvl-num">1</span>)</button>
 
         <div class="class-grid" id="class-grid">
           <div class="class-card selected" data-cls="assassin" onclick="selectHeroClass('assassin')">
@@ -799,7 +610,7 @@
           </div>
         </div>
 
-        <button class="btn-primary" onclick="startGame()">Принять статус Игрока (Новая игра)</button>
+        <button class="btn-primary" onclick="startFreshRun()">Начать с 1-го уровня (1-й этаж)</button>
       </div>
     </div>
 
@@ -809,7 +620,7 @@
         <div class="sys-tag" style="color:#ffd166;">[КОЛЛЕКЦИЯ УНИКАЛЬНЫХ ЖЕТОНОВ]</div>
         <div class="sys-title">💩 Альбом жетонов (<span id="album-count">0/50</span>)</div>
         <p class="sys-text" style="margin-bottom:8px;">
-          Каждый из 50 жетонов имеет свой дизайн. Редкий (30 шт. · 45%), Эпический (10 шт. · 15%), Мифический (7 шт. · 8%), Легендарный 3D (3 шт. · 2%).
+          Сохраняется при рестарте! Редкий (30 шт. · 45%), Эпический (10 шт. · 15%), Мифический (7 шт. · 8%), Легендарный 3D (3 шт. · 2%).
         </p>
         <div class="album-filter-row" id="album-filters">
           <button class="af-btn active" data-f="all" onclick="setAlbumFilter('all')">Все</button>
@@ -823,22 +634,22 @@
       </div>
     </div>
 
-    <!-- Оверлей 3: Детализированное открытие Коробки Босса -->
-    <div class="overlay hidden" id="modal-crate">
+    <!-- Оверлей 3: Затемнение + анимация появления и раскрытия Коробки Босса -->
+    <div class="overlay dark-dim hidden" id="modal-crate">
       <div class="sys-window" id="crate-win" style="border-color:#ffd166;text-align:center;">
         <div class="sys-tag" style="color:#ffd166;">[ТРОФЕЙНАЯ КОРОБКА БОССА]</div>
-        <div class="sys-title" id="crate-title">Вскрытие коробки...</div>
+        <div class="sys-title" id="crate-title">В бездне материализуется коробка...</div>
         <div class="crate-stage">
           <div class="crate-aura" id="crate-aura"></div>
-          <div class="crate-box shaking" id="crate-box">🎁</div>
+          <div class="crate-box" id="crate-box">🎁</div>
         </div>
         <div id="crate-token-preview" style="margin-bottom:8px;"></div>
-        <p class="sys-text" id="crate-desc">Срываем печати Бездны...</p>
+        <p class="sys-text" id="crate-desc">Тьма сгущается вокруг трофея...</p>
         <button class="btn-gold hidden" id="crate-ok-btn" onclick="closeCrateModal()">Забрать трофей</button>
       </div>
     </div>
 
-    <!-- Оверлей 4: Статус -->
+    <!-- Оверлей 4: Статус и дизайны экипировки/артефактов -->
     <div class="overlay hidden" id="modal-stats">
       <div class="sys-window">
         <div class="sys-tag">[ОКНО СТАТУСА]</div>
@@ -899,6 +710,7 @@
         <div class="sys-tag" id="chest-tag">[СУНДУК БЕЗДНЫ]</div>
         <div class="sys-title" id="chest-title">Вскрытие печати...</div>
         <div class="chest-icon shaking" id="chest-icon">📦</div>
+        <div id="chest-art-badge" style="margin-bottom:6px;"></div>
         <p class="sys-text" id="chest-result">Определяем редкость артефакта...</p>
         <button class="btn-gold hidden" id="chest-ok-btn" onclick="closeChestModal()">Забрать добычу</button>
       </div>
@@ -962,7 +774,7 @@
       </div>
     </div>
 
-    <!-- Оверлей 13: Смерть (откат 20 ⭐) -->
+    <!-- Оверлей 13: Смерть (откат 20 ⭐ или полный рестарт на 1-й уровень) -->
     <div class="overlay hidden" id="modal-dead">
       <div class="sys-window" style="border-color:#ff3b5c;">
         <div class="sys-tag" style="color:#ff3b5c;">[КРИТИЧЕСКИЙ УРОН]</div>
@@ -971,7 +783,7 @@
         <div class="status-note" id="dead-status"></div>
         <button class="btn-gold" onclick="revivePlayer()">⏪ Откатить смерть · 20 ⭐</button>
         <button class="btn-ad" onclick="watchAdForRevive()">🎬 Откатить смерть · Бесплатно (Реклама)</button>
-        <button class="btn-ghost" onclick="restartGame()">🔄 Начать заново с 1-го этажа</button>
+        <button class="btn-ghost" onclick="restartFromLevelOne()">🔄 Начать с 1-го уровня (1-й этаж)</button>
       </div>
     </div>
 
@@ -984,7 +796,7 @@
           Ты прошёл все <b>100 этажей</b> и сокрушил Владыку Абсолютной Бездны! Твоё имя навсегда вписано в Топ-20 Зала Славы.
         </p>
         <button class="btn-share" onclick="shareGame()">🏆 Поделиться победой с друзьями</button>
-        <button class="btn-gold" onclick="restartGame()">🔥 Начать Новую Игру</button>
+        <button class="btn-gold" onclick="restartFromLevelOne()">🔥 Начать с 1-го уровня</button>
       </div>
     </div>
 
@@ -1001,7 +813,7 @@
     var DAILY_COOLDOWN_MS = 24 * 60 * 60 * 1000;
     var REGEN_INTERVAL_MS = 10 * 60 * 1000;
     var MAX_PASSIVE_ENERGY = 18;
-    var PHRASE_REPEAT_COOLDOWN_FLOORS = 35; // Повторы реплик раз в 30-40 этажей
+    var PHRASE_REPEAT_COOLDOWN_FLOORS = 35;
 
     var PARTNER_TASKS = [];
 
@@ -1044,12 +856,47 @@
     }
 
     // =========================================================================
-    // 1. КОРОТКИЕ ОЗВУЧЕННЫЕ ФРАЗЫ (ПОВТОР РАЗ В 30–40 ЭТАЖЕЙ + БЕЗ ОБРЫВОВ)
+    // 1. УНИКАЛЬНЫЕ SVG-ДИЗАЙНЫ ДЛЯ АРТЕФАКТОВ, ОРУЖИЯ И БРОНИ
+    // =========================================================================
+    function getGearDesignSVG(kind, rarityKey) {
+      var rar = RARITIES[rarityKey || 'common'] || RARITIES.common;
+      var c = rar.col;
+      var inner = '';
+
+      if (kind === 'weapon') {
+        // Клинок / кинжал в рунах
+        inner =
+          '<polygon points="32,5 38,38 32,45 26,38" fill="' + c + '" stroke="#070b18" stroke-width="1.5"/>' +
+          '<rect x="20" y="42" width="24" height="4" rx="2" fill="#e2e8f0"/>' +
+          '<rect x="29" y="46" width="6" height="12" rx="2" fill="#94a3b8"/>';
+      } else if (kind === 'armor') {
+        // Нагрудник / доспех
+        inner =
+          '<path d="M16 14 L26 10 L32 17 L38 10 L48 14 L53 26 L44 30 L44 54 L20 54 L20 30 L11 26 Z" fill="' + c + '" opacity="0.88" stroke="#070b18" stroke-width="1.6"/>' +
+          '<polygon points="32,22 37,31 32,40 27,31" fill="#070b18" opacity="0.65"/>';
+      } else {
+        // Артефакт (кристалл / кольцо Бездны)
+        inner =
+          '<circle cx="32" cy="34" r="15" fill="none" stroke="' + c + '" stroke-width="3.2"/>' +
+          '<polygon points="32,12 42,26 32,40 22,26" fill="' + c + '" stroke="#070b18" stroke-width="1.4"/>' +
+          '<circle cx="32" cy="26" r="3" fill="#ffffff"/>';
+      }
+
+      return (
+        '<svg viewBox="0 0 64 64" width="38" height="38" style="flex-shrink:0;filter:drop-shadow(0 0 8px ' + c + '66);" xmlns="http://www.w3.org/2000/svg">' +
+          '<rect x="3" y="3" width="58" height="58" rx="11" fill="rgba(10,16,32,0.92)" stroke="' + c + '" stroke-width="1.4"/>' +
+          inner +
+        '</svg>'
+      );
+    }
+
+    // =========================================================================
+    // 2. КОРОТКИЕ ОЗВУЧЕННЫЕ ФРАЗЫ (ПОВТОР РАЗ В 30–40 ЭТАЖЕЙ + БЕЗ ОБРЫВОВ)
     // =========================================================================
     var voiceEnabled = true;
     var currentVoiceAudio = null;
     var missingVoiceFiles = {};
-    var phraseLastFloor = {}; // { "hit:0": этаж последнего использования }
+    var phraseLastFloor = {};
     var shoutTimer = null;
     var enemyTurnTimer = null;
     var cachedMaleVoice = null;
@@ -1171,9 +1018,7 @@
       el.className = 'shout-bubble ' + (category || '') + ' show';
       el.textContent = '💬 «' + text + '»';
       if (shoutTimer) clearTimeout(shoutTimer);
-      shoutTimer = setTimeout(function() {
-        el.classList.remove('show');
-      }, durationMs || 2000);
+      shoutTimer = setTimeout(function() { el.classList.remove('show'); }, durationMs || 2000);
     }
 
     function pickFloorSpacedLine(category) {
@@ -1181,21 +1026,17 @@
       if (!list || !list.length) return null;
       var curFloor = (P && P.floor) ? P.floor : 1;
 
-      // Ищем фразы, которые не использовались в последние 35 этажей
       var fresh = [];
       for (var i = 0; i < list.length; i++) {
         var key = category + ':' + i;
         var lastF = phraseLastFloor[key];
-        if (lastF === undefined || (curFloor - lastF) >= PHRASE_REPEAT_COOLDOWN_FLOORS) {
-          fresh.push(i);
-        }
+        if (lastF === undefined || (curFloor - lastF) >= PHRASE_REPEAT_COOLDOWN_FLOORS) fresh.push(i);
       }
 
       var chosenIdx;
       if (fresh.length > 0) {
         chosenIdx = fresh[Math.floor(Math.random() * fresh.length)];
       } else {
-        // Если все фразы категории уже были за последние 35 этажей — берём самую старую по этажу
         var oldestIdx = 0;
         var oldestFloor = Infinity;
         for (var j = 0; j < list.length; j++) {
@@ -1251,9 +1092,7 @@
       if (!line) { if (onComplete) onComplete(); return; }
 
       var durMs = estimateShortDurationMs(line.text);
-      if (voiceEnabled) {
-        showShoutBubble(line.text, category, durMs + 250);
-      }
+      if (voiceEnabled) showShoutBubble(line.text, category, durMs + 250);
 
       if (muted || !voiceEnabled) {
         setTimeout(function() { if (onComplete) onComplete(); }, Math.min(750, durMs));
@@ -1337,7 +1176,7 @@
     }
 
     // =========================================================================
-    // 2. ЗВУК, VFX-ЭФФЕКТЫ И ЧАСТИЦЫ БИОМОВ
+    // 3. ЗВУК, VFX-ЭФФЕКТЫ И ЧАСТИЦЫ БИОМОВ
     // =========================================================================
     var audioCtx = null;
     var muted = false;
@@ -1477,7 +1316,7 @@
     }
 
     // =========================================================================
-    // 3. 50 ЖЕТОНОВ С УНИКАЛЬНЫМ ДИЗАЙНОМ У КАЖДОГО (4 РЕДКОСТИ + 3D)
+    // 4. 50 ЖЕТОНОВ С УНИКАЛЬНЫМ ДИЗАЙНОМ У КАЖДОГО (4 РЕДКОСТИ + 3D)
     // =========================================================================
     var POOP_RARITY_META = {
       rare:      { name: 'Редкий',      cls: 'poop-rare',      txtCls: 'r-rare',      chance: 0.45, total: 30 },
@@ -1526,7 +1365,6 @@
       return list;
     })();
 
-    // У каждого из 50 жетонов своя палитра, форма аксессуара и детали
     function getUniquePoopSVG(token) {
       var id = token.designId;
       var rar = token.rarity;
@@ -1540,36 +1378,29 @@
         ['#573219', '#875331'], ['#663b20', '#995f3a'], ['#452612', '#704425'], ['#754425', '#ab6d45'],
         ['#5c351c', '#8e5735'], ['#6b3f24', '#9e633e'], ['#492a15', '#784928'], ['#7a4828', '#b3734a'],
         ['#522f18', '#82502e'], ['#63391e', '#965c38'],
-        // 30-39 Эпические
         ['#7e22ce', '#e879f9'], ['#2563eb', '#38bdf8'], ['#db2777', '#f472b6'], ['#059669', '#34d399'],
         ['#ea580c', '#fb923c'], ['#6d28d9', '#a78bfa'], ['#0891b2', '#22d3ee'], ['#be185d', '#fb7185'],
         ['#4f46e5', '#818cf8'], ['#65a30d', '#a3e635'],
-        // 40-46 Мифические
         ['#be123c', '#fb7185'], ['#7e22ce', '#00e5ff'], ['#b45309', '#fde047'], ['#0f766e', '#2dd4bf'],
         ['#9d174d', '#f472b6'], ['#3730a3', '#c084fc'], ['#991b1b', '#f87171'],
-        // 47-49 Легендарные 3D
         ['#eab308', '#fef08a'], ['#0284c7', '#e0f2fe'], ['#9333ea', '#ffd166']
       ];
 
       var cols = palette[id % palette.length];
-      var mainFill = cols[0];
-      var hiFill = cols[1];
-      var eyeCol = '#ffffff';
-      var pupilCol = '#090d16';
-      var prop = '';
+      var mainFill = cols[0], hiFill = cols[1];
+      var eyeCol = '#ffffff', pupilCol = '#090d16', prop = '';
 
-      // Индивидуальный аксессуар/деталь для каждого номера (0..49)
       var mod = id % 10;
-      if (mod === 0) prop = '<polygon points="20,14 26,6 32,12 38,6 44,14" fill="#ffd166" stroke="#1e1b4b" stroke-width="1.2"/>'; // корона
-      else if (mod === 1) prop = '<rect x="19" y="34" width="11" height="7" rx="2" fill="#00e5ff" opacity="0.85"/><rect x="34" y="34" width="11" height="7" rx="2" fill="#00e5ff" opacity="0.85"/><line x1="30" y1="37" x2="34" y2="37" stroke="#fff" stroke-width="1.5"/>'; // очки
-      else if (mod === 2) prop = '<path d="M18 22 L10 14 M46 22 L54 14" stroke="#ffd166" stroke-width="2.5" stroke-linecap="round"/>'; // рожки
-      else if (mod === 3) prop = '<polygon points="10,42 20,34 20,50" fill="' + hiFill + '"/><polygon points="54,42 44,34 44,50" fill="' + hiFill + '"/>'; // крылья
-      else if (mod === 4) prop = '<circle cx="32" cy="10" r="5" fill="none" stroke="#ffd166" stroke-width="2"/>'; // нимб
-      else if (mod === 5) prop = '<polygon points="50,12 44,24 52,24 46,36" fill="#ffd166"/>'; // молния
-      else if (mod === 6) prop = '<path d="M22 47 Q27 44 32 47 Q37 44 42 47" stroke="#1e1b4b" stroke-width="2" fill="none"/>'; // усы
-      else if (mod === 7) prop = '<polygon points="32,14 37,22 32,30 27,22" fill="#00e5ff"/>'; // кристалл
-      else if (mod === 8) prop = '<path d="M14 20 L18 16 L22 20 L18 24 Z" fill="#ffd166"/><path d="M46 16 L50 12 L54 16 L50 20 Z" fill="#00e5ff"/>'; // искры
-      else prop = '<circle cx="32" cy="36" r="3" fill="#ff2a55"/>'; // румянец/метка
+      if (mod === 0) prop = '<polygon points="20,14 26,6 32,12 38,6 44,14" fill="#ffd166" stroke="#1e1b4b" stroke-width="1.2"/>';
+      else if (mod === 1) prop = '<rect x="19" y="34" width="11" height="7" rx="2" fill="#00e5ff" opacity="0.85"/><rect x="34" y="34" width="11" height="7" rx="2" fill="#00e5ff" opacity="0.85"/><line x1="30" y1="37" x2="34" y2="37" stroke="#fff" stroke-width="1.5"/>';
+      else if (mod === 2) prop = '<path d="M18 22 L10 14 M46 22 L54 14" stroke="#ffd166" stroke-width="2.5" stroke-linecap="round"/>';
+      else if (mod === 3) prop = '<polygon points="10,42 20,34 20,50" fill="' + hiFill + '"/><polygon points="54,42 44,34 44,50" fill="' + hiFill + '"/>';
+      else if (mod === 4) prop = '<circle cx="32" cy="10" r="5" fill="none" stroke="#ffd166" stroke-width="2"/>';
+      else if (mod === 5) prop = '<polygon points="50,12 44,24 52,24 46,36" fill="#ffd166"/>';
+      else if (mod === 6) prop = '<path d="M22 47 Q27 44 32 47 Q37 44 42 47" stroke="#1e1b4b" stroke-width="2" fill="none"/>';
+      else if (mod === 7) prop = '<polygon points="32,14 37,22 32,30 27,22" fill="#00e5ff"/>';
+      else if (mod === 8) prop = '<path d="M14 20 L18 16 L22 20 L18 24 Z" fill="#ffd166"/><path d="M46 16 L50 12 L54 16 L50 20 Z" fill="#00e5ff"/>';
+      else prop = '<circle cx="32" cy="36" r="3" fill="#ff2a55"/>';
 
       if (rar === 'epic') eyeCol = '#00e5ff';
       if (rar === 'mythic') eyeCol = '#ffd166';
@@ -1664,7 +1495,7 @@
     }
 
     // =========================================================================
-    // 4. ДЕТАЛИЗИРОВАННАЯ АНИМАЦИЯ КОРОБКИ ПОСЛЕ БОССА
+    // 5. ПАУЗА + ТЁМНЫЙ ЭКРАН + ВЫХОД И РАСКРЫТИЕ КОРОБКИ ПОСЛЕ БОССА
     // =========================================================================
     function openBossRewardCrate(bossEnemy, onDone) {
       pendingCrateCallback = onDone || null;
@@ -1677,26 +1508,38 @@
       win.style.borderColor = '#ffd166';
       aura.className = 'crate-aura';
       box.textContent = '🎁';
-      box.className = 'crate-box shaking';
+      box.className = 'crate-box';
       prev.innerHTML = '';
       okBtn.classList.add('hidden');
-      document.getElementById('crate-title').textContent = 'Коробка Хранителя...';
-      document.getElementById('crate-desc').textContent = 'Срываем печати Бездны...';
+      document.getElementById('crate-title').textContent = 'Тьма сгущается...';
+      document.getElementById('crate-desc').textContent = 'Из поверженного Хранителя выпадает коробка...';
       document.getElementById('modal-crate').classList.remove('hidden');
 
-      beep(260, 0.15, 'triangle', 0.09);
-      haptic('medium');
+      beep(180, 0.22, 'sine', 0.08);
 
+      // Этап 1: коробка плавно опускается и появляется на тёмном экране
       setTimeout(function() {
-        box.textContent = '💥';
-        aura.classList.add('burst');
-        beep(520, 0.14, 'sawtooth', 0.1);
-      }, 650);
+        box.classList.add('enter');
+        document.getElementById('crate-title').textContent = 'Коробка Бездны явилась!';
+        document.getElementById('crate-desc').textContent = 'Печати начинают вибрировать...';
+      }, 450);
 
+      // Этап 2: тряска перед вскрытием
+      setTimeout(function() {
+        box.className = 'crate-box enter shaking';
+        beep(320, 0.14, 'triangle', 0.09);
+        haptic('medium');
+      }, 1050);
+
+      // Этап 3: взрыв свечения и анимация выхода содержимого
       setTimeout(function() {
         box.className = 'crate-box opened';
         box.textContent = '✨';
+        aura.classList.add('burst');
+        beep(580, 0.15, 'sawtooth', 0.1);
+      }, 1700);
 
+      setTimeout(function() {
         var extraShards = Math.round(35 + P.floor * 5);
         P.shards += extraShards;
         var extraEnergy = 6;
@@ -1709,15 +1552,18 @@
 
         win.style.borderColor = token.rarity === 'legendary' ? '#ffd166' : '#c084fc';
         prev.innerHTML =
-          '<div class="poop-token ' + meta.cls + '" style="padding:8px 14px;">' +
-            '<div class="poop-svg-wrap">' + getUniquePoopSVG(token) + '</div>' +
-            '<div style="font-size:12px;font-weight:900;color:#fff;margin-top:3px;">#' + token.num + ' ' + token.name + '</div>' +
-            '<div class="' + meta.txtCls + '" style="font-size:10px;font-weight:900;">' + meta.name.toUpperCase() + (isNew ? ' · НОВЫЙ В АЛЬБОМЕ!' : ' · ДУБЛЬ') + '</div>' +
+          '<div class="crate-loot-pop" style="display:inline-flex;flex-direction:column;align-items:center;gap:6px;">' +
+            getGearDesignSVG('artifact', token.rarity) +
+            '<div class="poop-token ' + meta.cls + '" style="padding:8px 14px;">' +
+              '<div class="poop-svg-wrap">' + getUniquePoopSVG(token) + '</div>' +
+              '<div style="font-size:12px;font-weight:900;color:#fff;margin-top:3px;">#' + token.num + ' ' + token.name + '</div>' +
+              '<div class="' + meta.txtCls + '" style="font-size:10px;font-weight:900;">' + meta.name.toUpperCase() + (isNew ? ' · НОВЫЙ В АЛЬБОМЕ!' : ' · ДУБЛЬ') + '</div>' +
+            '</div>' +
           '</div>';
 
-        document.getElementById('crate-title').textContent = 'Трофей вскрыт!';
+        document.getElementById('crate-title').textContent = 'Трофей получен!';
         document.getElementById('crate-desc').innerHTML =
-          'Получено: 💎 <b>+' + extraShards + ' Осколков</b> и ⚡ <b>+' + extraEnergy + ' энергии</b>!';
+          'Из коробки вышло: 💎 <b>+' + extraShards + ' Осколков</b> и ⚡ <b>+' + extraEnergy + ' энергии</b>!';
 
         addLog('🎁 [КОРОБКА БОССА]: Выпал жетон ' + (isNew ? '<b>НОВИНКА</b> ' : '') + '<span class="' + meta.txtCls + '">#' + token.num + ' ' + token.name + ' (' + meta.name + ')</span> + 💎' + extraShards + '!', 'loot');
         beep(880, 0.24, 'triangle', 0.11);
@@ -1725,7 +1571,7 @@
         okBtn.classList.remove('hidden');
         saveProgress();
         updateHUD();
-      }, 1250);
+      }, 2150);
     }
 
     function closeCrateModal() {
@@ -1738,7 +1584,7 @@
     }
 
     // =========================================================================
-    // 5. РЕНДЕР ВРАГОВ (АРТЫ БОССОВ + SVG)
+    // 6. РЕНДЕР ВРАГОВ (АРТЫ БОССОВ + SVG)
     // =========================================================================
     function getPortalSVG(aura) {
       return (
@@ -1858,7 +1704,7 @@
     }
 
     // =========================================================================
-    // 6. КЛАССЫ, МИКРО-ЛОР, 10 ЗОН И 10 БОССОВ
+    // 7. КЛАССЫ, МИКРО-ЛОР, 10 ЗОН И 10 БОССОВ
     // =========================================================================
     var HERO_CLASSES = {
       assassin: {
@@ -2053,8 +1899,8 @@
     ];
 
     var MAX_FLOORS = 100;
-    var SAVE_KEY = 'abyss_protocol_100_v5';
-    var PREV_SAVE_KEY = 'abyss_protocol_100_v4';
+    var SAVE_KEY = 'abyss_protocol_100_v6';
+    var ALL_SAVE_KEYS = ['abyss_protocol_100_v6', 'abyss_protocol_100_v5', 'abyss_protocol_100_v4', 'abyss_protocol_100_v3', 'abyss_protocol_100_v2', 'abyss_protocol_100_v1'];
     var P = {};
 
     function selectHeroClass(cls) {
@@ -2072,7 +1918,7 @@
       return { base: c, tier: c.tiers[tierIdx] };
     }
 
-    function initPlayer(clsKey) {
+    function initPlayer(clsKey, preservedAlbum) {
       var c = HERO_CLASSES[clsKey] || HERO_CLASSES.assassin;
       P = {
         heroClass: clsKey || 'assassin',
@@ -2103,7 +1949,7 @@
         bosses: 0,
         bountyKills: 0,
         shadows: [],
-        poopAlbum: {},
+        poopAlbum: preservedAlbum || {},
         seenEnemies: {},
         loreRead: {},
         claimedQuests: {},
@@ -2129,9 +1975,76 @@
 
     function loadProgress() {
       try {
-        var raw = localStorage.getItem(SAVE_KEY) || localStorage.getItem(PREV_SAVE_KEY);
-        return raw ? JSON.parse(raw) : null;
+        for (var i = 0; i < ALL_SAVE_KEYS.length; i++) {
+          var raw = localStorage.getItem(ALL_SAVE_KEYS[i]);
+          if (raw) return JSON.parse(raw);
+        }
+        return null;
       } catch (e) { return null; }
+    }
+
+    function wipeAllSavesExceptAlbum() {
+      var albumCopy = (P && P.poopAlbum) ? JSON.parse(JSON.stringify(P.poopAlbum)) : {};
+      var prev = loadProgress();
+      if (prev && prev.poopAlbum) {
+        for (var k in prev.poopAlbum) {
+          if (prev.poopAlbum.hasOwnProperty(k) && prev.poopAlbum[k] > 0) {
+            albumCopy[k] = Math.max(albumCopy[k] || 0, prev.poopAlbum[k]);
+          }
+        }
+      }
+      try {
+        for (var i = 0; i < ALL_SAVE_KEYS.length; i++) {
+          localStorage.removeItem(ALL_SAVE_KEYS[i]);
+        }
+      } catch (e) {}
+      document.getElementById('btn-continue').classList.add('hidden');
+      return albumCopy;
+    }
+
+    function startFreshRun() {
+      combatBusy = false;
+      phraseLastFloor = {};
+      if (enemyTurnTimer) { clearTimeout(enemyTurnTimer); enemyTurnTimer = null; }
+      var keptAlbum = wipeAllSavesExceptAlbum();
+      beep(520, 0.14, 'triangle', 0.1);
+      haptic('success');
+      initPlayer(selectedHeroClass, keptAlbum);
+      saveProgress();
+      document.getElementById('modal-start').classList.add('hidden');
+      document.getElementById('modal-win').classList.add('hidden');
+      document.getElementById('log').innerHTML = '';
+      var ci = getClassInfo();
+      addLog('[СИСТЕМА]: Новый забег с <b>1-го уровня и 1-го этажа</b>! Класс: <b>' + ci.tier.icon + ' ' + ci.tier.name + '</b>. Альбом жетонов сохранён.', 'system');
+      enterFloor();
+    }
+
+    function restartFromLevelOne() {
+      closeModals();
+      startFreshRun();
+    }
+
+    function continueGame() {
+      combatBusy = false;
+      if (enemyTurnTimer) { clearTimeout(enemyTurnTimer); enemyTurnTimer = null; }
+      var saved = loadProgress();
+      if (!saved) { startFreshRun(); return; }
+      initPlayer(saved.heroClass || 'assassin', saved.poopAlbum || {});
+      for (var k in saved) {
+        if (saved.hasOwnProperty(k)) P[k] = saved[k];
+      }
+      P.inCombat = false; P.enemy = null; P.lastAction = null;
+      if (!P.shadows) P.shadows = [];
+      if (!P.poopAlbum) P.poopAlbum = {};
+      if (!P.seenEnemies) P.seenEnemies = {};
+      if (!P.loreRead) P.loreRead = {};
+      if (typeof P.shards !== 'number') P.shards = 25;
+      processEnergyRegen();
+      beep(620, 0.15, 'triangle', 0.1);
+      document.getElementById('modal-start').classList.add('hidden');
+      document.getElementById('log').innerHTML = '';
+      addLog('[СИСТЕМА]: Возвращение на <b>Этаж ' + P.floor + '</b> (Ур. ' + P.lvl + ').', 'system');
+      enterFloor();
     }
 
     function processEnergyRegen() {
@@ -2172,10 +2085,7 @@
       return 'E';
     }
 
-    function getZone(floor) {
-      return ZONES[Math.min(ZONES.length - 1, Math.floor((floor - 1) / 10))];
-    }
-
+    function getZone(floor) { return ZONES[Math.min(ZONES.length - 1, Math.floor((floor - 1) / 10))]; }
     function isHardcoreFloor(floor) { return floor >= 91; }
 
     function getWeaponBonusStr() {
@@ -2232,9 +2142,7 @@
 
       var buffBox = document.getElementById('buff-pills');
       var bHtml = '';
-      if (P.shadows && P.shadows.length > 0) {
-        bHtml += '<div class="buff-tag shadow-tag" onclick="openStats()">👻 Тени: ' + P.shadows.length + '/10</div>';
-      }
+      if (P.shadows && P.shadows.length > 0) bHtml += '<div class="buff-tag shadow-tag" onclick="openStats()">👻 Тени: ' + P.shadows.length + '/10</div>';
       if (P.rageBuff) bHtml += '<div class="buff-tag">🔥 ЯРОСТЬ x2.2</div>';
       if (P.shieldBuff) bHtml += '<div class="buff-tag">🛡️ ЩИТ ТЕНИ</div>';
       buffBox.innerHTML = bHtml;
@@ -2330,47 +2238,8 @@
     }
 
     // =========================================================================
-    // 7. СТАРТ, ПРОБУЖДЕНИЕ, РАЗВИЛКИ И БАННЕР БОССА
+    // 8. ПРОБУЖДЕНИЕ, ЭТАЖИ, БОЙ И ПОБЕДА
     // =========================================================================
-    function startGame() {
-      combatBusy = false;
-      phraseLastFloor = {};
-      if (enemyTurnTimer) { clearTimeout(enemyTurnTimer); enemyTurnTimer = null; }
-      beep(520, 0.14, 'triangle', 0.1);
-      haptic('success');
-      initPlayer(selectedHeroClass);
-      saveProgress();
-      document.getElementById('modal-start').classList.add('hidden');
-      document.getElementById('modal-win').classList.add('hidden');
-      document.getElementById('log').innerHTML = '';
-      var ci = getClassInfo();
-      addLog('[СИСТЕМА]: Принят класс <b>' + ci.tier.icon + ' ' + ci.tier.name + '</b>. Сражайся, собирай жетоны в альбом 💩 и дойди до 100-го этажа!', 'system');
-      enterFloor();
-    }
-
-    function continueGame() {
-      combatBusy = false;
-      if (enemyTurnTimer) { clearTimeout(enemyTurnTimer); enemyTurnTimer = null; }
-      var saved = loadProgress();
-      if (!saved) { startGame(); return; }
-      initPlayer(saved.heroClass || 'assassin');
-      for (var k in saved) {
-        if (saved.hasOwnProperty(k)) P[k] = saved[k];
-      }
-      P.inCombat = false; P.enemy = null; P.lastAction = null;
-      if (!P.shadows) P.shadows = [];
-      if (!P.poopAlbum) P.poopAlbum = {};
-      if (!P.seenEnemies) P.seenEnemies = {};
-      if (!P.loreRead) P.loreRead = {};
-      if (typeof P.shards !== 'number') P.shards = 25;
-      processEnergyRegen();
-      beep(620, 0.15, 'triangle', 0.1);
-      document.getElementById('modal-start').classList.add('hidden');
-      document.getElementById('log').innerHTML = '';
-      addLog('[СИСТЕМА]: Возвращение на <b>Этаж ' + P.floor + '</b>.', 'system');
-      enterFloor();
-    }
-
     function checkClassAwakening() {
       var targetTier = P.floor >= 50 ? 2 : (P.floor >= 20 ? 1 : 0);
       if (targetTier > (P.awakeTier || 0)) {
@@ -2463,9 +2332,6 @@
       if (bossIntroTimer) { clearTimeout(bossIntroTimer); bossIntroTimer = null; }
     }
 
-    // =========================================================================
-    // 8. БОЙ (+25% БОССЫ, ХАРДКОР 91–100, ПОЛНАЯ ОЗВУЧКА ДО ОТВЕТКИ)
-    // =========================================================================
     function rollEnemyIntent(enemy) {
       var r = Math.random();
       if (enemy.isBoss) {
@@ -2900,11 +2766,8 @@
         }, 250);
       };
 
-      if (voiceCat) {
-        speakVoice(voiceCat, runCounter);
-      } else {
-        runCounter();
-      }
+      if (voiceCat) speakVoice(voiceCat, runCounter);
+      else runCounter();
     }
 
     function enemyCounterTurn(dodged) {
@@ -2947,9 +2810,6 @@
       updateHUD();
     }
 
-    // =========================================================================
-    // 9. ПОБЕДА, ЖЕТОНЫ, КОРОБКА БОССА, ТЕНЬ И ТОРГОВЕЦ
-    // =========================================================================
     function generateArtifact(forcedHighRarity) {
       var r = Math.random();
       var rarityKey = forcedHighRarity
@@ -2966,10 +2826,12 @@
       pendingChestCallback = onDone || null;
       var win = document.getElementById('chest-win');
       var icon = document.getElementById('chest-icon');
+      var badge = document.getElementById('chest-art-badge');
       var okBtn = document.getElementById('chest-ok-btn');
       win.style.borderColor = '#00e5ff';
       document.getElementById('chest-title').textContent = 'Вскрытие печати...';
       document.getElementById('chest-result').textContent = 'Определяем редкость добычи...';
+      badge.innerHTML = '';
       icon.textContent = '📦';
       icon.className = 'chest-icon shaking';
       okBtn.classList.add('hidden');
@@ -2987,6 +2849,7 @@
           P.artifact = art;
           win.style.borderColor = rar.col;
           icon.textContent = art.rarity === 'legendary' ? '👑' : '💍';
+          badge.innerHTML = '<div class="crate-loot-pop" style="display:inline-flex;">' + getGearDesignSVG('artifact', art.rarity) + '</div>';
           document.getElementById('chest-title').innerHTML = '<span class="' + rar.cls + '">' + rar.name.toUpperCase() + ' АРТЕФАКТ!</span>';
           document.getElementById('chest-result').innerHTML = 'Экипировано: ' + formatItemName(art) + '<br>+ 💎 <b>' + shardsBonus + ' Осколков Бездны</b>!';
           addLog('📦 [СУНДУК]: Получено ' + formatItemName(art) + ' и 💎 +' + shardsBonus + '!', 'loot');
@@ -3153,7 +3016,10 @@
       };
 
       if (wasBoss) {
-        openBossRewardCrate(defeatedEnemy, afterCrateOrShadow);
+        // Небольшая пауза после победы над боссом перед появлением коробки
+        setTimeout(function() {
+          openBossRewardCrate(defeatedEnemy, afterCrateOrShadow);
+        }, 650);
       } else {
         afterCrateOrShadow();
       }
@@ -3218,24 +3084,24 @@
       var forgeCost = 40 + curPlus * 35 + P.floor * 2;
       var artCost = 90 + P.floor * 5;
       var offers = [
-        { title: '⚒️ Заточить оружие до +' + (curPlus + 1), desc: 'Усиливает урон текущего оружия на +15% (+1 Силы)', cost: forgeCost, fn: function() {
+        { kind: 'weapon', rar: (P.weapon && P.weapon.rarity) || 'common', title: '⚒️ Заточить оружие до +' + (curPlus + 1), desc: 'Усиливает урон текущего оружия на +15% (+1 Силы)', cost: forgeCost, fn: function() {
             P.weapon.plus = curPlus + 1;
             setModalStatus('merch-status', '✅ Оружие заточено до +' + P.weapon.plus + '!');
             addLog('⚒️ [ЗАТОЧКА]: ' + formatItemName(P.weapon) + ' усилено!', 'loot');
           }
         },
-        { title: '💍 Случайный Редкий/Легендарный Артефакт', desc: 'Мгновенно открывает сундук артефактов', cost: artCost, fn: function() {
+        { kind: 'artifact', rar: 'epic', title: '💍 Случайный Редкий/Легендарный Артефакт', desc: 'Мгновенно выдаёт артефакт высокого класса', cost: artCost, fn: function() {
             var art = generateArtifact(true); P.artifact = art;
             setModalStatus('merch-status', '✅ Получен артефакт: ' + art.name);
             addLog('💍 [ТОРГОВЕЦ]: Куплено ' + formatItemName(art) + '!', 'loot');
           }
         },
-        { title: '💣 Набор бойца (Бомба + Свиток Ярости)', desc: 'Отлично помогает против боссов', cost: 45, fn: function() {
+        { kind: 'artifact', rar: 'rare', title: '💣 Набор бойца (Бомба + Свиток Ярости)', desc: 'Отлично помогает против боссов', cost: 45, fn: function() {
             P.inv.push('💣 Бомба Бездны (-30% HP врага)', '🔥 Свиток Ярости (след. удар x2.2)');
             setModalStatus('merch-status', '✅ Набор добавлен в инвентарь!');
           }
         },
-        { title: '⚡ Флакон Маны Разлома (+8 энергии)', desc: 'Быстрое пополнение ходов за Осколки', cost: 55, fn: function() {
+        { kind: 'artifact', rar: 'rare', title: '⚡ Флакон Маны Разлома (+8 энергии)', desc: 'Быстрое пополнение ходов за Осколки', cost: 55, fn: function() {
             P.energy += 8; setModalStatus('merch-status', '✅ Получено +8⚡ энергии!');
           }
         }
@@ -3246,8 +3112,13 @@
           var d = document.createElement('div');
           d.className = 'shop-item';
           d.innerHTML =
-            '<div class="quest-top"><span>' + o.title + '</span><span style="color:#c084fc;">💎 ' + o.cost + '</span></div>' +
-            '<div style="font-size:11px;color:#9fb0cc;margin-bottom:6px;">' + o.desc + '</div>';
+            '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">' +
+              getGearDesignSVG(o.kind, o.rar) +
+              '<div style="flex:1;">' +
+                '<div class="quest-top"><span>' + o.title + '</span><span style="color:#c084fc;">💎 ' + o.cost + '</span></div>' +
+                '<div style="font-size:11px;color:#9fb0cc;">' + o.desc + '</div>' +
+              '</div>' +
+            '</div>';
           var btn = document.createElement('button');
           btn.className = 'quest-btn partner';
           btn.disabled = (P.shards || 0) < o.cost;
@@ -3276,9 +3147,6 @@
       }
     }
 
-    // =========================================================================
-    // 10. БЕСТИАРИЙ, ТОП-20, СТАТУС, КВЕСТЫ, STARS И ADSGRAM
-    // =========================================================================
     function openBestiary() {
       var grid = document.getElementById('bestiary-grid');
       grid.innerHTML = '';
@@ -3392,9 +3260,18 @@
       document.getElementById('btn-int').style.opacity = dis ? '0.3' : '1';
 
       document.getElementById('gear-box').innerHTML =
-        '⚔️ <b>Оружие:</b> ' + formatItemName(P.weapon) + '<br>' +
-        '🛡️ <b>Броня:</b> ' + formatItemName(P.armor) + '<br>' +
-        '💍 <b>Артефакт:</b> ' + (P.artifact ? formatItemName(P.artifact) : 'Не найден');
+        '<div class="gear-card-row">' +
+          getGearDesignSVG('weapon', P.weapon && P.weapon.rarity) +
+          '<div><b>Оружие:</b> ' + formatItemName(P.weapon) + '</div>' +
+        '</div>' +
+        '<div class="gear-card-row">' +
+          getGearDesignSVG('armor', P.armor && P.armor.rarity) +
+          '<div><b>Броня:</b> ' + formatItemName(P.armor) + '</div>' +
+        '</div>' +
+        '<div class="gear-card-row">' +
+          getGearDesignSVG('artifact', P.artifact && P.artifact.rarity) +
+          '<div><b>Артефакт:</b> ' + (P.artifact ? formatItemName(P.artifact) : '<span style="color:#94a3b8;">Не найден</span>') + '</div>' +
+        '</div>';
 
       var shBox = document.getElementById('shadow-army-box');
       if (P.shadows && P.shadows.length > 0) {
@@ -3697,12 +3574,6 @@
       }
     }
 
-    function restartGame() {
-      combatBusy = false;
-      closeModals();
-      document.getElementById('modal-start').classList.remove('hidden');
-    }
-
     function closeModals() {
       var ids = ['modal-stats', 'modal-quests', 'modal-shop', 'modal-dead', 'modal-win', 'modal-bestiary', 'modal-lb', 'modal-awake', 'modal-merchant', 'modal-album'];
       for (var i = 0; i < ids.length; i++) document.getElementById(ids[i]).classList.add('hidden');
@@ -3720,6 +3591,7 @@
       var saved = loadProgress();
       if (saved && saved.floor && saved.floor > 1) {
         document.getElementById('saved-floor-num').textContent = saved.floor;
+        document.getElementById('saved-lvl-num').textContent = saved.lvl || 1;
         document.getElementById('btn-continue').classList.remove('hidden');
       }
     })();
